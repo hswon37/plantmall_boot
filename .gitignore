@@ -157,3 +157,9 @@ hs_err_pid*
 /.metadata/
 >>>>>>> refs/remotes/origin/main
 /target/
+!/**/src/**/bin
+!/**/src/**/build
+bin
+build
+.*.md.html
+.DS_Store
