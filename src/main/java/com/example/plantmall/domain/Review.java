@@ -10,7 +10,7 @@ public class Review {
 	private int reviewId;
 	private String productId;
 	private String userId;
-	private String title;
-	private String review;
+	private String reviewTitle;
+	private String reviewContent;
 	
 }

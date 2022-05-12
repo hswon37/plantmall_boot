@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter @Setter @NoArgsConstructor
 @SuppressWarnings("serial")
 public class LineItem implements Serializable {
@@ -16,7 +15,7 @@ public class LineItem implements Serializable {
 	private int lineNumber;
 	private int quantity;
 	private String productId;
-	private double unitPrice;
+	private int unitPrice;
 	  
 	public LineItem(int lineNumber, CartItem cartItem) {
 		this.lineNumber = lineNumber;
