@@ -14,11 +14,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
 @Getter @Setter @ToString
 public class Order {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int orderId;
 	private String userId;
 	private Date orderDate;

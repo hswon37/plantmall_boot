@@ -26,7 +26,7 @@ public class Cart implements Serializable{
 		return itemMap.containsKey(itemId);
 	}
 
-	public void addItem(Product product, boolean isInStock) {
+	public void addProduct(Product product, boolean isInStock) {
 	    CartItem cartItem = itemMap.get(product.getProductId());
 	    if (cartItem == null) {
 	      cartItem = new CartItem();
@@ -50,12 +50,12 @@ public class Cart implements Serializable{
 	    }
 	}
 
-	public void incrementQuantityByItemId(String ProdutId) {
+	public void incrementQuantityByProductId(String ProdutId) {
 	    CartItem cartItem = itemMap.get(ProdutId);
 	    cartItem.incrementQuantity();
 	}
 
-	public void setQuantityByItemId(String ProdutId, int quantity) {
+	public void setQuantityByProductId(String ProdutId, int quantity) {
 	    CartItem cartItem = itemMap.get(ProdutId);
 	    cartItem.setQuantity(quantity);
 	}
