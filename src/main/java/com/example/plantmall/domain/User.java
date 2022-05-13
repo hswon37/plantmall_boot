@@ -3,9 +3,11 @@ package com.example.plantmall.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Data
 @Getter @Setter
 public class User {
 	private String userId;

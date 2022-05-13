@@ -1,11 +1,12 @@
 package com.example.plantmall.domain;
 import java.io.Serializable;
 
-import javax.persistence.Entity;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter @Setter @NoArgsConstructor
 @SuppressWarnings("serial")
