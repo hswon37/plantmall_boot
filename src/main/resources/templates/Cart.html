@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>식몰</title>
+<link rel="stylesheet" href="../static/style/garam.css" type="text/css" >
+<script type="text/javascript">
+	function getCheckCnt() {
+		const query = 'input[name="selectItem"]:checked';
+		const selectedEls = document.querySelectorAll(query);
+	
+		let result = '';
+		let price = document.getElementById('priceSumPrint').innerHTML;
+		selectedEls.forEach((el) => {
+			result += 1;
+			alert(result);
+		})
+		
+		let payAmount = document.getElementById('payAmount').innerHTML;
+		alert("getCheckCnt payAmount: " + payAmount);
+		
+		document.getElementById('quantity').innerHTML = result;
+		document.getElementById('payAmount').innerHTML = payAmount + (price * result);
+	}
+	
+	function changeQuantity() {
+		var select = document.getElementById("quantitySelect");
+		var selectValue = select.options[select.selectedIndex].value;
+		var price = document.getElementById('itemPrice').innerHTML;
+	
+		document.getElementById('priceSumPrint').innerHTML = selectValue * price;
+		document.getElementById('individual_priceSum').value = selectValue * price;
+		getCheckCnt();
+	}
+</script>
+</head>
+<body>
+	<div class="wishList">
+		<div class="pageTitle">장바구니</div>
+		<div class="listCheck">
+			<span> <input type="checkbox" th:field="*{selectAll}" /><label for="selectAll"></label> </span>
+			<span>전체 선택 / 총 상품 </span>
+			<span th:text="${cart.numberOfItems}">0</span>개
+		</div>
+		<div class="cartList">
+			<div class="left">
+				<table class="cartElement">
+					<tbody>
+						<tr th:if="${cart.numberOfItems} == 0">
+							<td style="text-align:center;" colspan="8"><b>장바구니가 비어있습니다.</b></td>
+						</tr>
+							<tr th:each="cartItem: ${cart.cartItemList.pageList}">
+								<td>
+									<span class="selectItemBox">
+										<label for="selectItem"></label>
+										<input type="checkbox" class="selectItem" name="selectItem" value="1" onClick="getCheckCnt()">
+									</span> 
+									<span class="deleteItemBox">
+										<input type="button" value='X' />
+										<label for="deleteItem"></label>
+									</span>
+									<div class="cartItemBox" th:object="${cartItem.product}">
+										<div class="imgBox">
+											<a href="#" th:href="@{/product(productId=*{productId})}"><img src="">이미지</a>
+										</div>
+										<div class="contents">
+											제품 이름
+											<br>
+												가격: 
+												<span id="itemPrice" th:text="*{totalPrice}">16000</span>원
+											<div class="quantityPrice">
+												<ul>
+													<li>
+														수량변경: 
+														<select name="quantitySelect" id="quantitySelect" onChange="changeQuantity()">
+															<option value="1" selected>1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+															<option value="9">9</option>
+															<option value="10">10</option>
+														</select>
+													</li>
+												</ul>
+												<div class="priceSum">
+													<span id="priceSumPrint" th:text="*{totalPrice}">16000</span> 원
+													<input type="hidden" id="individual_priceSum" th:value="*{totalPrice}" />
+												</div>
+											</div>
+										</div>		
+									</div>
+								</td>
+							</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- left 끝남 -->
+			<div class="right">
+				<table class="priceTable">
+					<tbody>
+						<tr>
+							<th colspan="2">전체주문금액</th>
+						</tr>
+						<tr>
+							<td> 선택 상품 수 </td>
+							<td class="txtRight">
+								<span class="quantity" id="quantity" th:text="*{quantity}">0</span> 개
+							</td>
+						</tr>
+						<tr>
+							<td> 배송비 </td>
+							<td class="txtRight">
+								<span class="deliveryAmount" id="deliveryAmount">3000</span> 원
+							</td>
+						</tr>
+						<tr>
+							<td class="finalPrice"> 결제 예정 금액 </td>
+							<td class="txtRight finalPrice">
+								<span class="payAmount" id="payAmount" th:text="*{totalPrice}">0</span> 원
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<a href="#" class="button" th:href="@{/orderForm}">주문하기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

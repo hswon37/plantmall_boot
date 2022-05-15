@@ -1,5 +1,7 @@
 package com.example.plantmall.domain;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,4 +14,5 @@ public class Enquiry {
 	private String userId;
 	private String enqTitle;
 	private String enqContent;
+	private Date enquiryDate;
 }
