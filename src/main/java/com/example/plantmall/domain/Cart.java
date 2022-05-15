@@ -21,7 +21,7 @@ public class Cart implements Serializable{
 	
 	public Iterator<CartItem> getAllCartItems() { return itemList.getSource().iterator(); }
 	public PagedListHolder<CartItem> getCartItemList() { return itemList; }
-	 
+	public int getNumberOfItems() { return itemList.getSource().size(); }
 	public boolean containsItemId(String itemId) {
 		return itemMap.containsKey(itemId);
 	}

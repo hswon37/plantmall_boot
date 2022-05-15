@@ -12,7 +12,8 @@ import lombok.ToString;
 @Getter @Setter @ToString
 public class Order {
 	private int orderId;
-	private String userId;
+	private String userName;
+	private String phoneNumber;
 	private Date orderDate;
 	private String shipAddress;
 	private String billAddress;
@@ -25,7 +26,8 @@ public class Order {
 	private List<LineItem> lineItems = new ArrayList<LineItem>();
 	
 	public void initOrder(User user, Cart cart) {
-		userId = user.getUserId();
+		userName = user.getUserName();
+		phoneNumber = user.getPhone();
 		orderDate = new Date();
 		
 		shipAddress = user.getAddress();

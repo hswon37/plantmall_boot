@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>식몰</title>
+<link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+</head>
+<body>
+<div class="orderForm">
+	<div class="pageTitle">주문</div>
+		<div class="formTitle">주문제품 정보</div>
+		<table class="orderElement">
+			<tr th:each="lineItem:${order.lineItems}`">
+				<td class="imgBox">
+					<img src="">이미지
+				</td>
+				<td class="content">
+					<dl>
+						<dt><span th:text="${lineItem.product.p_name}"></span></dt>
+						<dd>
+							제품 가격: <span th:text="${lineItem.product.price}">16000</span>원 <br>
+							수량: <span th:text="${lineItem.quantity}">1</span>개 <br>
+							합계: <span th:text="${lineItem.unitPrice}">16000</span>원
+						</dd>
+					</dl>
+				</td>
+			</tr>
+		</table>
+		<form action="#" th:action="@{targetUrl}" th:object="${orderForm}" method="post">
+			<span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span>
+			<div class= "division">
+				<div class="left">
+					<div class="formWrap">
+						<div class="formTitle">주문자 정보</div>
+						<div class="formRow">
+							<div class="formCol head">이름</div>
+							<div class="formCol body">
+								<input type="text" class="input default" th:field="*{userName}" />
+							</div>
+						</div>
+						<div class="formRow">
+							<div class="formCol head">휴대폰</div>
+							<div class="formCol body">
+								<input type="text" class="input default" th:field="*{phone}" />
+							</div>
+						</div>
+						<div class="formRow">
+							<div class="formCol head">이메일</div>
+							<div class="formCol body">
+								<input type="text" class="input default" th:field="*{email}" /></div>
+						</div>
+						<div class="formRow">
+							<div class="formCol head">주소</div>
+							<div class="formCol body">
+								<input type="text" class="input default" th:field="*{billAddress}" />
+							</div>
+						</div>
+					</div>
+					<!-- 결제 정보 -->
+					<div class="formWrap">
+						<div class="formTitle">결제 정보</div>
+						<div class="formRow">
+							<div class="formCol head">카드 타입</div>
+							<div class="formCol body">
+								<span th:each="err:${#fields.errors('cartType')}" th:text="${err}"></span>
+								<select class="input default" th:field="{cardType}">
+									<option th:each="ty:${creditCardTypes}" th:value="${ty}" th:text="#{${ty}}">Visa</option>
+								</select>
+							</div>
+						</div>
+						<div class="formRow">
+							<div class="formCol head">카드 번호</div>
+							<div class="formCol body">
+								<span th:each="err:${#fields.errors('creditCard')}" th:text="${err}"></span>
+								<input type="text" class="input default" th:field="*{creditCard}" value="카드번호" />
+							</div>
+						</div>
+						<div class="formRow">
+							<div class="formCol head">유호기간 (MM/YY)</div>
+							<div class="formCol body">
+								<span th:each="err:${#fields.errors('expiryDate')}" th:text="${err}"></span>
+								<input type="text" class="input default" th:field="*{expiryDadte}" value="09/22" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- left끝 주문자 정보, 결제 정보 입력 끝  -->
+				<div class="right">
+					<table class="priceTable">
+						<tbody>
+							<tr>
+								<th colspan="2">전체주문금액</th>
+							</tr>
+							<tr>
+								<td> 주문 상품 수 </td>
+								<td class="txtRight">
+									<span class="quantity" id="quantity" th:text="${order.quantity}">1</span> 개
+								</td>
+							</tr>
+							<tr>
+								<td> 배송비 </td>
+								<td class="txtRight">
+									<span class="deliveryAmount" id="deliveryAmount">3000</span> 원
+								</td>
+							</tr>
+							<tr>
+								<td> 총 상품 금액 </td>
+								<td class="txtRight">
+									<span th:text="${order.totalPrice}">16000</span> 원
+								</td>
+							</tr>
+							<tr class="finalPrice">
+								<td> <b>결제 예정 금액</b> </td>
+								<td class="txtRight">
+									<span class="payAmount" id="payAmount" th:text="${order.totalPrice} + 3000">19000</span> 원
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div>
+						<a href="" class="button">결제하기</a>
+						<a href="" class="button">취소하기</a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

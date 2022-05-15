@@ -15,8 +15,4 @@ public class User {
 	private String phone;
 	private String zipcode;
 	private String address;
-	
-	private List<Review> reviewList = new ArrayList<Review>();
-	private List<Enquiry> enquiryList = new ArrayList<Enquiry>();
-	private List<EnquiryComment> enquiryCommList = new ArrayList<EnquiryComment>();
 }

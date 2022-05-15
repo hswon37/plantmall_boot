@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>식몰</title>
+<link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+</head>
+<body>
+<div class="includeReview">
+		<table class="reviewElements">
+			<tbody>
+				<tr th:if="${reviewList.numberOfItems} == 0">
+					<td style="text-align:center;" colspan="8">리뷰가 없습니다.</td>
+				</tr>
+				<tr th:each="review:${reviewList}">
+					<td>
+						<div class="review">
+							<div class="nameDate">
+								<span th:text="*{userName}">서가람</span>
+								<span th:text="*{reviewDate}">2022-4-15</span>
+							</div>
+							<p>리뷰 내용</p>
+							<div class="updateReview" th:if="*{userId} ==${#session.getAttribute('userName')}">
+								<a href="#" class="btnUpdate" th:href="@{/review/UpdateReview}">수정</a>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr th:remove="all">
+					<td>
+						<div class="review">
+							<div class="nameDate">
+								<span th:text="*{userName}">서가람</span>
+								<span th:text="*{reviewDate}">2022-4-15</span>
+							</div>
+							<p>내용ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd		
+							</p>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

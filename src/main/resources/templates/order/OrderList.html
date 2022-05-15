@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>식몰</title>
+<link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+</head>
+<body>
+<hr>
+	<div class="orderPage">
+		<div class="pageTitle">주문 목록</div>
+		<div class="orderList">
+			<table class="orderElement">
+				<tbody>
+					<tr th:if="${orderList.length} == 0">
+						<td style="text-align: center;" colspan="8"><b>주문 목록이 비어있습니다.</b></td>
+					</tr>
+					<tr th:each="order, status:${orderList}">
+						<td>
+							<div class="orderInfo">
+								<b><span th:text="${#dates.format(order.orderDate, 'yyyy.MM.dd')}">2022.04.09</span></b>
+								<span class="orderIdText" th:text="${order.orderId}">주문번호(orderId)</span>
+								<span class="orderDetailPage">
+									<a href="#" th:href="@{/order/orderDetail(orderId=${order.orderId})}">주문 상세보기</a>
+								</span>
+							</div>
+							<div class="orderContents">
+								<div class="imgBox">
+									<a href="#" th:href="@{/product(productId=${order.lineItems[0].productId})}"><img src="">이미지</a>
+								</div>
+								<div class="content">
+									<p th:text="${order.lineItems[0].product.p_name}">첫번째 상품</p>
+									<p th:text="${status.size > 1}? '외 ${status.size - 1}개'">외 1개</p>
+									<br><br><br>
+									<span class="itemPrice" th:text="${order.totalPrice}">16000원</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr th:remove="all">
+						<td>
+							<div class="orderInfo">
+								<b><span>2022.04.10</span></b>
+								<span class="orderIdText">주문번호(orderId)</span>
+								<span class="orderDetailPage">
+									<a href="#">주문 상세보기</a>
+								</span>
+							</div>
+							<div class="orderContents">
+								<div class="imgBox">
+									<a href="#" ><img src="">이미지</a>
+								</div>
+								<div class="content">
+									<p>두번째 상품</p>
+									<p>외 3개</p>
+									<br><br><br>
+									<span class="itemPrice">32000원</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
