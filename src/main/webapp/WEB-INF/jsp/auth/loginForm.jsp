@@ -27,8 +27,8 @@
                      <h5 class="ir_su">로그인 영역</h5>
                      <div class="lc_text">
                          <label for="uid" class="ir_su">아이디</label>
-                         <form:input type="text" path="userId"/>
-                         <form:errors path="userId"/>
+                         <form:input type="text" path="email"/>
+                         <form:errors path="email"/>
                          <!-- <input type="text" id="uid" name="uid" class="input_text" maxlength="20"> -->
                          <label for="upw" class="ir_su">비밀번호</label>
                          <form:password path="password"/>

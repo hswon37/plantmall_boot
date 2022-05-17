@@ -8,6 +8,8 @@ import com.example.plantmall.domain.User;
 
 @Mapper
 public interface UserMapper {
-	public List<User> selectList();
+
+	User getAccountByUsernameAndPassword(String username, String password);
+	void insertUser(User user);
 	
 }

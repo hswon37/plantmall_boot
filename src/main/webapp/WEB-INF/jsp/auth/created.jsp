@@ -12,27 +12,27 @@
 <tbody>
 <tr style="height: 18px;">
 <td style="width: 25%; text-align: center; height: 18px;">ID</td>
-<td style="width: 75%; text-align: center; height: 18px;">flowwwer</td>
+<td style="width: 75%; text-align: center; height: 18px;">${completedUser.userId}</td>
 </tr>
 <tr style="height: 18px;">
 <td style="width: 25%; text-align: center; height: 18px;">NAME</td>
-<td style="width: 75%; text-align: center; height: 18px;">임미미</td>
+<td style="width: 75%; text-align: center; height: 18px;">${completedUser.userName}</td>
 </tr>
 <tr style="height: 18px;">
 <td style="width: 25%; text-align: center; height: 18px;">EMAIL</td>
-<td style="width: 75%; text-align: center; height: 18px;">flowwww@naver.com</td>
+<td style="width: 75%; text-align: center; height: 18px;">${completedUser.email}</td>
 </tr>
 <tr style="height: 18px;">
 <td style="width: 25%; text-align: center; height: 18px;">PHONE</td>
-<td style="width: 75%; text-align: center; height: 18px;">010-7882-1024</td>
+<td style="width: 75%; text-align: center; height: 18px;">${completedUser.phone}</td>
 </tr>
 <tr style="height: 18px;">
 <td style="width: 25%; text-align: center; height: 18px;">ZIPCODE</td>
-<td style="width: 75%; text-align: center; height: 18px;">08920</td>
+<td style="width: 75%; text-align: center; height: 18px;">${completedUser.zipcode}</td>
 </tr>
 <tr style="height: 18px;">
 <td style="width: 25%; text-align: center; height: 18px;">ADDRESS</td>
-<td style="width: 75%; text-align: center; height: 18px;">서울특별시 성북구 화랑로13길 60</td>
+<td style="width: 75%; text-align: center; height: 18px;">${completedUser.address }</td>
 </tr>
 </tbody>
 </table>

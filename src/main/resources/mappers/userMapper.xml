@@ -7,4 +7,26 @@
         SELECT EMAIL
           FROM USER_TABLE
     </select>
+    
+    <insert id="insertUser" parameterType="User">
+    	INSERT INTO USER_TABLE
+    	(userId,userName,password,email,phone,zipcode,address)
+    	VALUES
+    	(#{userId},#{userName},#{password},#{email},#{phone},#{zipcode},#{address})
+    </insert>
+
+    <select id="getAccountByUsernameAndPassword" resultType="User">
+	    SELECT
+	    	USERID,
+	    	USERNAME,
+	    	EMAIL,
+	    	PHONE,
+	    	ZIPCODE,
+	    	ADDRESS
+	    FROM USER_TABLE
+	    WHERE USER_TABLE.EMAIL = #{param1}
+	      AND USER_TABLE.PASSWORD = #{param2}
+
+  </select>
+
 </mapper>
