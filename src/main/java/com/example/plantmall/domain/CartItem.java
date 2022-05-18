@@ -8,12 +8,12 @@ import lombok.Setter;
 @Getter @Setter
 @SuppressWarnings("serial")
 public class CartItem implements Serializable {
-	private Product product;
+	private Item item;
 	private int quantity;
 	
 	public double getTotalPrice() {
-		if (product != null) {
-			return product.getPrice() * quantity;
+		if (item != null) {
+			return item.getListPrice() * quantity;
 		}
 		else {
 			return 0;
