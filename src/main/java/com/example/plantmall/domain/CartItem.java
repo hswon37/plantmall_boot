@@ -1,19 +1,19 @@
 package com.example.plantmall.domain;
 
-import java.io.Serializable;
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-@SuppressWarnings("serial")
-public class CartItem implements Serializable {
-	private Item item;
+public class CartItem {
+	private String userId;
+	private String productId;
 	private int quantity;
+	private int unitPrice;
+	private Product product;
 	
-	public double getTotalPrice() {
-		if (item != null) {
-			return item.getListPrice() * quantity;
+	public int getTotalPrice() {
+		if (product != null) {
+			return product.getPrice() * quantity;
 		}
 		else {
 			return 0;
@@ -21,10 +21,6 @@ public class CartItem implements Serializable {
 	}
 	
 	public void incrementQuantity() {
-	    quantity++;
-	}
-	
-	public void decreaseQuantity() {
-	    quantity--;
+		quantity++;
 	}
 }

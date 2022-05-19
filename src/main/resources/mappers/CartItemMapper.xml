@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.plantmall.dao.mybatis.mapper.CartMapper">
+<cache />
+
+	<select id="getCartItemList" resultType="cartItem">
+		SELECT USERID, PRODUCCTID, QUANTITY, UNITPRICE FROM CARTITEM
+		WHERE USERID = #{userId}
+	</select>
+	
+	<insert id="insertCartItem">
+		INSERT INTO CARTITEM (USERID, PRODUCTID, QUANTITY, UNITPRICE)
+		VALUES (#{userId}, #{productId), #{quantity}, #{unitPrice})
+	</insert>
+	
+	<delete id="deleteCartItem">
+		DELETE FROM CARTITEM
+		WHERE PRODUCTID = #{productId}
+	</delete>
+	
+	<delete id="deleteCartItemAll">
+		DELETE FROM CARTITEM
+		WHERE USERID = #{VALUE}
+	</delete>
+	
+	<update id="updateCartItem">
+		UPDATE CARTITEM SET QUANTITY = #{quantity}
+		WHERE PRODUCTID=#{productId}
+	</update>
+	
+	<select id="sumMoney">
+		SELECT SUM(#{unitPrice}) AS TOTALPRICE 
+		FROM CARTITEM
+	</select>
+	
+</mapper>
