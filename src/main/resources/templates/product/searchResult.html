@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+    <title>식몰</title>
+   	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+	<style>
+		table {
+			text-align:center;
+		}
+	</style>
+</head>
+<body onload="init();">
+	<div th:insert="~{header :: #top}"></div>
+		
+	<h2>검색 결과</h2>
+	<div align="center">
+	  카테고리: <a href="#">꽃</a> | <a href="#">야생화</a> | <a href="#">허브</a> | <a href="#">나무</a> | <a href="#">다육</a> | <a href="#">해조</a>
+		<table>
+			<tr>
+				<td>
+					<a href="#">
+						<img th:src="@{/images/temp.jpg}" style="width:200px">				
+						<div>판매자</div>
+						<div>제품명</div>
+						<div>가격</div>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+						<img th:src="@{/images/temp.jpg}" style="width:200px">				
+						<div>판매자</div>
+						<div>제품명</div>
+						<div>가격</div>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+						<img th:src="@{/images/temp.jpg}" style="width:200px">				
+						<div>판매자</div>
+						<div>제품명</div>
+						<div>가격</div>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+						<img th:src="@{/images/temp.jpg}" style="width:200px">				
+						<div>판매자</div>
+						<div>제품명</div>
+						<div>가격</div>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="#">
+						<img th:src="@{/images/temp.jpg}" style="width:200px">				
+						<div>판매자</div>
+						<div>제품명</div>
+						<div>가격</div>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+						<img th:src="@{/images/temp.jpg}" style="width:200px">				
+						<div>판매자</div>
+						<div>제품명</div>
+						<div>가격</div>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+						<img th:src="@{/images/temp.jpg}" style="width:200px">				
+						<div>판매자</div>
+						<div>제품명</div>
+						<div>가격</div>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+						<img th:src="@{/images/temp.jpg}" style="width:200px">				
+						<div>판매자</div>
+						<div>제품명</div>
+						<div>가격</div>
+					</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
+        

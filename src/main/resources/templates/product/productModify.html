@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8">
     <title>식몰</title>
-    <style>
+   	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+	<style>
 	  table {
 	    width: 100%;
 	    border-collapse: collapse;
@@ -13,13 +14,13 @@
 	    padding: 10px;
 	  }
 	</style>
-   	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
 </head>
-<body>
+<body onload="init();">
 	<div th:insert="~{header :: #top}"></div>
-	<h2>제품 삭제</h2>
+		
+	<h2>제품 수정</h2>
 	<div>
-	<form id="deleteForm" method="post">
+	<form id="editForm" method="post">
 	 	<table>
 			<tr>
 				<td rowspan="6" style="border-bottom: none; border:1px solid;">
@@ -89,12 +90,12 @@
 					alert("상품 사진을 입력해주세요");
 					productPhoto.focus();
 				} */
-				document.editForm.action = "${path}/shop/product/update.do"; /*수정 필요*/
+				document.editForm.action = "${path}/shop/product/update.do";
 				document.editForm.submit();
 			});
 			$("#deleteBtn").click(function(){
 				if(confirm("상품을 삭제하시겠습니까?")){
-					document.editForm.action = "${path}/shop/product/delete.do";/*수정 필요*/
+					document.editForm.action = "${path}/shop/product/delete.do";
 					document.editForm.submit();
 				}
 			});
