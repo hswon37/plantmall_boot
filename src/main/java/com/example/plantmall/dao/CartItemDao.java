@@ -7,8 +7,7 @@ import com.example.plantmall.domain.CartItem;
 public interface CartItemDao {
 	List<CartItem> getCartItemList(String userId);
 	void insertCartItem(CartItem CartItem);
-	void deleteCartItem(String productId);
-	void deleteCartItemAll(String userId);
+	void deleteCartItem(CartItem cartItem);
 	void updateCartItem(CartItem CartItem);
-	int sumMoney(String userId);
+	Integer sumMoney(String userId);
 }

@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.plantmall.dao.CartItemDao;
 import com.example.plantmall.dao.mybatis.mapper.CartItemMapper;
 import com.example.plantmall.domain.CartItem;
 
 @Repository
-public class MybatisCartItemDao implements CartItemMapper {
+public class MybatisCartItemDao implements CartItemDao {
 	@Autowired
 	private CartItemMapper cartMapper;
 
@@ -27,17 +28,10 @@ public class MybatisCartItemDao implements CartItemMapper {
 	}
 
 	@Override
-	public void deleteCartItem(String productId) {
+	public void deleteCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub
-		cartMapper.deleteCartItem(productId);
+		cartMapper.deleteCartItem(cartItem);
 	}
-
-	@Override
-	public void deleteCartItemAll(String userId) {
-		// TODO Auto-generated method stub
-		cartMapper.deleteCartItemAll(userId);
-	}
-
 	@Override
 	public void updateCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub
@@ -45,7 +39,7 @@ public class MybatisCartItemDao implements CartItemMapper {
 	}
 
 	@Override
-	public int sumMoney(String userId) {
+	public Integer sumMoney(String userId) {
 		// TODO Auto-generated method stub
 		return cartMapper.sumMoney(userId);
 	}

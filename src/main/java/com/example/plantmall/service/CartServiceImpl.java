@@ -28,15 +28,9 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public void deleteCartItem(String productId) {
+	public void deleteCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub
-		cartItemDao.deleteCartItem(productId);
-	}
-
-	@Override
-	public void deleteCartItemAll(String userId) {
-		// TODO Auto-generated method stub
-		cartItemDao.deleteCartItemAll(userId);
+		cartItemDao.deleteCartItem(cartItem);
 	}
 
 	@Override
@@ -46,7 +40,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int sumMoney(String userId) {
+	public Integer sumMoney(String userId) {
 		// TODO Auto-generated method stub
 		return cartItemDao.sumMoney(userId);
 	}

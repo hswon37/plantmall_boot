@@ -35,9 +35,11 @@ public class OrderController {
 		return "/orderForm";
 	}
 	
-	@PostMapping()
-	public String submit(HttpServletRequest request, @ModelAttribute("orderForm") OrderForm orderForm) {
-		User user = (User) request.getSession().getAttribute("user");
-		
-	}
+	/*
+	 * @PostMapping() public String submit(HttpServletRequest
+	 * request, @ModelAttribute("orderForm") OrderForm orderForm) { User user =
+	 * (User) request.getSession().getAttribute("user");
+	 * 
+	 * }
+	 */
 }

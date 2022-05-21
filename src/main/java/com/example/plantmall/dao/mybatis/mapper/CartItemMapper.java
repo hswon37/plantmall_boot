@@ -9,9 +9,8 @@ import com.example.plantmall.domain.CartItem;
 @Mapper
 public interface CartItemMapper {
 	List<CartItem> getCartItemList(String userId);
-	void insertCartItem(CartItem cart);
-	void deleteCartItem(String productId);
-	void deleteCartItemAll(String userId);
+	void insertCartItem(CartItem cartItem);
+	void deleteCartItem(CartItem cartItem);
 	void updateCartItem(CartItem cartItem);
-	int sumMoney(String userId);
+	Integer sumMoney(String userId);
 }

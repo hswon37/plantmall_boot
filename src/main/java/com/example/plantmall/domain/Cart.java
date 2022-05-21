@@ -16,8 +16,8 @@ import lombok.Setter;
 @SuppressWarnings("serial")
 public class Cart implements Serializable {
 
-	private final Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
-	private final PagedListHolder<CartItem> itemList = new PagedListHolder<CartItem>();
+	private Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
+	private PagedListHolder<CartItem> itemList = new PagedListHolder<CartItem>();
 
 	public Iterator<CartItem> getAllCartItems() {
 		return itemList.getSource().iterator();
@@ -31,11 +31,11 @@ public class Cart implements Serializable {
 		return itemList.getSource().size();
 	}
 
-	public boolean containsCartItemId(String CartItemId) {
-		return itemMap.containsKey(CartItemId);
+	public boolean containsProductId(String productId) {
+		return itemMap.containsKey(productId);
 	}
 
-	public void addProduct(Product product, boolean isInStock) {
+	public void addProduct(Product product) {
 		CartItem cartItem = itemMap.get(product.getProductId());
 		if (cartItem == null) {
 			cartItem = new CartItem();
@@ -56,13 +56,13 @@ public class Cart implements Serializable {
 		}
 	}
 	
-	public void incrementQuantityByItemId(String itemId) {
-	    CartItem cartItem = itemMap.get(itemId);
+	public void incrementQuantityByProductId(String productId) {
+	    CartItem cartItem = itemMap.get(productId);
 	    cartItem.incrementQuantity();
 	}
 
-	public void setQuantityByItemId(String itemId, int quantity) {
-	    CartItem cartItem = itemMap.get(itemId);
+	public void setQuantityByProductId(String productId, int quantity) {
+	    CartItem cartItem = itemMap.get(productId);
 	    cartItem.setQuantity(quantity);
 	}
 
@@ -79,4 +79,10 @@ public class Cart implements Serializable {
 	    return subTotal;
 	}
 
+	@Override
+	public String toString() {
+		return "Cart [itemMap=" + itemMap + ", itemList=" + itemList + "]";
+	}
+	
+	
 }
