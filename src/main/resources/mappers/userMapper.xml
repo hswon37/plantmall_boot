@@ -15,7 +15,7 @@
     	(#{userId},#{userName},#{password},#{email},#{phone},#{zipcode},#{address})
     </insert>
 
-    <select id="getAccountByUsernameAndPassword" resultType="User">
+    <select id="getUserByEmailAndPassword" resultType="User">
 	    SELECT
 	    	USERID,
 	    	USERNAME,
@@ -26,7 +26,30 @@
 	    FROM USER_TABLE
 	    WHERE USER_TABLE.EMAIL = #{param1}
 	      AND USER_TABLE.PASSWORD = #{param2}
-
   </select>
+  
+      <select id="getUserByEmail" resultType="User">
+	    SELECT
+	    	USERID,
+	    	USERNAME,
+	    	EMAIL,
+	    	PHONE,
+	    	ZIPCODE,
+	    	ADDRESS
+	    FROM USER_TABLE
+	    WHERE USER_TABLE.EMAIL = #{param1}
+  </select>
+  
+      <insert id="updateUser" parameterType="User">
+    	UPDATE USER_TABLE SET
+	    	userId = #{userId},
+	    	userName = #{userName},
+	    	password = #{password},
+	    	email = #{email},
+	    	phone = #{phone},
+	    	zipcode = #{zipcode},
+	    	address = #{address}
+    	WHERE userId =#{userId}
+    </insert>
 
 </mapper>

@@ -1,8 +1,8 @@
-package com.example.plantmall.dao;
+package com.example.plantmall.service;
 
 import com.example.plantmall.domain.User;
 
-public interface UserDao {
+public interface AuthService {
 
 	User getUser(String email);
 	User getUser(String email, String password);

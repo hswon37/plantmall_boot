@@ -13,12 +13,21 @@ public class MybatisUserDao implements UserDao{
 	private UserMapper userMapper;
 
 	@Override
-	public User getUser(String username, String password) {
-		return userMapper.getAccountByUsernameAndPassword(username, password);
+	public User getUser(String email) {
+		return userMapper.getUserByEmail(email);
+	}
+	@Override
+	public User getUser(String email, String password) {
+		return userMapper.getUserByEmailAndPassword(email, password);
 	}
 
 	@Override
 	public void insertUser(User user) {
 		userMapper.insertUser(user);
+	}
+	
+	@Override
+	public void updateUser(User user) {
+		userMapper.updateUser(user);
 	}
 }

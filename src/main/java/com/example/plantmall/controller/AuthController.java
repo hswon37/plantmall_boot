@@ -4,9 +4,11 @@ package com.example.plantmall.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,80 +19,38 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.example.plantmall.dao.UserDao;
 import com.example.plantmall.dao.mybatis.MybatisUserDao;
 import com.example.plantmall.dao.mybatis.mapper.UserMapper;
 import com.example.plantmall.domain.User;
+import com.example.plantmall.service.AuthService;
 
 @Controller
 public class AuthController{
 	
+	@Value("/auth/signupForm")
+	private String formViewName;
+	
 	@Autowired
-	private UserDao userDao;
-
-	@ModelAttribute("UserInfo")
-	public User UserInfo(HttpServletRequest request) {
-		if(request.getMethod().equalsIgnoreCase("GET")) {
-			User userInfo = new User();
-			return userInfo;
+	private AuthService authService;
+	
+	@ModelAttribute("userForm")
+	public UserForm formBackingObject(HttpServletRequest request) throws Exception{
+		UserSession userSession=
+				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
+		if(userSession!=null) {
+			return new UserForm(authService.getUser(userSession.getUser().getEmail()));
 		}else {
-			return new User();
+			return new UserForm();
 		}
 	}
 	
-	@RequestMapping(path = "/login", method=RequestMethod.GET)
-	public String loginForm() {
-		return "auth/loginForm";
+	@RequestMapping(method = RequestMethod.GET)
+	public String showForm() {
+		return formViewName;
 	}
-	
-	@RequestMapping(path = "/login", method=RequestMethod.POST)
-	public ModelAndView submit(@ModelAttribute("UserInfo") User userInfo) {
-		ModelAndView mav = new ModelAndView();
-	
-		User reg = userDao.getUser(userInfo.getEmail(), userInfo.getPassword());
-		if(reg==null) {
-			mav.setViewName("/auth/error");
-			mav.addObject("errorMessage", "아이디, 비밀번호를 확인해주세요");
-		}else {
-			mav.setViewName("/auth/created");
-			mav.addObject("completedUser", reg);
-		}	
-		return mav;
-	}
-	
-	@RequestMapping(path = "/settings", method=RequestMethod.GET)
-	public String settings() {
-		return "auth/settings";
-	}
-	
-	@RequestMapping(path = "/signupForm", method=RequestMethod.GET)
-	public String singupForm() {
-		return "auth/signupForm";
-	}
-	
-	@RequestMapping(path = "/signupForm", method=RequestMethod.POST)
-	public ModelAndView submitSign(@Validated @ModelAttribute("UserInfo") User userInfo, BindingResult result) {
-		ModelAndView mav = new ModelAndView();
-		if(result.hasErrors()) {
-			mav.addObject("errorMessage", "회원가입 실패");
-			mav.setViewName("/auth/error");
-		}
-
-		mav.setViewName("/auth/created");
-		userDao.insertUser(userInfo);
-		mav.addObject("completedUser", userInfo);
-		return mav; 
-	}
-	
-
-	
-	@RequestMapping(path = "/created", method=RequestMethod.GET)
-	public String created() {
-		return "auth/created";
-	}
-	
-	
 	@RequestMapping(path = "/authFuncList", method=RequestMethod.GET)
 	public String authFuncList(Model model) {
 		return "/auth/authFuncList";
