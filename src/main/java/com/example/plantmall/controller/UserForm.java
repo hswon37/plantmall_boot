@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.example.plantmall.domain.User;
 
+@SuppressWarnings("serial")
 public class UserForm implements Serializable{
 	
 	private User user;

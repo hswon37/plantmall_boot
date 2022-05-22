@@ -1,5 +1,43 @@
 package com.example.plantmall.dao.mybatis;
 
-public class MybatisOrderDao {
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
+
+import com.example.plantmall.dao.OrderDao;
+import com.example.plantmall.dao.mybatis.mapper.LineItemMapper;
+import com.example.plantmall.dao.mybatis.mapper.OrderMapper;
+import com.example.plantmall.domain.Order;
+
+@Repository
+public class MybatisOrderDao implements OrderDao {
+	@Autowired
+	protected OrderMapper orderMapper;
+	@Autowired
+	protected LineItemMapper lineItemMapper;
+
+	@Override
+	public List<Order> getOrdersByUserId(String userId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return orderMapper.getOrdersByUserId(userId);
+	}
+
+	@Override
+	public Order getOrder(int orderId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		Order order = orderMapper.getOrder(orderId);
+		if (order != null) {
+			order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
+		}
+		return order;
+	}
+
+	@Override
+	public void insertOrder(Order order) throws DataAccessException {
+		// TODO Auto-generated method stub
+//		order.setOrderId();
+	}
+	
 }

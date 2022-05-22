@@ -1,11 +1,13 @@
 package com.example.plantmall.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.plantmall.dao.UserDao;
 import com.example.plantmall.domain.User;
-
+@Service
 public class AuthServiceImpl implements AuthService{
+	
 	@Autowired
 	private UserDao userDao;
 
@@ -26,7 +28,6 @@ public class AuthServiceImpl implements AuthService{
 
 	@Override
 	public User getUser(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.getUser(email);
 	}
 }

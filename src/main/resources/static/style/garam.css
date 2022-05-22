@@ -1,0 +1,414 @@
+@charset "UTF-8";
+a.button {
+	display: inline-block;
+	margin-bottom: 10px;
+  	width: 100%;
+  	line-height: 58px;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #555555;
+}
+a,
+a:visited {
+  	text-decoration: none;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+.orderPage {
+	/* 전체 div */
+	margin: 0 auto;
+	width: 700px;
+}
+
+.pageTitle {
+	/* 상단 '주문 목록' 텍스트 */
+	font-size: 28px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+.orderForm {
+	/* 1200px크기로 가운데에 오도록 */
+	margin: 0 auto;
+	width: 1200px;
+}
+.orderDetail {
+	width: 100%;
+}
+.orderInfo {
+/* 주문 내역 상단 날짜, 주문번호, 주문 상세보기 링크 */
+	padding: 5px;
+}
+.orderDateText {
+	text-align: left;
+	padding-right: 20px;
+	font-size: 20px;
+}
+.orderDetailPage {
+	float: right;
+	text-align: right;
+	padding-right: 10px
+}
+table.orderElement {
+	width: 100%;
+	border: solid 1px;
+	border-collapse: collapse;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+table.orderElement tr {
+	border: solid 1px;
+	padding: 20px;
+}
+
+.orderContents {
+/* 주문 목록 element 안에 들어가는 이미지, 이름, 가격 */
+	width: 100%;
+	word-break: break-all;
+	padding: 10px 10px 0 10px ;
+	font-size: 16px;
+	display: flex;
+}
+.contents {
+/* 장바구니 아이템 element 안에 들어가는 이름, 가격, 수량, 총 가격 설정 */
+	display: inline-block;
+	width: 570px;
+	word-break: break-all;
+	padding: 20px 0 0 0 ;
+	font-size: 16px;
+}
+.imgBox {
+	width: 120px;
+	height: 120px;
+	padding-right: 20px;
+}
+
+.content {
+	width: 500px;
+	font-size: 16px;
+}
+
+.itemPrice {
+	font-size: 20px;
+	float: right;
+}
+.priceSum {
+	padding: 5px 0 5px 0;
+	font-size: 20px;
+	text-align: center;
+}
+dt {
+	font-size: 18px;
+    font-weight: bold;
+}
+dd {
+	display: block;
+	margin-left: 0px;
+}
+.quantityPrice {
+	display: inline; 
+	float : right;
+	font-size: 20px;
+}
+.division {
+	display:flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.left {
+/* order form  */
+	width: 800px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+.right {
+/* 전체 주문 금액 부분*/
+	flex: 1;
+	box-sizing: border-box;
+}
+.input.default {
+	font-size: 16px;
+	padding: 11px;
+	box-sizing: border-box;
+	border: solid 10x;
+	vertical-align: middle;
+	width: 300px;
+}
+table.priceTable {
+	width: 100%;
+	border: solid 1px;
+	border-collapse: collapse;
+	margin: 45px 0 10px 0;
+}
+table.priceTable tr th {
+	padding: 5px;
+	font-size: 21px;
+	border: solid 1px;
+	height: 40px;
+}
+table.priceTable tr td {
+	padding: 10px 30px;
+	font-size: 17px;
+}
+.txtRight {
+	text-align: right;
+}
+.finalPrice {
+	border-top: solid 1px;
+	padding: 15px 5px 40px 20px;
+	font-size: 21px;
+}
+.finalPrice span {
+	font-size: 25px;
+}
+.formWrap {
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+.formTitle {
+	font-size: 20px;
+	font-weight: bold;
+	padding-bottom: 15px;
+	border-bottom: solid 1px;
+}
+.formRow {
+	box-sizing: border-box;
+	border-bottom: solid 1px;
+}
+.formCol {
+	display: inline-block;
+	vertical-align: top;
+	box-sizing: border-box;
+}
+.formCol.head {
+	width: 170px;
+	font-size: 16px;
+	padding-top: 25px;
+	padding-bottom: 22px;
+	border-right: solid 1px;
+}
+.formCol.body {
+	font-size: 16px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-right: 15px;
+}
+ul {
+/* 점, 들여쓰기 없앰 */
+	list-style: none;
+	padding-left: 0px;
+}
+li select {
+	width: 50px;
+	height: 26px;
+	font-size: 12px;
+	padding: 0 2px;
+	text-align: center;
+}
+.wishList {
+/* 1200px크기로 가운데에 오도록 */
+	margin: 0 auto;
+	width: 1200px;
+}
+.listCheck {
+/* 전체 선택 부분 */
+	font-size: 20px;
+	padding-bottom: 15px;
+}
+
+.cartList {
+/* 장바구니 아이템 리스트랑 결제 금액 나타내는 부분 */
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+table.cartElement {
+/* 장바구니 아이템 리스트 element */
+	width: 100%;
+	border: solid 1px;
+	border-collapse: collapse;
+	margin: 0 0 10px;
+}
+
+.selectItemBox {
+/* 장바구니 아이템 element 하나 선택 */
+	padding-top: 20px;
+}
+
+.deleteItemBox {
+/* 장바구니 아이템 element 하나 삭제 */
+	float: right;
+	padding-right: 10px;
+}
+
+
+
+/* Review css */
+.reviewForm {
+	/* 전체 div */
+	margin: 0 auto;
+	width: 700px;
+	padding-top: 100px;
+}
+.orderElement {
+	width: 100%;
+	border: solid 1px;
+	border-collapse: collapse;
+	word-break: break-all;
+	/*padding: 10px 10px 0 10px;*/
+	font-size: 16px;
+	display: flex;
+}
+.write_area {
+	border: 1px solid;
+}
+.rFormTitle {
+	border-bottom: solid 1px;
+	padding-right: 15px;
+}
+textarea {
+	border: none;
+	font-size: 16px;
+	width: 100%;
+	height: 100%;
+}
+textarea:focus {
+	outline: none;
+}
+.rFormTitle textarea{
+	font-size: 20px;
+	padding-top: 10px;
+}
+.rFormCol {
+	vertical-align: top;
+	box-sizing: border-box;
+}
+.rFormCol.reviewBody {
+	font-size: 16px;
+	padding-top: 12px;
+	padding-right: 15px;
+}
+.includeReview {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.reviewElements {
+	width: 1000px;
+	margin: 0 0 10px;
+}
+.review {
+	width: 1000px;
+	vertical-align: top;
+	overflow: hidden;
+	height : auto;
+	border-bottom: solid 1px;
+	padding: 20px 5px;
+	word-break: break-all;
+}
+.nameDate {
+	font-size: 18px;
+	font-weight: bold;
+}
+.button {
+	float: right;
+}
+.updateReview {
+	display: inline-block;
+}
+a.btnUpdate {
+	float: right;
+	margin-bottom: 10px;
+  	width: 40px;
+  	line-height: 30px;
+    font-size: 15px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #555555;
+}
+
+
+
+/* Enquiry css */
+.enquiryForm {
+	/* 전체 div */
+	margin: 0 auto;
+	width: 700px;
+	padding-top: 100px;
+}
+.includeEnquiry {
+	width: 1000px;
+	margin: 0 auto;
+}
+.createEnq {
+	position: relative;
+	border-top: solid 1px lightgray;
+	border-bottom: solid 1px lightgray;
+	padding: 25px 8px;
+	margin: 0;
+}
+.navSideBtn{
+	position: absolute;
+	right: 3px;
+	top: 7px;
+}
+.enqButton {
+	display: inline-block;
+	margin-bottom: 10px;
+  	width: 100%;
+  	line-height: 25px;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #555555;
+    padding: 5px;
+}
+.updateEnq {
+	font-size: 14px;
+	padding: 5px 5px 5px 5px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #555555;
+}
+div.miniTab>span {
+	padding-right: 15px;
+	font-size: 14px;
+	height: 18px;
+}
+div.miniTab>span:first-child {
+	font-weight: bold;
+}
+.question {
+	font-size: 16px;
+	font-weight: bold;
+	overflow: hidden;
+	height : auto;
+	border-bottom: solid 1px lightgray;
+	padding: 10px 5px 10px 5px;
+	word-break: break-all;
+}
+.replyCell {
+	padding: 10px 30px;
+	line-height: 22px;
+	border-top: 1px solid lightgray;
+}
+.info {
+	line-height: 22px;
+}
+.replyText{
+	margin: 10px;
+	overflow: hidden;
+	height : auto;
+	word-break: break-all;
+}

@@ -1,5 +1,7 @@
 package com.example.plantmall.domain;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,5 +14,6 @@ public class Review {
 	private String userId;
 	private String reviewTitle;
 	private String reviewContent;
+	private Date reviewDate;
 	
 }

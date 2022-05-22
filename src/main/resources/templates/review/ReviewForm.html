@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>식몰</title>
+<link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+<script>
+	function MoveFocus() {
+		document.rForm.rtitle.focus();
+		return;
+	}
+</script>
+</head>
+<body onload="MoveFocus();">
+	<div class="reviewForm">
+		<div class="orderElement">
+			<div class="imgBox">
+				<img src=""> 이미지
+			</div>
+			<div class="content">
+				제품 이름
+				<br><br>
+				<br>
+				<span class="itemPrice" th:text="${product.price}">16000</span>
+			</div>
+		</div>
+		<form name="rForm" action="#" th:action="@{targetUrl}" th:object="${reviewForm}" method="post">
+			<span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span>
+			<div class="formWrap">
+				<div class="write_area">
+					<div class="rFormTitle">
+						<textarea name="rtitle" th:field="*{reviewTitle}" rows="1" placeholder="리뷰 제목" required></textarea>
+					</div>
+					<div class="rFormCol reviewBody">
+						<textarea th:field="*{reviewContent}" rows="20" placeholder="리뷰 내용" required></textarea>
+					</div>
+				</div>
+				<div>
+					<a href="#" class="button" th:href="@{/review/ReviewForm}">리뷰 작성</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

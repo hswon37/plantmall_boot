@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,7 @@
 <body>
      <!-- 로그인 -->
      <div class="login-wrap">
-         <form:form modelAttribute="UserInfo">
+         <form action='<c:url value="/auth/login"/>' method="POST">
              <fieldset>
                  <legend class="ir_su">로그인 및 관련 설정</legend>
                  <div class="login_header">
@@ -27,12 +27,10 @@
                      <h5 class="ir_su">로그인 영역</h5>
                      <div class="lc_text">
                          <label for="uid" class="ir_su">아이디</label>
-                         <form:input type="text" path="email"/>
-                         <form:errors path="email"/>
+                         <input type="text" name="email" size="20">
                          <!-- <input type="text" id="uid" name="uid" class="input_text" maxlength="20"> -->
                          <label for="upw" class="ir_su">비밀번호</label>
-                         <form:password path="password"/>
-                         <form:errors path="password"/>
+                         <input type="password" name="password" size="20">
                          <!-- <input type="password" id="upw" name="upw" class="input_text" maxlength="20"> -->
                      </div>
                      <input type="submit" value="로그인"/>
@@ -45,7 +43,7 @@
                      </ul>
                  </div>
              </fieldset>
-         </form:form>
+         </form>
      </div>
      <!-- //로그인 -->
 </body>
