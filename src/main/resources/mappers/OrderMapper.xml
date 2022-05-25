@@ -5,18 +5,18 @@
 <cache />
 
 	<select resultType="Order" id="getOrder">
-		SELECT ORDERID, USERID, ORDERDATE, SHIPADDRESS, BILLADDRESS, CREDITCARD, EXPIRYDATE, CARDTYPE, STATUS
-		FROM ORDER_TABLE WHERE ORDER_TABLE.ORDERID = #{VALUE}
+		SELECT ORDERID, USERID, USERNAME, ORDERDATE, SHIPADDRESS, CREDITCARD, EXPIRYDATE, CARDTYPE 
+		FROM ORDER_TABLE WHERE ORDER_TABLE.ORDERID = #{orderId}
 	</select>
 
 	<select resultType="Order" id="getOrdersByUserId">
-		SELECT ORDERID, USERID, ORDERDATE, SHIPADDRESS, BILLADDRESS, CREDITCARD, EXPIRYDATE, CARDTYPE, STATUS
-		FROM ORDER_TABLE WHERE ORDER_TABLE.USERID = #{VALUE} ORDER BY ORDERDATE
+		SELECT ORDERID, USERID, USERNAME, ORDERDATE, SHIPADDRESS, CREDITCARD, EXPIRYDATE, CARDTYPE 
+		FROM ORDER_TABLE WHERE ORDER_TABLE.USERID = #{userId} ORDER BY ORDERDATE
 	</select>
 
 	<insert id="insertOrder">
 		INSERT INTO ORDER_TABLE
-		VALUES (#{orderId}, #{shipAddress}, #{billAddress}, #{totalPrice}, #{creditCard}, #{expiryDate}, #{locale}, #{status}, #{userId}, #{orderDate}, #{cardType})
+		VALUES (#{orderId}, #{shipAddress}, #{totalPrice}, #{creditCard}, #{expiryDate}, #{userId}, #{orderDate}, #{cardType}, #{userName})
 	</insert>
 
 </mapper>

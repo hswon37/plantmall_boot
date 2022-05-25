@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.example.plantmall.dao.OrderDao;
 import com.example.plantmall.dao.mybatis.mapper.LineItemMapper;
 import com.example.plantmall.dao.mybatis.mapper.OrderMapper;
+import com.example.plantmall.domain.LineItem;
 import com.example.plantmall.domain.Order;
 
 @Repository
@@ -37,7 +38,13 @@ public class MybatisOrderDao implements OrderDao {
 	@Override
 	public void insertOrder(Order order) throws DataAccessException {
 		// TODO Auto-generated method stub
-//		order.setOrderId();
+		//order.setOrderId(sequenceDao.getNextId("ordernum"));
+    	orderMapper.insertOrder(order);
+    	for (int i = 0; i < order.getLineItems().size(); i++) {
+    		LineItem lineItem = (LineItem) order.getLineItems().get(i);
+    		lineItem.setOrderId(order.getOrderId());
+    		lineItemMapper.insertLineItem(lineItem);
+    	}
 	}
 	
 }

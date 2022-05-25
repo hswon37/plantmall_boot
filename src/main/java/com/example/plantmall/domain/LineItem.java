@@ -13,18 +13,18 @@ public class LineItem implements Serializable {
 	private int lineNumber;
 	private int quantity;
 	private int unitPrice;
-	private Item item;
-	private String itemId;
+	private Product product;
+	private String productId;
 	
 	public LineItem(int lineNumber, CartItem cartItem) {
 		this.lineNumber = lineNumber;
 	    this.quantity = cartItem.getQuantity();
-	    this.unitPrice = cartItem.getItem().getUnitPrice();
-	    this.item = cartItem.getItem();
-	    this.itemId = cartItem.getItem().getItemId();
+	    this.unitPrice = cartItem.getUnitPrice();
+	    this.product = cartItem.getProduct();
+	    this.productId = cartItem.getProduct().getProductId();
 	}
 	
-	public double getTotalPrice() {
+	public int getTotalPrice() {
 		return this.unitPrice * this.quantity;
 	}
 }

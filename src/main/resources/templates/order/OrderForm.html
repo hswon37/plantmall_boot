@@ -20,13 +20,13 @@
 						<dd>
 							제품 가격: <span th:text="${lineItem.product.price}">16000</span>원 <br>
 							수량: <span th:text="${lineItem.quantity}">1</span>개 <br>
-							합계: <span th:text="${lineItem.unitPrice}">16000</span>원
+							합계: <span th:text="${lineItem.unitPrice * lineItem.quantity}">16000</span>원
 						</dd>
 					</dl>
 				</td>
 			</tr>
 		</table>
-		<form action="#" th:action="@{targetUrl}" th:object="${orderForm}" method="post">
+		<form action="#" th:action="@{/order/newOrderSubmitted}" th:object="${orderForm}" method="post">
 			<span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span>
 			<div class= "division">
 				<div class="left">
@@ -35,24 +35,19 @@
 						<div class="formRow">
 							<div class="formCol head">이름</div>
 							<div class="formCol body">
-								<input type="text" class="input default" th:field="*{userName}" />
+								<input type="text" class="input default" th:field="*{order.userName}" />
 							</div>
 						</div>
 						<div class="formRow">
 							<div class="formCol head">휴대폰</div>
 							<div class="formCol body">
-								<input type="text" class="input default" th:field="*{phone}" />
+								<input type="text" class="input default" th:field="*{order.phone}" />
 							</div>
-						</div>
-						<div class="formRow">
-							<div class="formCol head">이메일</div>
-							<div class="formCol body">
-								<input type="text" class="input default" th:field="*{email}" /></div>
 						</div>
 						<div class="formRow">
 							<div class="formCol head">주소</div>
 							<div class="formCol body">
-								<input type="text" class="input default" th:field="*{billAddress}" />
+								<input type="text" class="input default" th:field="*{order.shipAddress}" />
 							</div>
 						</div>
 					</div>
@@ -63,7 +58,7 @@
 							<div class="formCol head">카드 타입</div>
 							<div class="formCol body">
 								<span th:each="err:${#fields.errors('cartType')}" th:text="${err}"></span>
-								<select class="input default" th:field="{cardType}">
+								<select class="input default" th:field="{order.cardType}">
 									<option th:each="ty:${creditCardTypes}" th:value="${ty}" th:text="#{${ty}}">Visa</option>
 								</select>
 							</div>
@@ -72,14 +67,14 @@
 							<div class="formCol head">카드 번호</div>
 							<div class="formCol body">
 								<span th:each="err:${#fields.errors('creditCard')}" th:text="${err}"></span>
-								<input type="text" class="input default" th:field="*{creditCard}" value="카드번호" />
+								<input type="text" class="input default" th:field="*{order.creditCard}" value="카드번호" />
 							</div>
 						</div>
 						<div class="formRow">
 							<div class="formCol head">유호기간 (MM/YY)</div>
 							<div class="formCol body">
 								<span th:each="err:${#fields.errors('expiryDate')}" th:text="${err}"></span>
-								<input type="text" class="input default" th:field="*{expiryDadte}" value="09/22" />
+								<input type="text" class="input default" th:field="*{order.expiryDadte}" value="09/22" />
 							</div>
 						</div>
 					</div>
@@ -91,12 +86,12 @@
 							<tr>
 								<th colspan="2">전체주문금액</th>
 							</tr>
-							<tr>
+<!-- 							<tr>
 								<td> 주문 상품 수 </td>
 								<td class="txtRight">
 									<span class="quantity" id="quantity" th:text="${order.quantity}">1</span> 개
 								</td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td> 배송비 </td>
 								<td class="txtRight">
@@ -112,14 +107,14 @@
 							<tr class="finalPrice">
 								<td> <b>결제 예정 금액</b> </td>
 								<td class="txtRight">
-									<span class="payAmount" id="payAmount" th:text="${order.totalPrice} + 3000">19000</span> 원
+									<span class="payAmount" id="payAmount" th:text="${order.totalPrice + 3000}">19000</span> 원
 								</td>
 							</tr>
 						</tbody>
 					</table>
 					<div>
-						<a href="" class="button">결제하기</a>
-						<a href="" class="button">취소하기</a>
+						<a href="#" th:href="@{/order/newOrderSubmitted}" class="button">결제하기</a>
+						<a href="#" th:href="@{/}" class="button">취소하기</a>
 					</div>
 				</div>
 			</div>
