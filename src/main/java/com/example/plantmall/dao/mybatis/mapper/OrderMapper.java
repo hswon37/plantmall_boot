@@ -11,4 +11,5 @@ public interface OrderMapper {
 	List<Order> getOrdersByUserId(String userId);
 	Order getOrder(int orderId);
 	void insertOrder(Order order);
+	Order getOrderAndLineItems(int orderId);
 }

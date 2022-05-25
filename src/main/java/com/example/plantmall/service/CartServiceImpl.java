@@ -51,4 +51,10 @@ public class CartServiceImpl implements CartService {
 		return cartItemDao.sumMoney(userId);
 	}
 
+	@Override
+	public void deleteCartItem(String userId, String productId) {
+		// TODO Auto-generated method stub
+		cartItemDao.deleteCartItem(userId, productId);
+	}
+
 }

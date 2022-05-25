@@ -49,4 +49,10 @@ public class MybatisCartItemDao implements CartItemDao {
 		// TODO Auto-generated method stub
 		return cartMapper.sumMoney(userId);
 	}
+
+	@Override
+	public void deleteCartItem(String userId, String productId) {
+		// TODO Auto-generated method stub
+		cartMapper.deleteCartItem(userId, productId);
+	}
 }
