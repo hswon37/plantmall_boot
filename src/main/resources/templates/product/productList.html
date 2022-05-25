@@ -4,8 +4,13 @@
 	<meta charset="utf-8">
     <title>식몰</title>
    	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+	<style>
+		table {
+			text-align:center;
+		}
+	</style>
 </head>
-<body>
+<body onload="init();">
 	<div th:insert="~{header :: #top}"></div>
 	<h2>제품 목록</h2>
 	<!--얘도 변수명하고 연결 안되서 에러 <h3 th:text="${category.name}">카테고리 이름</h3>-->
