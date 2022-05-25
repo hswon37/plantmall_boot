@@ -9,6 +9,11 @@
 		WHERE USERID = #{userId}
 	</select>
 	
+	<select id="getCartItemByProductId" resultType="CartItem">
+		SELECT USERID, PRODUCTID, QUANTITY, UNITPRICE, LISTPRICE FROM CARTITEM
+		WHERE PRODUCTID = #{productId}
+	</select>
+	
 	<insert id="insertCartItem">
 		INSERT INTO CARTITEM (USERID, PRODUCTID, QUANTITY, UNITPRICE, LISTPRICE)
 		VALUES (#{userId}, #{productId}, #{quantity}, #{unitPrice}, #{listPrice})

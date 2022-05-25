@@ -20,7 +20,13 @@ public class CartServiceImpl implements CartService {
 		// TODO Auto-generated method stub
 		return cartItemDao.getCartItemList(userId);
 	}
-
+	
+	@Override
+	public CartItem getCartItemByProductId(String productId) {
+		// TODO Auto-generated method stub
+		return cartItemDao.getCartItemByProductId(productId);
+	}
+	
 	@Override
 	public void insertCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub

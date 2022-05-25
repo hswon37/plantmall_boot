@@ -27,7 +27,7 @@
 										<br><br>
 										<br><br>
 										수량: <span class="quantity" th:text="${lineItem.quantity}">1</span>개
-										<p class="itemPrice"><span th:text="${lineItem.unitPrice">16000</span>원</p>
+										<p class="itemPrice"><span th:text="${lineItem.unitPrice * lineItem.quantity}">16000</span>원</p>
 									</div>
 								</div>
 							</td>
@@ -59,7 +59,7 @@
 				<div class="formRow">
 					<div class="formCol head">주소</div>
 					<div class="formCol body">
-						<span th:text="${order.billAddress}">경기도 어쩌고 저쩌고</span>	
+						<span th:text="${order.shipAddress}">경기도 어쩌고 저쩌고</span>	
 					</div>
 				</div>
 			</div>

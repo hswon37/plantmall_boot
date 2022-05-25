@@ -22,6 +22,12 @@ public class MybatisCartItemDao implements CartItemDao {
 	}
 
 	@Override
+	public CartItem getCartItemByProductId(String productId) {
+		// TODO Auto-generated method stub
+		return cartMapper.getCartItemByProductId(productId);
+	}
+	
+	@Override
 	public void insertCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub
 		cartMapper.insertCartItem(cartItem);

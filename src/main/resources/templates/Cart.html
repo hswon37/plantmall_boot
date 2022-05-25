@@ -63,6 +63,7 @@
 			   		});
 			 	}
 			}
+		
 		</script>
 		<div class="listCheck">
 			<span> <input type="checkbox" name="allCheck" id="allCheck" checked />
@@ -161,7 +162,20 @@
 					</tbody>
 				</table>
 				<div>
-					<a href="#" class="button" th:href="@{/order}">주문하기</a>
+					<a href="javascript:void(0)" class="button newOrder_btn">주문하기</a>
+					<script th:inline="javascript">
+						$(".newOrder_btn").click(function() {
+							var checkArr = new Array();
+							$("input[class='chkbox']:checked").each(function() {
+								checkArr.push($(this).attr("data-cartNum"));
+							});
+							$.ajax({
+								url: "/order/newOrder",
+								type: "post",
+								data: {chkbox : checkArr}
+							});
+						});
+					</script>
 				</div>
 			</div>
 		</div>
