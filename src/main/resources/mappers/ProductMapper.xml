@@ -5,12 +5,12 @@
 
   <cache />
 
-  <select id="getProduct" resultType="Product">
+  <select id="getProduct" parameterType="String" resultType="Product">
     SELECT
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME as p_name,
+      PNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG
@@ -18,12 +18,12 @@
     WHERE PRODUCTID = #{productId}
   </select>
 
-  <select id="getProductListByCategory" resultType="Product">
+  <select id="getProductListByCategory" parameterType="String" resultType="Product">
     SELECT
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME as p_name,
+      PNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG
@@ -31,12 +31,12 @@
     WHERE CATEGORYID = #{value}
   </select>
 
-  <select id="searchProductList" resultType="Product">
+  <select id="searchProductList" parameterType="String" resultType="Product">
     SELECT
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME as p_name,
+      PNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG
@@ -44,27 +44,50 @@
     WHERE lower(name) like #{value}
   </select>
   
-  <select id="showProductList" resultType="Product">
+  <!-- select id="showProductList" parameterType="String" resultType="Product">
     SELECT
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME as p_name,
+      PNAME as p_name,
       PRICE,
       PRODUCTIMG,
       USERNAME
     FROM PRODUCT, USER_TABLE
     WHERE PRODUCTID = #{productId}
     AND PRODUCT.USERID = USER_TABLE.USERID
+  </select -->
+  
+  <select id="getAllProduct" resultType="Product">
+    SELECT
+      PRODUCTID,
+      CATEGORYID,
+      USERID,
+      PNAME as p_name,
+      DESCRIPTION,
+      PRICE,
+      PRODUCTIMG
+    FROM PRODUCT
   </select>
   
-  <insert id="insertProduct" parameterType="com.example.plantmall.domain.Product">
+  <insert id="insertProduct" parameterType="Product">
 		<selectKey keyProperty="id" resultType="int" order="BEFORE">
 			SELECT Product_seq.nextval AS id FROM DUAL
 		</selectKey>
-		INSERT INTO Product (productid, categoryid, pname, description, price, productimg, userid)
-		VALUES (#{productid}, #{categoryid}, #{pname}, #{description}, #{price}, #{productimg}, #{userid})
+		INSERT INTO PRODUCT (PRODUCTID, CATEGORYID, PNAME, DESCRIPTION, PRICE, PRODUCTIMG, USERID)
+		VALUES (#{productid}, #{categoryid}, #{p_name}, #{description}, #{price}, #{productimg}, #{userid})
 		  
   </insert>
-
+  
+  <update id="updateProduct" parameterType="Product">
+		UPDATE PRODUCT 
+		SET CATEGORYID = #{categoryid}, PNAME = #{p_name}, DESCRIPTION = #{description}, PRICE = #{price}, PRODUCTIMG = #{productimg}
+		WHERE PRODUCTID = #{productid} and USERID = #{userid}
+  </update>
+  
+  <delete id="deleteProduct" parameterType="Product">
+		DELETE FROM PRODUCT
+		WHERE PRODUCTID = #{productid} and USERID = #{userid}		  
+  </delete>
+  
 </mapper>

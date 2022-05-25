@@ -8,7 +8,7 @@
   <select id="getCategory" resultType="Category">
     SELECT
       CATEGORYID,
-      cNAME,
+      cNAME as c_name,
     FROM CATEGORY
     WHERE CATID = #{categoryId}
   </select>
@@ -16,7 +16,7 @@
   <select id="getCategoryList" resultType="Category">
     SELECT
       CATEGORYID,
-      cNAME,
+      cNAME as c_name,
     FROM CATEGORY
   </select>
 

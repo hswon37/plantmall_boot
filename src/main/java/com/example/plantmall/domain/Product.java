@@ -2,9 +2,11 @@ package com.example.plantmall.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import java.io.Serializable;
 
 @Getter @Setter
-public class Product {
+@SuppressWarnings("serial")
+public class Product implements Serializable {
 	private String productId;
 	private String categoryId;
 	private String userId;

@@ -7,6 +7,7 @@
 	<style>
 		table {
 			text-align:center;
+			display: inline-block;
 		}
 	</style>
 </head>
@@ -17,20 +18,21 @@
 	<h3>카테고리 이름</h3>
 	<div align="center">
 	  카테고리: <a href="" th:href="@{#}">꽃</a> | <a href="" th:href="@{#}">야생화</a> | <a href="" th:href="@{#}">허브</a> | <a href="" th:href="@{#}">나무</a> | <a href="" th:href="@{#}">다육</a> | <a href="" th:href="@{#}">해조</a>
-		<table>
+		<div>
 			<!-- 현재: 한 행당 4개씩이 아닌, 한 행에 한 제품이 출력되는 형태. 4줄씩 나눠서 출력해야하는데 어떻게하죠? -->
-<!--  이것저것 변수명하고 연결 안돼서 이거 때매 에러남, 추후 다 연결되면 주석 해제하고 확인
-			<tr th:each="product : ${productList.pageList}">
+<!--  이것저것 변수명하고 연결 안돼서 이거 때매 에러남, 추후 다 연결되면 주석 해제하고 확인-->
+			<tr th:each="product, iterStat : ${productList}">
 				<td>
 					<a href="" th:href="@{/product/detail}" name="productId" value="${product.productId}">				
-						<img th:src="${product.img}" style="width:200px">			<!-- 이미지도 jpetstore예제 보면 아예 img태그 자체가 db에 저장되어있음.jpetstore/src/main/resources/db/hsqldb/jpetstore.script -->	
-	<!-- 				<div th:text="${product.userName}">판매자명</div> <!-- product 테이블엔 userName이 존재하지 않음. -->
-<!-- 					<div th:text="${product.name}">제품명</div>
+		 				<img th:src="@{/images/}+${product.productImg}" style="width:200px;height:200px" alt="제품사진">			<!-- 이미지도 jpetstore예제 보면 아예 img태그 자체가 db에 저장되어있음.jpetstore/src/main/resources/db/hsqldb/jpetstore.script -->	
+		 				<div th:text="${userNameList.get(iterStat.index)}">판매자명</div>
+ 						<div th:text="${product.p_name}">제품명</div>
 						<div th:text="${product.price}">가격</div>
 					</a>
 					
 				</td>
-			</tr> -->
+			</tr>
+			<!-- 
 			<tr>
 			<td>
 				<a href="#">
@@ -98,7 +100,7 @@
 					<div>가격</div>
 				</a>
 			</td>
-		</tr>
+		</tr>-->
 		</table>
 	</div>
 </body>
