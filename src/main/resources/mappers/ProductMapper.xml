@@ -10,7 +10,7 @@
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME,
+      pNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG
@@ -23,7 +23,7 @@
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME,
+      pNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG
@@ -32,16 +32,39 @@
   </select>
 
   <select id="searchProductList" resultType="Product">
-    select
+    SELECT
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME,
+      pNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG
-    from PRODUCT
+    FROM PRODUCT
     WHERE lower(name) like #{value}
   </select>
+  
+  <select id="showProductList" resultType="Product">
+    SELECT
+      PRODUCTID,
+      CATEGORYID,
+      USERID,
+      pNAME as p_name,
+      PRICE,
+      PRODUCTIMG,
+      USERNAME
+    FROM PRODUCT, USER_TABLE
+    WHERE PRODUCTID = #{productId}
+    AND PRODUCT.USERID = USER_TABLE.USERID
+  </select>
+  
+  <insert id="insertProduct" parameterType="com.example.plantmall.domain.Product">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT Product_seq.nextval AS id FROM DUAL
+		</selectKey>
+		INSERT INTO Product (productid, categoryid, pname, description, price, productimg, userid)
+		VALUES (#{productid}, #{categoryid}, #{pname}, #{description}, #{price}, #{productimg}, #{userid})
+		  
+  </insert>
 
 </mapper>
