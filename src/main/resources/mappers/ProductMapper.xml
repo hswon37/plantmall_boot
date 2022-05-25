@@ -10,7 +10,7 @@
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME,
+      pNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG

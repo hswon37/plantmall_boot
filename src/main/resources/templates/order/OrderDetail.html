@@ -19,8 +19,7 @@
 							<td>
 								<div class="orderContents">
 									<div class="imgBox">
-										<!-- <img src="" th:attr="src=@{/images/}/> -->
-										이미지
+										<img th:src="@{/static/images/} + ${lineItem.product.productImg}" />
 									</div>
 									<div class="content">
 										<span th:text="${lineItem.product.p_name}">제품 이름</span>
@@ -50,7 +49,7 @@
 						<span th:text="${order.userName}">서가람</span>
 					</div>
 				</div>
-				<div class="formRow">
+ 				<div class="formRow">
 					<div class="formCol head">휴대폰</div>
 					<div class="formCol body">
 						<span th:text="${order.phoneNumber}">01012345678</span>	
@@ -69,7 +68,7 @@
 				<div class="formRow">
 					<div class="formCol head">카드 타입</div>
 					<div class="formCol body">
-						<span th:text="${order.cartType}">Visa</span>	
+						<span th:text="${order.cardType}">Visa</span>	
 					</div>
 				</div>
 				<div class="formRow">

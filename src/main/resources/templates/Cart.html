@@ -94,7 +94,7 @@
 								<td>
 									<span class="selectItemBox">
 										<label for="selectItem"></label>
-										<input type="checkbox" class="chkbox" id="chkbox" data-cartNum="${cart.cartItemList.cartItem.productId}" name="selectItem" 
+										<input type="checkbox" class="chkbox" id="chkbox" th:attr="data-cartNum=${cartItem.productId}" name="selectItem" 
 										th:value="${cartItem.listPrice}" onClick="itemSum()">
 										<script>
 											 $(".chkbox").click(function(){
@@ -109,11 +109,12 @@
 									</span>
 									<div class="cartItemBox" th:object="${cartItem.product}">
 										<div class="imgBox">
-											<a href="#" th:href="@{/product(productId=${cartItem.productId})}"><img src="">이미지</a>
+											<a href="#" th:href="@{/product(productId=${cartItem.productId})}">
+											<img th:src="@{/static/images/} + ${cartItem.product.productImg}" /></a>
 										</div>
 										<div class="content">
 											<p>
-												<span th:text="${cart.p_name}">제품 이름</span>
+												<span class="productName" th:text="${cartItem.product.p_name}">제품 이름</span>
 												<br><br><br>
 												<ul class="quantityPrice">
 													<li>
@@ -169,11 +170,16 @@
 							$("input[class='chkbox']:checked").each(function() {
 								checkArr.push($(this).attr("data-cartNum"));
 							});
-							$.ajax({
+ 							/* $.ajax({
 								url: "/order/newOrder",
 								type: "post",
-								data: {chkbox : checkArr}
-							});
+								data: {chkbox : checkArr},
+								success : function(result){
+									alert("녗ㅊㄷㄴㄴ");
+					    			location.href="/order/OrderForm"
+					    		}
+							});  */
+							location.href="/order/newOrder?chkbox=" + checkArr;
 						});
 					</script>
 				</div>

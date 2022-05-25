@@ -12,6 +12,7 @@ public interface CartItemMapper {
 	CartItem getCartItemByProductId(String productId);
 	void insertCartItem(CartItem cartItem);
 	void deleteCartItem(CartItem cartItem);
+	void deleteCartItem(String userId, String productId);
 	void updateCartItem(CartItem cartItem);
 	Integer sumMoney(String userId);
 }

@@ -12,19 +12,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.plantmall.domain.Cart;
 import com.example.plantmall.domain.CartItem;
 import com.example.plantmall.domain.Product;
 import com.example.plantmall.service.CartService;
+import com.example.plantmall.service.ProductService;
 
 @Controller
 @RequestMapping("/cart")
+@SessionAttributes("sessionCart")
 public class CartController {
 
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private ProductService productService;
 	
 	@ModelAttribute("sessionCart")
 	public Cart createCart(HttpSession session) {
@@ -51,23 +56,38 @@ public class CartController {
 		
 		// session에 저장된 userId
 //		String userId = (String) session.getAttribute("userId");
-		String userId = "te";
+		String userId = "admin";
 //		if (userId == null) {
 //			return new ModelAndView("user/login");
 //		}
 
 		List<CartItem> cartList = cartService.getCartItemList(userId);
+		
 		CartItem cartItem;
-		if (cartItemMap.isEmpty()) {
+		Product product;
 
-			for (int i = 0; i < cartList.size(); i++) {
-				cartItem = cartList.get(i);
-//				cartItem.setProduct() product를 productId로 찾아서 넣어야됨
-				cartItemMap.put(cartItem.getProductId(), cartItem);	
-				System.out.println(cartItem);
-			}
+//		if (cartItemMap.isEmpty()) {
+//			System.out.println("\ncartItemMap.isEmpty()");
+//			for (int i = 0; i < cartList.size(); i++) {
+//				cartItem = cartList.get(i);
+//				product = productService.getProduct(cartItem.getProductId());
+//				cartItem.setProduct(product);
+//				System.out.println("\n cartItem.getProductId() :" + cartItem.getProductId());
+//				System.out.println("cartItem.product.getP_name() :" + cartItem.getProduct().getP_name() + "\n");
+//				cartItemMap.put(cartItem.getProductId(), cartItem);	
+//				System.out.println(cartItem);
+//			}
+//		}
+		
+		for (int i = 0; i < cartList.size(); i++) {
+			cartItem = cartList.get(i);
+			product = productService.getProduct(cartItem.getProductId());
+			cartItem.setProduct(product);
+			System.out.println("\n cartItem.getProductId() :" + cartItem.getProductId());
+			System.out.println("cartItem.product.getP_name() :" + cartItem.getProduct().getP_name() + "\n");
+			cartItemMap.put(cartItem.getProductId(), cartItem);	
 		}
-
+		
 		int sumMoney = (cartService.sumMoney(userId) == null) ? 0 : cartService.sumMoney(userId);
 		int fee = 3000;
 		
@@ -76,22 +96,19 @@ public class CartController {
 		map.put("sum", sumMoney + fee);
 		map.put("cartItemList", cartList);
 		map.put("numberOfItems", cartList.size());
-		map.put("p_name", "제품이름이 지금 없음");
 		mav.setViewName("Cart");
 		mav.addObject("cart", map);
 		return mav;
 	}
 	
 	@RequestMapping("/addItemToCart")
-	public ModelAndView addItemToCart(@RequestParam("productId") String produtId,
+	public ModelAndView addItemToCart(@RequestParam("productId") String productId,
 			@ModelAttribute("sessionCart") Cart cart) throws Exception {
-		if (cart.containsProductId(produtId)) {
-			cart.incrementQuantityByProductId(produtId);
+		if (cart.containsProductId(productId)) {
+			cart.incrementQuantityByProductId(productId);
 		}
 		else {
-			// product 가져오는 메서드
-			// Product product = 
-			Product product = new Product();
+			Product product = productService.getProduct(productId);
 			cart.addProduct(product);
 		}
 		return new ModelAndView("Cart", "cart", cart);

@@ -1,5 +1,6 @@
 package com.example.plantmall.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,8 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+@SuppressWarnings("serial")
 @Getter @Setter @ToString
-public class Order {
+public class Order implements Serializable{
 	private int orderId;
 	private String userId;
 	private String userName;
@@ -35,11 +37,7 @@ public class Order {
 		
 		shipAddress = user.getAddress();
 		
-		totalPrice = getToTalPrice(lineItems);
-		
-		creditCard = "";
-		expiryDate = "";
-		cardType = "";
+		totalPrice = setTotalPriceUsingLineItems(lineItems);
   
 	    this.lineItems = lineItems;
 	}
@@ -53,7 +51,7 @@ public class Order {
 	    lineItems.add(lineItem);
 	 }
 	 
-	 public int getToTalPrice(List<LineItem> lineItems) {
+	 public int setTotalPriceUsingLineItems(List<LineItem> lineItems) {
 		 int sum = 0;
 		 for (LineItem line : lineItems) {
 			 sum += line.getTotalPrice();
