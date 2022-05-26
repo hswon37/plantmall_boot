@@ -5,11 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class productController {
-	/*제품 목록
-	@RequestMapping("/product/list")
-	public String showProductList() {
-		return "product/productList";
-	}*/
+
 	//제품 상세
 	@RequestMapping("/product/detail")
 	public String showProductDetail() {

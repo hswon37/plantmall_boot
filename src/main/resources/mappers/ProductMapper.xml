@@ -44,20 +44,6 @@
     WHERE lower(name) like #{value}
   </select>
   
-  <!-- select id="showProductList" parameterType="String" resultType="Product">
-    SELECT
-      PRODUCTID,
-      CATEGORYID,
-      USERID,
-      PNAME as p_name,
-      PRICE,
-      PRODUCTIMG,
-      USERNAME
-    FROM PRODUCT, USER_TABLE
-    WHERE PRODUCTID = #{productId}
-    AND PRODUCT.USERID = USER_TABLE.USERID
-  </select -->
-  
   <select id="getAllProduct" resultType="Product">
     SELECT
       PRODUCTID,
@@ -75,19 +61,19 @@
 			SELECT Product_seq.nextval AS id FROM DUAL
 		</selectKey>
 		INSERT INTO PRODUCT (PRODUCTID, CATEGORYID, PNAME, DESCRIPTION, PRICE, PRODUCTIMG, USERID)
-		VALUES (#{productid}, #{categoryid}, #{p_name}, #{description}, #{price}, #{productimg}, #{userid})
+		VALUES (#{productId}, #{categoryId}, #{p_name}, #{description}, #{price}, #{productImg}, #{userId})
 		  
   </insert>
   
   <update id="updateProduct" parameterType="Product">
 		UPDATE PRODUCT 
-		SET CATEGORYID = #{categoryid}, PNAME = #{p_name}, DESCRIPTION = #{description}, PRICE = #{price}, PRODUCTIMG = #{productimg}
-		WHERE PRODUCTID = #{productid} and USERID = #{userid}
+		SET CATEGORYID = #{categoryId}, PNAME = #{p_name}, DESCRIPTION = #{description}, PRICE = #{price}, PRODUCTIMG = #{productImg}
+		WHERE PRODUCTID = #{productId} and USERID = #{userId}
   </update>
   
   <delete id="deleteProduct" parameterType="Product">
 		DELETE FROM PRODUCT
-		WHERE PRODUCTID = #{productid} and USERID = #{userid}		  
+		WHERE PRODUCTID = #{productId} and USERID = #{userId}		  
   </delete>
   
 </mapper>

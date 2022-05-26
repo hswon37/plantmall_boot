@@ -9,9 +9,9 @@ import com.example.plantmall.domain.Category;
 
 @Mapper
 public interface CategoryMapper {
-
-  List<Category> getCategoryList();
-
-  Category getCategory(String categoryId);
+	
+	Category getCategory(String categoryId);
+	
+	List<Category> getCategoryList();
 
 }

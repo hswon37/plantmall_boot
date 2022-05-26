@@ -5,18 +5,18 @@
 
   <cache />
   
-  <select id="getCategory" resultType="Category">
+  <select id="getCategory" parameterType="String" resultType="Category">
     SELECT
       CATEGORYID,
-      cNAME as c_name,
+      CNAME as c_name
     FROM CATEGORY
-    WHERE CATID = #{categoryId}
+    WHERE CATEGORYID = #{categoryId}
   </select>
 
   <select id="getCategoryList" resultType="Category">
     SELECT
       CATEGORYID,
-      cNAME as c_name,
+      CNAME as c_name
     FROM CATEGORY
   </select>
 
