@@ -76,6 +76,7 @@ public class ViewProductController {
 		model.put("categoryName", categoryName);
 		model.put("productList", productList);
 		model.put("userNameList", userNameList);
-		return "product/productList";
-	}
+		return "product/productList";		
+	}	
+	
 }

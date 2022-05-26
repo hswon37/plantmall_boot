@@ -89,8 +89,24 @@
 	overflow:visible;
 	padding:0;
 }
-table {
+.noLineTable table {
 	text-align:center;
+}
+.lineTable table {
+  	width: 100%;
+  	border-collapse: collapse;
+}
+.lineTable td {
+  	border: 1px solid #444444;
+  	padding: 10px;
+}
+.manageTable table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.manageTable td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
 }
 a {
 	text-decoration : none;

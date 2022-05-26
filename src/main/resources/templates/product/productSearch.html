@@ -4,21 +4,12 @@
 	<meta charset="utf-8">
     <title>식몰</title>
    	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
-	<style>
-	  table {
-	    width: 100%;
-	    border-collapse: collapse;
-	  }
-	  td {
-	    border: 1px solid #444444;
-	    padding: 10px;
-	  }
-	</style>
+	
 </head>
 <body onload="init();">
 	<div th:insert="~{header :: #top}"></div>
 	<h2>제품 검색</h2>
-	<div>
+	<div class="lineTable">
 	 	<table>
 			<tr>
 				<td>카테고리 선택</td>
