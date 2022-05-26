@@ -1,5 +1,15 @@
 package com.example.plantmall.dao.mybatis.mapper;
 
-public class OrderMapper {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.example.plantmall.domain.Order;
+
+@Mapper
+public interface OrderMapper {
+	List<Order> getOrdersByUserId(String userId);
+	Order getOrder(int orderId);
+	void insertOrder(Order order);
+	Order getOrderAndLineItems(int orderId);
 }

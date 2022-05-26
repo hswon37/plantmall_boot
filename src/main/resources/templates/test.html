@@ -1,0 +1,98 @@
+<html>
+<head>
+	<title>BLUEB</title>
+</head>
+
+<body onload="init();">
+<script language="JavaScript">
+
+var sell_price;
+var amount;
+
+function init () {
+	sell_price = document.form.sell_price.value;
+	amount = document.form.amount.value;
+	document.form.sum.value = sell_price;
+	change();
+}
+
+function add () {
+	hm = document.form.amount;
+	if (hm.value < 4){//추후 4 대신, 최대 수량까지만
+		sum = document.form.sum;
+		hm.value ++ ;
+
+		sum.value = parseInt(hm.value) * sell_price;
+	}
+}
+
+function del () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+		if (hm.value > 1) {
+			hm.value -- ;
+			sum.value = parseInt(hm.value) * sell_price;
+		}
+}
+
+function change () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+
+		if (hm.value < 0) {
+			hm.value = 0;
+		}
+	sum.value = parseInt(hm.value) * sell_price;
+}  
+
+</script>
+<form name="form" method="get">
+<table>
+		<tr>
+				<td rowspan="6" style="border-bottom: none">
+					<img th:src="${product.img}" style="width:200px">				
+				</td>
+				<td>제품명</td>
+				<td>
+					<b th:text="${product.name}">생선뼈 선인장</b>
+				</td>
+			</tr>
+			<tr>
+				<td>판매자</td>
+				<td th:text="${product.userName}">황세원</td> <!-- user_table에 있는거 가져오기 -->
+			</tr>
+			<tr>
+				<td>가격</td>
+				<td th:text="${product.price}">3,771,000원</td>
+			</tr>
+			<tr>
+				<td>배송</td>
+				<td th:text="${product.orderDate}"> <!-- order_table에 있는거 가져오기 -->
+				6월 20일 (화) 도착 예정<br>
+				배송비 0원
+				</td><!-- 구현가능할까...? -->
+			</tr>
+			<tr>
+				<td>남은 수량</td>
+				<td><span class="product_quantity" th:text="${product.quantity}">4</span>개</td>
+			</tr>
+	<tr>
+		<td>주문 수량</td>
+		<td> 
+			<input type=hidden name="sell_price" value="3771000"><!-- th:value="${product.price}"-->
+			<input type="text" name="amount" value="1" size="3" onchange="change();">
+			<input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();">
+		</td>
+	</tr>
+	<tr>
+		<td style="border-bottom: none"></td>
+		<td style="border-bottom: none">총 금액</td><!-- 구현 가능할지 의문. 상품금액x주문수량=총금액, 서버에서 +-작동 확인시 총금액 계산 구현 예정 -->
+		<td style="border-bottom: none">
+			<span th:text="${product.price}">3,771,000</span>
+			 x <span id="result_quantity">4</span> 
+			 = <b><input type="text" name="sum" size="11" readonly></b>원
+		</td>
+	</tr>
+</table>
+</form>
+</body>
