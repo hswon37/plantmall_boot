@@ -1,6 +1,9 @@
 package com.example.plantmall.controller;
+
 import java.util.List;
 import java.util.ArrayList;
+//import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.plantmall.service.ProductService;
 import com.example.plantmall.domain.Product;
-//import com.example.plantmall.domain.User;
 
 @Controller
 public class ViewProductController {
@@ -21,8 +23,9 @@ public class ViewProductController {
 		this.productService = productService;
 	}
 
+	//제품 목록 페이지
 	@RequestMapping("/product/list")
-	public String handleRequest(@RequestParam(value="categoryId", required=false) String categoryId, 
+	public String showProductList(@RequestParam(value="categoryId", required=false) String categoryId, 
 								ModelMap model) throws Exception {
 		List<Product> itemList;
 		String categoryName;
@@ -76,7 +79,28 @@ public class ViewProductController {
 		model.put("categoryName", categoryName);
 		model.put("productList", productList);
 		model.put("userNameList", userNameList);
+		
 		return "product/productList";		
 	}	
+	
+	//제품 상세 페이지
+	@RequestMapping("/product/detail")
+	public String showProductDetail(@RequestParam(value="productId", required=false) String productId, 
+			ModelMap model) throws Exception {
+		Product product = this.productService.getProduct(productId);
+		//String userName = this.~.getUserName(p.userId);	//예상 사용자명 가져오기 코드
+		String userName = "admin";	//임시 userName
+		//Date orderDate = this.~.getOrderDate(p.userId);	//예상 주문일자 가져오기 코드
+		String orderDate = "5월 27일 (금)"; 	//임시 orderDate
+		//int quantity = this.~.getQuantity(productId);	//예상 제품 수량 가져오기 코드
+		int quantity = 4;	//임시 quantity
+		
+		model.put("product",  product);
+		model.put("userName", userName);
+		model.put("orderDate", orderDate);
+		model.put("quantity", quantity);
+		
+		return "product/productDetail";
+	}
 	
 }

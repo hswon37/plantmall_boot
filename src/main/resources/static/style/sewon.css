@@ -109,6 +109,11 @@
 	padding: 10px;
 }
 
+.detailTabel td {
+	border: 0px;
+	padding: 10px;
+}
+
 .detailTable li {
 	list-style:none;
 	display:inline-block;
