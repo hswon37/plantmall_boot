@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.plantmall.dao.mybatis.mapper.FundingMapper">
+ 
+    <!-- Funding 전체 목록 -->
+    <select id="getAllFundingList" parameterType="java.util.List">
+        SELECT TITLE
+          FROM FUNDING
+    </select>
+    
+    <insert id="insertFunding" parameterType="Funding">
+    	INSERT INTO FUNDING
+    	(FUNDINGID,
+	    	CATEGORYID,
+	    	PRODUCTID,
+	    	CALENDAR,
+	    	PRODUCTINFORMATION,
+	    	TITLE,
+	    	CREATE_AT,
+	    	UPDATE_AT)
+    	VALUES
+    	(#{fundingId},#{categoryId},#{productId},#{calendar},#{productInformation},#{title},#{createAt},#{updateAt})
+    </insert>
+
+    <select id="getFundingById" resultType="Funding">
+	    SELECT
+	    	FUNDINGID,
+	    	CATEGORYID,
+	    	PRODUCTID,
+	    	CALENDAR,
+	    	PRODUCTINFORMATION,
+	    	TITLE,
+	    	CREATE_AT,
+	    	UPDATE_AT
+	    FROM FUNDING
+	    WHERE USER_TABLE.FUNDINGID = #{param1}
+  </select>
+  
+
+</mapper>
