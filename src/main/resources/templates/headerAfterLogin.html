@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>식몰</title>
+	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}">
+</head>
+<body>
+	<div id="top">
+		<ul>
+			<li id="logo"><a href="" th:href="@{/}"><img th:src="@{/images/logoTemp.svg}" width="10%">식몰</a></li>
+			<li id="info"><a href="" th:href="@{/}">로그아웃</a></li>
+			<li id="info"><a href="" th:href="@{/}">마이페이지</a></li>
+		</ul>
+		<ul id="nav">
+			<li><a href="" th:href="@{best.jsp}">BEST</a></li>
+			<li>CATEGORY
+				<ul>
+					<li><a href="" th:href="@{/product/list}">전체</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c1}">꽃</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c2}">야생화</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c3}">허브</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c4}">다육</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c5}">나무</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c6}">해조</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c7}">원예용품</a></li>
+				</ul>
+			</li>
+			<li><a href="" th:href="@{Cart.jsp}">CART</a></li>
+			<li><a href="" th:href="@{OrderList.jsp}">ORDER</a></li>
+			<li><a href="" th:href="@{funding.jsp}">FUNDING</a></li>
+			<li><a href="" th:href="@{search.jsp}">SEARCH</a></li>
+		</ul>	
+	</div>
+</body>
+</html>

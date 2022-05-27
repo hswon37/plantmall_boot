@@ -91,14 +91,13 @@ public class ViewProductController {
 		//String userName = this.~.getUserName(p.userId);	//예상 사용자명 가져오기 코드
 		String userName = "admin";	//임시 userName
 		//Date orderDate = this.~.getOrderDate(p.userId);	//예상 주문일자 가져오기 코드
-		String orderDate = "5월 27일 (금)"; 	//임시 orderDate
-		//int quantity = this.~.getQuantity(productId);	//예상 제품 수량 가져오기 코드
-		int quantity = 4;	//임시 quantity
+		String orderDate = "5월 27일 (금)"; 	//임시 orderDate 
 		
 		model.put("product",  product);
 		model.put("userName", userName);
 		model.put("orderDate", orderDate);
-		model.put("quantity", quantity);
+		
+		System.out.println(product.getP_name()+" 제품 상세 model -> view 전달");
 		
 		return "product/productDetail";
 	}

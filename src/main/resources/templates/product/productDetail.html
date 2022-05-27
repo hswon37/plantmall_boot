@@ -8,7 +8,7 @@
 <body onload="init();">
 	<div th:insert="~{header :: #top}"></div>
 	<h2>제품 상세</h2>
-	<div class="lineTable detailTable">
+	<div class="manageTable detailTable">
 		<form name="form" method="get">
 	
 	 	<table>
@@ -31,14 +31,10 @@
 			</tr>
 			<tr>
 				<td>배송</td>
-				<td th:text="${orderDate}"> <!-- order_table에 있는거 가져오기 -->
+				<td th:text="${orderDate}+도착예정"> <!-- order_table에 있는거 가져오기 -->
 				6월 20일 (화) 도착 예정<br>
 				배송비 0원
 				</td><!-- 구현가능할까...? -->
-			</tr>
-			<tr>
-				<td>남은 수량</td>
-				<td><span class="product_quantity" th:text="${quantity}">4</span>개</td>
 			</tr>
 			<tr>
 				<td>주문 수량</td>
@@ -49,7 +45,6 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="border-bottom: none"></td>
 				<td style="border-bottom: none">총 금액</td><!-- 구현 가능할지 의문. 상품금액x주문수량=총금액, 서버에서 +-작동 확인시 총금액 계산 구현 예정 -->
 				<td style="border-bottom: none">
 					<span th:text="${product.price}">3,771,000</span>
@@ -103,9 +98,7 @@
 	
 		var sell_price;
 		var amount;
-		var maxAmount = parseInt([[${quantity}]]);
-//		var maxAmount = 4;	//임시 현재 임시로 둬야만 가능.
-
+		
 		function init () {
 			sell_price = document.form.sell_price.value;
 			amount = document.form.amount.value;
@@ -115,7 +108,7 @@
 		
 		function add () {
 			hm = document.form.amount;
-			if (hm.value < maxAmount){
+			if (hm.value < 10){
 				sum = document.form.sum;
 				hm.value ++ ;
 		
