@@ -13,15 +13,18 @@
 			<tr>
 				<td>카테고리 선택</td>
 				<td>
-					<select name="category" th:text="${pageMaker.cri.category}">
-						<option value="꽃">꽃</option>
+					<select name="category">
+						<option th:each="check ${categoryNameList}"
+									th:value="${check?.categoryName}"
+									th:utext="${check?.categoryName}"></option>
+<!-- 						<option value="꽃">꽃</option>
 						<option value="야생화">야생화</option>
 						<option value="허브">허브</option>
 						<option value="나무">나무</option>
 						<option value="다육">다육</option>
 						<option value="해조">해조</option>
 						<option value="선택안함">선택안함</option>
-					</select>
+ -->					</select>
 				</td>
 			</tr>
 			<tr>

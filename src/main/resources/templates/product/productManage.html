@@ -6,7 +6,7 @@
    	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
 </head>
 <body onload="init();">
-	<div th:insert="~{header :: #top}"></div>
+	<div th:insert="~{headerAfterLogin :: #top}"></div>
 	<h2>제품 관리 목록
 		<input type="button" value="새 제품 등록" onclick="location.href='/product/registration'">
 	</h2>

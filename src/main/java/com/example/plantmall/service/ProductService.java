@@ -26,6 +26,10 @@ public class ProductService {
 	public Category getCategory(String categoryId) {
 		return categoryDao.getCategory(categoryId);
 	}
+	
+	public List<Category> getCategoryList() {
+		return categoryDao.getCategoryList();
+	}
 
 	public List<Product> getProductListByCategory(String categoryId) {
 		return productDao.getProductListByCategory(categoryId);

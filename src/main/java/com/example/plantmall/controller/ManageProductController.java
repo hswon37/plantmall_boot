@@ -1,11 +1,20 @@
 package com.example.plantmall.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.plantmall.service.ProductService;
+
 @Controller
 public class ManageProductController {
-	
+		private ProductService productService;
+			
+		@Autowired
+		public void setProductService(ProductService productService) {
+			this.productService = productService;
+		}
+		
 		//제품 관리 목록
 		@RequestMapping("/product/manage")
 		public String showProductManage() {
