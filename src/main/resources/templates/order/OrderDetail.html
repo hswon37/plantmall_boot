@@ -19,15 +19,14 @@
 							<td>
 								<div class="orderContents">
 									<div class="imgBox">
-										<!-- <img src="" th:attr="src=@{/images/}/> -->
-										이미지
+										<img th:src="@{/static/images/} + ${lineItem.product.productImg}" />
 									</div>
 									<div class="content">
 										<span th:text="${lineItem.product.p_name}">제품 이름</span>
 										<br><br>
 										<br><br>
 										수량: <span class="quantity" th:text="${lineItem.quantity}">1</span>개
-										<p class="itemPrice"><span th:text="${lineItem.unitPrice">16000</span>원</p>
+										<p class="itemPrice"><span th:text="${lineItem.unitPrice * lineItem.quantity}">16000</span>원</p>
 									</div>
 								</div>
 							</td>
@@ -50,7 +49,7 @@
 						<span th:text="${order.userName}">서가람</span>
 					</div>
 				</div>
-				<div class="formRow">
+ 				<div class="formRow">
 					<div class="formCol head">휴대폰</div>
 					<div class="formCol body">
 						<span th:text="${order.phoneNumber}">01012345678</span>	
@@ -59,7 +58,7 @@
 				<div class="formRow">
 					<div class="formCol head">주소</div>
 					<div class="formCol body">
-						<span th:text="${order.billAddress}">경기도 어쩌고 저쩌고</span>	
+						<span th:text="${order.shipAddress}">경기도 어쩌고 저쩌고</span>	
 					</div>
 				</div>
 			</div>
@@ -69,7 +68,7 @@
 				<div class="formRow">
 					<div class="formCol head">카드 타입</div>
 					<div class="formCol body">
-						<span th:text="${order.cartType}">Visa</span>	
+						<span th:text="${order.cardType}">Visa</span>	
 					</div>
 				</div>
 				<div class="formRow">

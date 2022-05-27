@@ -1,5 +1,5 @@
 @charset "UTF-8";
-a.button {
+a.button, .orderFormBtn {
 	display: inline-block;
 	margin-bottom: 10px;
   	width: 100%;
@@ -86,13 +86,23 @@ table.orderElement tr {
 	width: 120px;
 	height: 120px;
 	padding-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	float: left;
 }
-
+.imgBox img {
+	width: 120px;
+	height: 120px;
+}
+/* Cart에서도 사용 */
 .content {
-	width: 500px;
+	width: 700px;
 	font-size: 16px;
 }
-
+.productName {
+	font-size: 18px;
+	font-weight: bold;
+}
 .itemPrice {
 	font-size: 20px;
 	float: right;
@@ -112,8 +122,7 @@ dd {
 }
 .quantityPrice {
 	display: inline; 
-	float : right;
-	font-size: 20px;
+	font-size: 16px;
 }
 .division {
 	display:flex;
@@ -234,10 +243,13 @@ table.cartElement {
 	border-collapse: collapse;
 	margin: 0 0 10px;
 }
-
+.cartItemBox {
+	display:inline-block;
+}
 .selectItemBox {
 /* 장바구니 아이템 element 하나 선택 */
-	padding-top: 20px;
+	padding-right: 10px;
+	float:left;
 }
 
 .deleteItemBox {
@@ -245,8 +257,12 @@ table.cartElement {
 	float: right;
 	padding-right: 10px;
 }
-
-
+.itemPrice {
+	float: right;
+}
+.quantityBtn {
+	float: left;
+}
 
 /* Review css */
 .reviewForm {

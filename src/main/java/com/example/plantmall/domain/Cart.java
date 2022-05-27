@@ -11,66 +11,78 @@ import org.springframework.beans.support.PagedListHolder;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @SuppressWarnings("serial")
-public class Cart implements Serializable{
+public class Cart implements Serializable {
 
-	private String userId;
-	private final Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
-	private final PagedListHolder<CartItem> itemList = new PagedListHolder<CartItem>();
+	private Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
+	private PagedListHolder<CartItem> itemList = new PagedListHolder<CartItem>();
+
+	public Iterator<CartItem> getAllCartItems() {
+		return itemList.getSource().iterator();
+	}
+
+	public PagedListHolder<CartItem> getCartItemList() {
+		return itemList;
+	}
+
+	public int getNumberOfCartItems() {
+		return itemList.getSource().size();
+	}
+
+	public boolean containsProductId(String productId) {
+		return itemMap.containsKey(productId);
+	}
+
+	public void addProduct(Product product) {
+		CartItem cartItem = itemMap.get(product.getProductId());
+		if (cartItem == null) {
+			cartItem = new CartItem();
+			cartItem.setQuantity(0);
+			itemMap.put(product.getProductId(), cartItem);
+			itemList.getSource().add(cartItem);
+		}
+		cartItem.incrementQuantity();
+	}
+
+	public Product removeCartItemById(String produtId) {
+		CartItem cartItem = itemMap.remove(produtId);
+		if (cartItem == null) {
+			return null;
+		} else {
+			itemList.getSource().remove(cartItem);
+			return cartItem.getProduct();
+		}
+	}
 	
-	public Iterator<CartItem> getAllCartItems() { return itemList.getSource().iterator(); }
-	public PagedListHolder<CartItem> getCartItemList() { return itemList; }
-	public int getNumberOfItems() { return itemList.getSource().size(); }
-	public boolean containsItemId(String itemId) {
-		return itemMap.containsKey(itemId);
-	}
-
-	public void addProduct(Product product, boolean isInStock) {
-	    CartItem cartItem = itemMap.get(product.getProductId());
-	    if (cartItem == null) {
-	      cartItem = new CartItem();
-	      cartItem.setProduct(product);
-	      cartItem.setQuantity(0);
-	      itemMap.put(product.getProductId(), cartItem);
-	      itemList.getSource().add(cartItem);
-	    }
+	public void incrementQuantityByProductId(String productId) {
+	    CartItem cartItem = itemMap.get(productId);
 	    cartItem.incrementQuantity();
 	}
 
-
-	public Product removeCartProductById(String ProdutId) {
-		CartItem cartItem = itemMap.remove(ProdutId);
-	    if (cartItem == null) {
-	      return null;
-	    }
-		else {
-		  itemList.getSource().remove(cartItem);
-	      return cartItem.getProduct();
-	    }
-	}
-
-	public void incrementQuantityByProductId(String ProdutId) {
-	    CartItem cartItem = itemMap.get(ProdutId);
-	    cartItem.incrementQuantity();
-	}
-
-	public void setQuantityByProductId(String ProdutId, int quantity) {
-	    CartItem cartItem = itemMap.get(ProdutId);
+	public void setQuantityByProductId(String productId, int quantity) {
+	    CartItem cartItem = itemMap.get(productId);
 	    cartItem.setQuantity(quantity);
 	}
 
-    public int getSubTotal() {
+	public int getSubTotal() {
 	    int subTotal = 0;
 	    Iterator<CartItem> items = getAllCartItems();
 	    while (items.hasNext()) {
 	      CartItem cartItem = (CartItem) items.next();
 	      Product product = cartItem.getProduct();
-	      int listPrice = product.getPrice();
+	      int price = product.getPrice();
 	      int quantity = cartItem.getQuantity();
-	      subTotal += listPrice * quantity;
+	      subTotal += price * quantity;
 	    }
 	    return subTotal;
 	}
 
+	@Override
+	public String toString() {
+		return "Cart [itemMap=" + itemMap + ", itemList=" + itemList + "]";
+	}
+	
+	
 }
