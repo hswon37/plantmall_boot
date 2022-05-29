@@ -17,22 +17,25 @@ public class MybatisProductDao implements ProductDao {
 	@Autowired
 	private ProductMapper productMapper;
 
+	@Override
+	public Product getProduct(String productId) throws DataAccessException {
+	    return productMapper.getProduct(productId);
+	}
+	
+	@Override
 	public List<Product> getProductListByCategory(String categoryId) 
 			throws DataAccessException {
 	    return productMapper.getProductListByCategory(categoryId);
 	}
 
-	public Product getProduct(String productId) throws DataAccessException {
-	    return productMapper.getProduct(productId);
-	}
-
+	@Override
 	public List<Product> searchProductList(String keywords) 
 			throws DataAccessException {
 	    return productMapper.searchProductList(
 	    	"%" + keywords.toLowerCase() + "%");
 	}
 
-	/* Inner Classes */
+	/* Inner Classes: 이게 뭐지? jpetstore꺼 긁어온거긴함*/
 	public static class ProductSearch {
 
 		private List<String> keywordList = new ArrayList<String>();
@@ -46,5 +49,31 @@ public class MybatisProductDao implements ProductDao {
 		public List<String> getKeywordList() {
 			return keywordList;
 		}
-	}	
+	}
+	
+	@Override
+	public List<Product> showProductList(String productId) throws DataAccessException{
+		return productMapper.showProductList(productId);
+	}
+	
+	@Override
+	public List<Product> getAllProduct(){
+		return productMapper.getAllProduct();
+	}
+
+	@Override
+	public void insertProduct(Product product) throws DataAccessException{
+		productMapper.insertProduct(product);
+	}
+
+	@Override
+	public void updateProduct(Product product) throws DataAccessException{
+		productMapper.updateProduct(product);
+	}
+
+	@Override
+	public void deleteProduct(Product product) throws DataAccessException{
+		productMapper.deleteProduct(product);
+	}
+
 }

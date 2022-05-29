@@ -89,6 +89,43 @@
 	overflow:visible;
 	padding:0;
 }
-table {
+.noLineTable table {
 	text-align:center;
+}
+.lineTable table {
+  	width: 100%;
+  	border-collapse: collapse;
+}
+.lineTable td {
+  	border: 1px solid #444444;
+  	padding: 10px;
+}
+.manageTable table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.manageTable td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+
+.detailTable li {
+	list-style:none;
+	display:inline-block;
+	position:relative;
+	margin:5px 30px;
+	padding:0;
+	color:black;
+}
+.detailTable li a {
+	display:block;
+	margin:0;
+	text-decoration:none;
+	font-weight:bold;
+	color:black;
+}
+
+a {
+	text-decoration : none;
+	color : black;
 }

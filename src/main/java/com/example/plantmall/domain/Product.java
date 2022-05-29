@@ -4,10 +4,11 @@ import java.io.Serializable;
 
 import lombok.Getter;
 import lombok.Setter;
+import java.io.Serializable;
 
 @SuppressWarnings("serial")
 @Getter @Setter
-public class Product implements Serializable{
+public class Product implements Serializable {
 	private String productId;
 	private String categoryId;
 	private String userId;

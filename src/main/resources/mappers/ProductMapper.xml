@@ -5,12 +5,12 @@
 
   <cache />
 
-  <select id="getProduct" resultType="Product">
+  <select id="getProduct" parameterType="String" resultType="Product">
     SELECT
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME as p_name,
+      PNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG
@@ -18,12 +18,12 @@
     WHERE PRODUCTID = #{productId}
   </select>
 
-  <select id="getProductListByCategory" resultType="Product">
+  <select id="getProductListByCategory" parameterType="String" resultType="Product">
     SELECT
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME,
+      PNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG
@@ -31,17 +31,49 @@
     WHERE CATEGORYID = #{value}
   </select>
 
-  <select id="searchProductList" resultType="Product">
-    select
+  <select id="searchProductList" parameterType="String" resultType="Product">
+    SELECT
       PRODUCTID,
       CATEGORYID,
       USERID,
-      pNAME,
+      PNAME as p_name,
       DESCRIPTION,
       PRICE,
       PRODUCTIMG
-    from PRODUCT
+    FROM PRODUCT
     WHERE lower(name) like #{value}
   </select>
-
+  
+  <select id="getAllProduct" resultType="Product">
+    SELECT
+      PRODUCTID,
+      CATEGORYID,
+      USERID,
+      PNAME as p_name,
+      DESCRIPTION,
+      PRICE,
+      PRODUCTIMG
+    FROM PRODUCT
+  </select>
+  
+  <insert id="insertProduct" parameterType="Product">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT Product_seq.nextval AS id FROM DUAL
+		</selectKey>
+		INSERT INTO PRODUCT (PRODUCTID, CATEGORYID, PNAME, DESCRIPTION, PRICE, PRODUCTIMG, USERID)
+		VALUES (#{productId}, #{categoryId}, #{p_name}, #{description}, #{price}, #{productImg}, #{userId})
+		  
+  </insert>
+  
+  <update id="updateProduct" parameterType="Product">
+		UPDATE PRODUCT 
+		SET CATEGORYID = #{categoryId}, PNAME = #{p_name}, DESCRIPTION = #{description}, PRICE = #{price}, PRODUCTIMG = #{productImg}
+		WHERE PRODUCTID = #{productId} and USERID = #{userId}
+  </update>
+  
+  <delete id="deleteProduct" parameterType="Product">
+		DELETE FROM PRODUCT
+		WHERE PRODUCTID = #{productId} and USERID = #{userId}		  
+  </delete>
+  
 </mapper>
