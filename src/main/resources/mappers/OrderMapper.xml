@@ -11,12 +11,15 @@
 
 	<select resultType="Order" id="getOrdersByUserId">
 		SELECT ORDERID, USERID, USERNAME, ORDERDATE, SHIPADDRESS, CREDITCARD, EXPIRYDATE, CARDTYPE, PHONENUMBER
-		FROM ORDER_TABLE WHERE ORDER_TABLE.USERID = #{userId} ORDER BY ORDERDATE
+		FROM ORDER_TABLE WHERE ORDER_TABLE.USERID = #{userId} ORDER BY ORDERDATE DESC
 	</select>
 
-	<insert id="insertOrder">
+	<insert id="insertOrder" parameterType="Order">
 		INSERT INTO ORDER_TABLE
 		VALUES (#{orderId}, #{shipAddress}, #{totalPrice}, #{creditCard}, #{expiryDate}, #{userId}, #{orderDate}, #{cardType}, #{userName}, #{phoneNumber})
+		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
+			SELECT ORDER_SEQ.NEXTVAL AS ORDERID FROM DUAL
+		</selectKey>
 	</insert>
 
 	<resultMap id="OrderAndLineItemMap" type="Order">

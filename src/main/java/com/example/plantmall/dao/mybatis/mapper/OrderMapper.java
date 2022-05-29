@@ -10,6 +10,6 @@ import com.example.plantmall.domain.Order;
 public interface OrderMapper {
 	List<Order> getOrdersByUserId(String userId);
 	Order getOrder(int orderId);
-	void insertOrder(Order order);
+	int insertOrder(Order order);
 	Order getOrderAndLineItems(int orderId);
 }
