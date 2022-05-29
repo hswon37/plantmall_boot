@@ -2,10 +2,12 @@ package com.example.plantmall.domain;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @SuppressWarnings("serial")
 public class CartItem implements Serializable{
 	private String userId;

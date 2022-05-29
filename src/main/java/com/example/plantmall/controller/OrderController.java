@@ -84,6 +84,7 @@ public class OrderController {
 			System.out.println("hasErrore()\n");
 			return new ModelAndView("order/OrderForm");
 		}
+		
 		orderService.insertOrder(orderForm.getOrder());
 		ModelAndView mav = new ModelAndView("order/OrderDetail");
 		mav.addObject("order", orderForm.getOrder());
