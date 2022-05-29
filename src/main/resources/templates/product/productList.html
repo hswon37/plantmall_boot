@@ -8,11 +8,10 @@
 <body onload="init();">
 	<div th:insert="~{header :: #top}"></div>
 	<h2>제품 목록</h2>
-	<!--얘도 변수명하고 연결 안되서 에러 <h3 th:text="${category.name}">카테고리 이름</h3>-->
 	<h3 th:text="${categoryName}">카테고리 이름</h3>
-	<div align="center" class="noLineTable">
+	<div align="center">
 	  카테고리: <a href="" th:href="@{/product/list}">전체</a> | <a href="" th:href="@{/product/list?categoryId=c1}">꽃</a> | <a href="" th:href="@{/product/list?categoryId=c2}">야생화</a> | <a href="" th:href="@{/product/list?categoryId=c3}">허브</a> | <a href="" th:href="@{/product/list?categoryId=c4}">나무</a> | <a href="" th:href="@{/product/list?categoryId=c5}">다육</a> | <a href="" th:href="@{/product/list?categoryId=c6}">해조</a> | <a href="" th:href="@{/product/list?categoryId=c7}">원예용품</a>
-		<table>
+		<table class="noLineTable">
 			<tr th:each="miniProductList, iterStat : ${productList}">
 				<td th:each="product, miniIterStat : ${miniProductList}">
 					<a href="" th:href="@{/product/detail?productId=}+${product.productId}" name="productId" value="${product.productId}">				

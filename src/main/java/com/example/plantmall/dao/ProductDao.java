@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.plantmall.controller.SearchValueCommand;
 import com.example.plantmall.domain.Product;
 
 public interface ProductDao {
@@ -12,7 +13,7 @@ public interface ProductDao {
 
 	List<Product> getProductListByCategory(String categoryId) throws DataAccessException;
 
-	List<Product> searchProductList(String keywords) throws DataAccessException;
+	List<Product> searchProductList(SearchValueCommand svc) throws DataAccessException;
 	
 	List<Product> showProductList(String productId) throws DataAccessException;
 

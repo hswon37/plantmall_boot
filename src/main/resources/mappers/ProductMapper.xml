@@ -31,7 +31,7 @@
     WHERE CATEGORYID = #{value}
   </select>
 
-  <select id="searchProductList" parameterType="String" resultType="Product">
+  <select id="searchProductList" parameterType="com.example.plantmall.controller.SearchValueCommand" resultType="Product">
     SELECT
       PRODUCTID,
       CATEGORYID,
@@ -41,7 +41,24 @@
       PRICE,
       PRODUCTIMG
     FROM PRODUCT
-    WHERE lower(name) like #{value}
+    <where>
+		<if test="categoryId != null">
+			CATEGORYID = #{categoryId}
+		</if>
+		<if test="keyword != null">
+			AND (PNAME LIKE '%'||#{keyword}||'%'
+			OR DESCRIPTION LIKE '%'||#{keyword}||'%')
+		</if>
+		<if test="lowPrice != null and highPrice != null">
+			AND PRICE BETWEEN #{lowPrice} AND #{highPrice}
+		</if>
+		<if test="lowPrice == null and highPrice != null">
+			AND PRICE BETWEEN 0 AND #{highPrice}
+		</if>
+		<if test="lowPrice != null and highPrice == null">
+			AND PRICE BETWEEN 0 AND #{lowPrice}
+		</if>
+	</where>
   </select>
   
   <select id="getAllProduct" resultType="Product">
