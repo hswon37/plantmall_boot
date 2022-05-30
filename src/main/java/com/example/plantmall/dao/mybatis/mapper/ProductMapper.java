@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.plantmall.controller.SearchValueCommand;
 import com.example.plantmall.domain.Product;
 
 @Mapper
@@ -13,7 +14,7 @@ public interface ProductMapper {
 	
 	List<Product> getProductListByCategory(String categoryId);
 	
-	List<Product> searchProductList(String keywords);
+	List<Product> searchProductList(SearchValueCommand svc);
 	
 	List<Product> showProductList(String productId);
 	

@@ -8,6 +8,8 @@ import com.example.plantmall.dao.CategoryDao;
 import com.example.plantmall.dao.ProductDao;
 import com.example.plantmall.domain.Category;
 import com.example.plantmall.domain.Product;
+
+import com.example.plantmall.controller.SearchValueCommand;
 //import com.example.plantmall.domain.User;
 
 @Service
@@ -39,8 +41,8 @@ public class ProductService {
 		return productDao.getAllProduct();
 	}
 	
-	public List<Product> searchProductList(String keywords) {
-		return productDao.searchProductList(keywords);
+	public List<Product> searchProductList(SearchValueCommand svc) {
+		return productDao.searchProductList(svc);
 	}
 	
 	public List<Product> showProductList(String productId){

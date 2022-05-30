@@ -89,27 +89,23 @@
 	overflow:visible;
 	padding:0;
 }
-.noLineTable table {
+table.noLineTable {
 	text-align:center;
 }
-.lineTable table {
+table.lineTable {
   	width: 100%;
   	border-collapse: collapse;
 }
-.lineTable td {
+td.lineTable {
   	border: 1px solid #444444;
   	padding: 10px;
 }
-.manageTable table {
-	width: 100%;
-	border-collapse: collapse;
-}
-.manageTable td {
+td.manageTable {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 }
 
-.detailTable li {
+li.detailTable {
 	list-style:none;
 	display:inline-block;
 	position:relative;
@@ -117,7 +113,7 @@
 	padding:0;
 	color:black;
 }
-.detailTable li a {
+li a.detailTable {
 	display:block;
 	margin:0;
 	text-decoration:none;

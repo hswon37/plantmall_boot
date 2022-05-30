@@ -8,41 +8,37 @@
 <body onload="init();">
 	<div th:insert="~{header :: #top}"></div>
 	<h2>제품 검색</h2>
-	<div class="lineTable">
-	 	<table>
-			<tr>
-				<td>카테고리 선택</td>
-				<td>
-					<select name="category">
-						<option th:each="check ${categoryNameList}"
-									th:value="${check?.categoryName}"
-									th:utext="${check?.categoryName}"></option>
-<!-- 						<option value="꽃">꽃</option>
-						<option value="야생화">야생화</option>
-						<option value="허브">허브</option>
-						<option value="나무">나무</option>
-						<option value="다육">다육</option>
-						<option value="해조">해조</option>
-						<option value="선택안함">선택안함</option>
- -->					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>검색어</td>
-				<td><input type="text" name="name" th:text="${pageMaker.cri.name}"></td>
-			</tr>
-			<tr>
-				<td>가격</td>
-				<td>
-					<input type="text" name="lowPrice" th:text="${pageMaker.cri.lowPrice}">~<input type="text" name="highPrice" th:text="${pageMaker.cri.highPrice}">원
-				</td>
-			</tr>
-			<tr>
-			
-		</table>
-		<div align="center">
-			<input type="button" value="검색">
-		</div>
+	<div>
+		<form action="/product/searchResult" method="get">
+		 	<table class="lineTable">
+				<tr>
+					<td class="lineTable">카테고리 선택</td>
+					<td class="lineTable">
+						<select name="categoryId">
+							<option value="">카테고리 선택</option>
+							<option th:each="val : ${categoryList}"
+										th:value="${val?.categoryId}"
+										th:utext="${val?.c_name}">카테고리</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="lineTable">검색어</td>
+					<td class="lineTable"><input type="text" name="keyword" placeholder="검색어를 입력하세요"></td>
+				</tr>
+				<tr>
+					<td class="lineTable">가격</td>
+					<td class="lineTable">
+						<input type="text" name="lowPrice" placeholder="최소 가격 입력">~<input type="text" name="highPrice" placeholder="최대 가격 입력">원
+					</td>
+				</tr>
+				<tr>
+				
+			</table>
+			<div align="center">
+				<input type="submit" value="검색">
+			</div>
+		</form>
 	</div>
 </body>
 </html>

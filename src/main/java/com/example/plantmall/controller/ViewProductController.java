@@ -39,6 +39,7 @@ public class ViewProductController {
 		else {
 			itemList = this.productService.getProductListByCategory(categoryId);
 			categoryName = this.productService.getCategory(categoryId).getC_name();
+			/*
 			if (categoryName.equals("flower"))
 				categoryName = "꽃";
 			else if (categoryName.equals("wildflower"))
@@ -53,6 +54,8 @@ public class ViewProductController {
 				categoryName = "해조";
 			else if (categoryName.equals("gardeningSupplies"))
 				categoryName = "원예용품";
+				*/
+			
 		}
 		List<List<Product>> productList = new ArrayList<>();
 		List<List<String>> userNameList = new ArrayList<>();

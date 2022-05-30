@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.plantmall.controller.SearchValueCommand;
 import com.example.plantmall.dao.ProductDao;
 import com.example.plantmall.dao.mybatis.mapper.ProductMapper;
 import com.example.plantmall.domain.Product;
@@ -29,10 +30,9 @@ public class MybatisProductDao implements ProductDao {
 	}
 
 	@Override
-	public List<Product> searchProductList(String keywords) 
+	public List<Product> searchProductList(SearchValueCommand svc) 
 			throws DataAccessException {
-	    return productMapper.searchProductList(
-	    	"%" + keywords.toLowerCase() + "%");
+	    return productMapper.searchProductList(svc);
 	}
 
 	/* Inner Classes: 이게 뭐지? jpetstore꺼 긁어온거긴함*/
