@@ -29,8 +29,8 @@ import com.example.plantmall.domain.User;
 import com.example.plantmall.service.AuthService;
 
 @Controller
-@RequestMapping({"/signup","/auth/edit"})
-public class AuthController{
+@RequestMapping({"/signup","/auth/update"})
+public class AccountController{
 	
 	@Value("auth/signupForm")
 	private String formViewName;
@@ -47,7 +47,6 @@ public class AuthController{
 				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
 		
 		if(userSession!=null) {
-			System.out.println("userSession!"+userSession.getUser());
 			return new UserForm(
 					authService.getUser(userSession.getUser().getEmail()));
 		}else {
@@ -64,7 +63,6 @@ public class AuthController{
 		mav.setViewName(formViewName);
 		
 		if(userSession!=null) {
-			System.out.println("userSession!"+userSession.getUser());
 			mav.addObject("userForm",new UserForm(
 					authService.getUser(userSession.getUser().getEmail())));
 		}else {
@@ -75,21 +73,25 @@ public class AuthController{
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String onSubmit(HttpServletRequest request, HttpSession session, @ModelAttribute("userForm") UserForm userForm) throws Exception{
-		
+	public ModelAndView onSubmit(HttpServletRequest request, HttpSession session, @ModelAttribute("userForm") UserForm userForm) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(successViewName);
 			if(userForm.isNewUser()) {
 				//회원가입 진행
 				authService.insertUser(userForm.getUser());
+				mav.addObject("isNewUser", true);
+				
 			}else {
 				//회원수정 진행
 				authService.updateUser(userForm.getUser());
+				mav.addObject("isNewUser", false);
 			}
 			
 			UserSession userSession = new UserSession(
 					authService.getUser(userForm.getUser().getEmail()));
 			
 			session.setAttribute("userSession", userSession);
-			return successViewName;
+			return mav;
 	}
 
 

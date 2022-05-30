@@ -49,8 +49,7 @@ public class SignonController {
 		}else {
 			UserSession userSession = new UserSession(user);
 			model.addAttribute("userSession",userSession);
-			System.out.println(userSession.getUser());
-			
+
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 

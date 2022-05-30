@@ -8,7 +8,13 @@
 <body>
 <div th:insert="~{header :: #top}"></div>
 
-<h2> SIGNUPFORM</h2>
+<div th:if="${userForm}">
+	<h2> AUTH UPDATE FORM</h2>
+</div>
+<div th:unless="${userForm}">
+	<h2> SIGNUPFORM</h2>
+</div>
+
 <table style="border-collapse: collapse; width: 50%; height: 126px;" >
 	<form th:action="@{/signup}" th:object="${userForm}" method="post">
 	<tr>
@@ -25,7 +31,7 @@
 		<td><input type="text" id="user.userName" th:field="*{user.userName}"/></td>
 	</tr>
 	<tr>
-		<td><label for="email" >이메일</label>/td>
+		<td><label for="email" >이메일</label></td>
 		<td> <input type="text" id="user.email" th:field="*{user.email}"/></td>
 	</tr>
 	<tr>

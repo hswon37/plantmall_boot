@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+</head>
+<body>
+<div th:insert="~{header :: #top}"></div>
+<div>
+	<ul>
+		<li>
+			<a href="" th:href="@{/auth/update}">계정 수정</a>
+		</li>
+		<li>
+			<a href="" th:href="@{/auth/delete}">계정 삭제</a>
+		</li>
+	</ul>
+</div>
+
+</body>
+</html>
