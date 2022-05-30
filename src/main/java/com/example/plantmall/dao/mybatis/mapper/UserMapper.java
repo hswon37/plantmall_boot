@@ -10,9 +10,10 @@ import com.example.plantmall.domain.User;
 public interface UserMapper {
 
 	User getUserByEmail(String email);
+	User getUserById(String id);
 	User getUserByEmailAndPassword(String email, String password);
 	void insertUser(User user);
 	void updateUser(User user);
-	
-	
+	void deleteUser(String id);
+
 }

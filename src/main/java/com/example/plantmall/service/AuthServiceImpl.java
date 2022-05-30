@@ -30,4 +30,10 @@ public class AuthServiceImpl implements AuthService{
 	public User getUser(String email) {
 		return userDao.getUser(email);
 	}
+
+	@Override
+	public void deleteUser(String id) {
+		userDao.deleteUser(id);
+		
+	}
 }

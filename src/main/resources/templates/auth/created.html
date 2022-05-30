@@ -8,8 +8,13 @@
 <body>
 <div th:insert="~{header :: #top}"></div>
 
-<h1 style="text-align: center;"><span style="background-color: #339966; color: #333333;">회원 가입을 축하합니다</span></h1>
-<p>${userSession}</p>
+<div th:if="${isNewUser}">
+	<h1 style="text-align: center;"><span style="background-color: #339966; color: #333333;">회원 가입을 축하합니다</span></h1>
+</div>
+<div th:unless="${isNewUser}">
+	<h1 style="text-align: center;"><span style="background-color: #339966; color: #333333;">수정되었습니다.</span></h1>
+</div>
+
 <table style="border-collapse: collapse; width: 86.8707%; height: 204px; margin-left: auto; margin-right: auto;" border="1">
 <tbody>
 <tr style="height: 18px;">

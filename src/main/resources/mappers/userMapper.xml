@@ -40,6 +40,19 @@
 	    WHERE USER_TABLE.EMAIL = #{param1}
   </select>
   
+    <select id="getUserById" resultType="User">
+	    SELECT
+	    	USERID,
+	    	USERNAME,
+	    	EMAIL,
+	    	PHONE,
+	    	ZIPCODE,
+	    	ADDRESS
+	    FROM USER_TABLE
+	    WHERE USER_TABLE.userId = #{param1}
+  </select>
+  
+  
       <insert id="updateUser" parameterType="User">
     	UPDATE USER_TABLE SET
 	    	userId = #{userId},
@@ -51,5 +64,11 @@
 	    	address = #{address}
     	WHERE USER_TABLE.EMAIL =#{email}
     </insert>
+    
+    <delete id="deleteUser">
+        	DELETE 
+        	FROM USER_TABLE
+        	WHERE USER_TABLE.userId = #{param1}
+    </delete>
 
 </mapper>
