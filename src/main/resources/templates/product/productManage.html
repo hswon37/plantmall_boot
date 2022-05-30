@@ -4,19 +4,14 @@
 	<meta charset="utf-8">
     <title>식몰</title>
    	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
-	<style>
-		table {
-			text-align:center;
-		}
-	</style>
 </head>
 <body onload="init();">
-	<div th:insert="~{header :: #top}"></div>
+	<div th:insert="~{headerAfterLogin :: #top}"></div>
 	<h2>제품 관리 목록
 		<input type="button" value="새 제품 등록" onclick="location.href='/product/registration'">
 	</h2>
 	<div align="center">
-	 	<table>
+	 	<table class="noLineTable">
 			<!-- 현재: 한 행당 4개씩이 아닌, 한 행에 모든 제품이 출력되는 형태. 4줄씩 나눠서 출력해야하는데 어떻게하죠? -->
 			<!--  이것저것 변수명하고 연결 안돼서 이거 때매 에러남, 추후 다 연결되면 주석 해제하고 확인
 			<tr th:each="product : ${productList.pageList}">

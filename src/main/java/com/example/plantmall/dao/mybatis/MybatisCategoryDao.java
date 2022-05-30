@@ -12,12 +12,15 @@ import com.example.plantmall.domain.Category;
 public class MybatisCategoryDao implements CategoryDao {
 	@Autowired
 	private CategoryMapper categoryMapper;
+
+	@Override
+	public Category getCategory(String categoryId) throws DataAccessException {
+		return categoryMapper.getCategory(categoryId);
+	}
 	
+	@Override
 	public List<Category> getCategoryList() throws DataAccessException {
 		return categoryMapper.getCategoryList();
 	}
 
-	public Category getCategory(String categoryId) throws DataAccessException {
-		return categoryMapper.getCategory(categoryId);
-	}
 }

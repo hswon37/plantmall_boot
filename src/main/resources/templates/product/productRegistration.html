@@ -4,16 +4,6 @@
 	<meta charset="utf-8">
     <title>식몰</title>
    	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
-	<style>
-	  table {
-	    width: 100%;
-	    border-collapse: collapse;
-	  }
-	  td {
-	    border-bottom: 1px solid #444444;
-	    padding: 10px;
-	  }
-	</style>
 </head>
 <body onload="init();">
 	<div th:insert="~{header :: #top}"></div>
@@ -21,21 +11,21 @@
 	<h2>제품 등록</h2>
 	<div>
 		<form action="/plantmall/productRegistration" method="post" id="enrollForm">
-		 	<table>
+		 	<table class="lineTable">
 				<tr>
-					<td rowspan="6" style="border-bottom: none; border:1px solid;">
+					<td class="manageTable" rowspan="6" style="border-bottom: none; border:1px solid;">
 						<input type="file" name="image">				
 					</td>
-					<td>제품명</td>
-					<td><input type="text" name="name"></td>
+					<td class="manageTable">제품명</td>
+					<td class="manageTable"><input type="text" name="name"></td>
 				</tr>
 				<tr>
-					<td>가격</td>
-					<td><input type="text" name="price">원</td>
+					<td class="manageTable">가격</td>
+					<td class="manageTable"><input type="text" name="price">원</td>
 				</tr>
 				<tr>
-					<td>카테고리</td>
-					<td>
+					<td class="manageTable">카테고리</td>
+					<td class="manageTable">
 						<select name="category">
 							<option value="꽃">꽃</option>
 							<option value="야생화">야생화</option>
@@ -47,20 +37,20 @@
 					</td>
 				</tr>
 				<tr>
-					<td>수량</td>
-					<td><input type="text" name="quantity">개</td>
+					<td class="manageTable">수량</td>
+					<td class="manageTable"><input type="text" name="quantity">개</td>
 				</tr>
 				<tr>
-					<td style="border-bottom: none">제품 설명</td>
-					<td style="border-bottom: none">
+					<td class="manageTable" style="border-bottom: none">제품 설명</td>
+					<td class="manageTable" style="border-bottom: none">
 						<textarea cols="50" rows="10" placeholder="제품의 상세 설명을 작성해주세요" name="description"></textarea>
 					</td>
 				
 				</tr>
 				<tr>
-					<td style="border-bottom: none"></td>
-					<td style="border-bottom: none"></td>
-					<td style="border-bottom: none">
+					<td class="manageTable" style="border-bottom: none"></td>
+					<td class="manageTable" style="border-bottom: none"></td>
+					<td class="manageTable" style="border-bottom: none">
 						<input type="button" value="등록" onclick="alert('해당 제품을 등록 하시겠습니까?')" id="enrollBtn">
 					</td>
 				</tr>

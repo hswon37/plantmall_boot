@@ -89,6 +89,39 @@
 	overflow:visible;
 	padding:0;
 }
-table {
+table.noLineTable {
 	text-align:center;
+}
+table.lineTable {
+  	width: 100%;
+  	border-collapse: collapse;
+}
+td.lineTable {
+  	border: 1px solid #444444;
+  	padding: 10px;
+}
+td.manageTable {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+
+li.detailTable {
+	list-style:none;
+	display:inline-block;
+	position:relative;
+	margin:5px 30px;
+	padding:0;
+	color:black;
+}
+li a.detailTable {
+	display:block;
+	margin:0;
+	text-decoration:none;
+	font-weight:bold;
+	color:black;
+}
+
+a {
+	text-decoration : none;
+	color : black;
 }
