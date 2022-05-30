@@ -10,13 +10,17 @@ import org.springframework.stereotype.Repository;
 
 import com.example.plantmall.dao.ProductDao;
 import com.example.plantmall.dao.mybatis.mapper.ProductMapper;
+import com.example.plantmall.dao.mybatis.mapper.ReviewMapper;
 import com.example.plantmall.domain.Product;
+import com.example.plantmall.domain.Review;
 
 @Repository
 public class MybatisProductDao implements ProductDao {
 	@Autowired
 	private ProductMapper productMapper;
-
+	@Autowired
+	private ReviewMapper reviewMapper;
+	
 	public List<Product> getProductListByCategory(String categoryId) 
 			throws DataAccessException {
 	    return productMapper.getProductListByCategory(categoryId);
@@ -46,5 +50,17 @@ public class MybatisProductDao implements ProductDao {
 		public List<String> getKeywordList() {
 			return keywordList;
 		}
+	}
+
+	@Override
+	public List<Review> getReviewsByProductId(String productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return reviewMapper.getReviewsByProductId(productId);
+	}
+
+	@Override
+	public Product getProductAndReviewList(String productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return productMapper.getProductAndReviews(productId);
 	}	
 }

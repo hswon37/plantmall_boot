@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <title>식몰</title>
 <link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
 </head>
 <body>
 <hr>
+	<div th:insert="~{header :: #top}"></div>
 	<div class="orderPage">
 		<div class="pageTitle">
 			<b><span th:text="${#dates.format(order.orderDate, 'yyyy.MM.dd')}">2022.04.09</span> 주문 상세보기</b>
@@ -17,23 +19,30 @@
 					<tbody>
 						<tr th:each="lineItem: ${order.lineItems}">
 							<td>
-								<div class="orderContents">
-									<div class="imgBox">
+								<div class=ReviewContent>
+									<div class="ReviewImgBox">
 										<img th:src="@{/static/images/} + ${lineItem.product.productImg}" />
 									</div>
 									<div class="content">
 										<span th:text="${lineItem.product.p_name}">제품 이름</span>
 										<br><br>
-										<br><br>
-										수량: <span class="quantity" th:text="${lineItem.quantity}">1</span>개
-										<p class="itemPrice"><span th:text="${lineItem.unitPrice * lineItem.quantity}">16000</span>원</p>
+										<br>
+										<span class="quantity" th:text="|제품 가격: ${lineItem.unitPrice}원|">16000</span>
+										<br>
+										<span class="quantity" th:text="|수량: ${lineItem.quantity}개|">1</span>
+										<span class="itemPrice" th:text="|${lineItem.unitPrice * lineItem.quantity}원|">16000</span>
 									</div>
+								</div>
+								<div>
+									<a href="#" th:href="@{/review/check(userId=${order.userId}, orderId=${order.orderId}, lineNumber=${lineItem.lineNumber})}" class="button">
+										리뷰
+									</a>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="priceSum">
-								<p>총 결제 금액: <span th:text="${order.totalPrice}">16000</span>원</p>
+								<p>총 결제 금액: <span th:text="${order.totalPrice + 3000}">16000</span>원</p>
 							</td>
 						</tr>
 					</tbody>

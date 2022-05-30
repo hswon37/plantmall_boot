@@ -13,6 +13,8 @@ public interface ProductMapper {
 	
 	Product getProduct(String productId);
 	
+	// 리뷰를 담기 위한 mapper
+	Product getProductAndReviews(String productId);
 	List<Product> searchProductList(String keywords);
 
 }
