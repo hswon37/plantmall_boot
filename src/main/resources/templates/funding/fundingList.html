@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+</head>
+<body>
+<div th:insert="~{header :: #top}"></div>
+
+<h2>펀딩 목록</h2>
+<p style="text-align: center;"><a href=""> 꽃</a> | <a href=""> 야생화</a> <a href=""> 허브</a> | <a href=""> 나무</a>| <a href=""> 다육</a></p>
+<p style="text-align: center;">&nbsp;</p>
+<table style="border-collapse: collapse; width: 50%; height: 486px; margin-left: auto; margin-right: auto;" border="1">
+	<tbody>
+		<div th:each="funding:${fundingList}">
+		<tr>
+		<td style="width: 33.3333%;  text-align: center;" >
+		<img th:src="@{/images/}+${funding.productImg}" style="width:200px;height:200px" alt="제품사진">
+		</td>	
+		</tr>
+		
+		<tr>
+		<td style="width: 33.3333%;  text-align: center;"  th:text="${funding.title}">제품명 | 가격 | 70%</td>	
+		</tr>
+		
+		<tr>
+		<td style="width: 33.3333%;  text-align: center;" th:text="${funding.calendar}">22-04-09 ~ 22-04-20</td>
+		</tr>
+		</div>
+	</tbody>
+</table>
+</body>
+</html>
