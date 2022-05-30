@@ -15,7 +15,18 @@ a,
 a:visited {
   	text-decoration: none;
 }
-
+.gButton {
+	display: inline-block;
+	margin-bottom: 10px;
+  	width: 100%;
+  	line-height: 58px;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #555555;
+}
 p {
 	margin: 0;
 	padding: 0;
@@ -23,6 +34,7 @@ p {
 .orderPage {
 	/* 전체 div */
 	margin: 0 auto;
+	padding-top: 40px;
 	width: 700px;
 }
 
@@ -70,9 +82,11 @@ table.orderElement tr {
 /* 주문 목록 element 안에 들어가는 이미지, 이름, 가격 */
 	width: 100%;
 	word-break: break-all;
-	padding: 10px 10px 0 10px ;
 	font-size: 16px;
-	display: flex;
+}
+
+.orderContents p {
+	font-size: 20px;
 }
 .contents {
 /* 장바구니 아이템 element 안에 들어가는 이름, 가격, 수량, 총 가격 설정 */
@@ -85,14 +99,26 @@ table.orderElement tr {
 .imgBox {
 	width: 120px;
 	height: 120px;
+	padding-left: 5px;
 	padding-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	float: left;
 }
-
+.imgBox img {
+	width: 120px;
+	height: 120px;
+}
+/* Cart, Review에서 사용 */
 .content {
-	width: 500px;
-	font-size: 16px;
+	width: 680px;
+	font-size: 20px;
+	padding-top: 10px;
 }
-
+.productName {
+	font-size: 18px;
+	font-weight: bold;
+}
 .itemPrice {
 	font-size: 20px;
 	float: right;
@@ -112,8 +138,7 @@ dd {
 }
 .quantityPrice {
 	display: inline; 
-	float : right;
-	font-size: 20px;
+	font-size: 16px;
 }
 .division {
 	display:flex;
@@ -218,6 +243,7 @@ li select {
 .listCheck {
 /* 전체 선택 부분 */
 	font-size: 20px;
+	padding-top: 40px;
 	padding-bottom: 15px;
 }
 
@@ -234,10 +260,13 @@ table.cartElement {
 	border-collapse: collapse;
 	margin: 0 0 10px;
 }
-
+.cartItemBox {
+	display:inline-block;
+}
 .selectItemBox {
 /* 장바구니 아이템 element 하나 선택 */
-	padding-top: 20px;
+	padding-right: 10px;
+	float:left;
 }
 
 .deleteItemBox {
@@ -245,8 +274,12 @@ table.cartElement {
 	float: right;
 	padding-right: 10px;
 }
-
-
+.itemPrice {
+	float: right;
+}
+.quantityBtn {
+	float: left;
+}
 
 /* Review css */
 .reviewForm {
@@ -255,14 +288,45 @@ table.cartElement {
 	width: 700px;
 	padding-top: 100px;
 }
-.orderElement {
+.ReviewOrderElement {
 	width: 100%;
 	border: solid 1px;
 	border-collapse: collapse;
 	word-break: break-all;
-	/*padding: 10px 10px 0 10px;*/
 	font-size: 16px;
 	display: flex;
+}
+.ReviewImgBox {
+	width: 150px;
+    height: 150px;
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    float: left;
+}
+
+.ReviewImgBox img {
+	width: 150px;
+	height: 150px;
+}
+
+.ReviewContent {
+	width: 500px;
+	font-size: 20px;
+}
+
+.ReviewContent .quantity {
+	font-size: 17px;
+}
+
+.ReviewDetail_write_area {
+	border: 1px solid;
+	padding-bottom: 10px;
+}
+.ReviewDetail_title{
+	padding-top: 10px;
+	padding-bottom: 5px;
 }
 .write_area {
 	border: 1px solid;
@@ -284,6 +348,12 @@ textarea:focus {
 	font-size: 20px;
 	padding-top: 10px;
 }
+
+.rFormTitle span {
+	font-size: 20px;
+    padding-top: 10px;
+}
+
 .rFormCol {
 	vertical-align: top;
 	box-sizing: border-box;
@@ -293,6 +363,7 @@ textarea:focus {
 	padding-top: 12px;
 	padding-right: 15px;
 }
+
 .includeReview {
 	width: 1000px;
 	margin: 0 auto;

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1 style="text-align: center;"><span style="background-color: #339966; color: #333333;">х╦©Ь ╟║ютю╩ цЮгогу╢о╢ы</span></h1>
+<h1 style="text-align: center;"><span style="background-color: #339966; color: #333333;">М ▄Л⌡░ Й╟─Л·┘Л²└ Л╤∙М∙≤М∙╘К▀┬К▀╓</span></h1>
 <p>${userSession}</p>
 <table style="border-collapse: collapse; width: 86.8707%; height: 204px; margin-left: auto; margin-right: auto;" border="1">
 <tbody>
@@ -37,6 +37,6 @@
 </tr>
 </tbody>
 </table>
-<p style="text-align: center;"><button> ╦чюню╦╥н</button></p>
+<p style="text-align: center;"><button> К╘■Л²╦Л°╪К║°</button></p>
 </body>
 </html>

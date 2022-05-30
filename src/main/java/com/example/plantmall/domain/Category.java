@@ -1,12 +1,6 @@
 package com.example.plantmall.domain;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import org.springframework.beans.support.PagedListHolder;
 
 import lombok.Getter;
 import lombok.Setter;

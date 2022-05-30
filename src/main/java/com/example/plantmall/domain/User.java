@@ -32,4 +32,8 @@ public class User {
 	@Pattern(regexp = "\\d{5}")
 	private String zipcode;
 	private String address;
+	
+	private List<Review> reviewList = new ArrayList<Review>();
+	private List<Enquiry> enquiryList = new ArrayList<Enquiry>();
+	private List<EnquiryComment> enquiryCommList = new ArrayList<EnquiryComment>();
 }

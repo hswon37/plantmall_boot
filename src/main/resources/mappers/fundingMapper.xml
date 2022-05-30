@@ -3,9 +3,24 @@
 <mapper namespace="com.example.plantmall.dao.mybatis.mapper.FundingMapper">
  
     <!-- Funding 전체 목록 -->
-    <select id="getAllFundingList" parameterType="java.util.List">
-        SELECT TITLE
-          FROM FUNDING
+    <select id="getAllFundingList" resultType="Funding">
+    	SELECT F.*, P.PRODUCTIMG
+    	FROM FUNDING F, PRODUCT P
+    	WHERE F.PRODUCTID=P.PRODUCTID
+    </select>
+    
+    <select id="getMyAllProductListByUserEmail" parameterType="String" resultType="Product">
+	    SELECT 
+	    	PRODUCTID,
+	    	CATEGORYID,
+	    	PNAME AS p_name,
+	    	DESCRIPTION,
+	    	PRICE,
+	    	PRODUCTIMG,
+	    	USERID 
+	      FROM PRODUCT
+	      WHERE PRODUCT.USERID =#{param1}
+	      
     </select>
     
     <insert id="insertFunding" parameterType="Funding">

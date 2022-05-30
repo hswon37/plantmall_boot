@@ -10,5 +10,6 @@ import com.example.plantmall.domain.LineItem;
 public interface LineItemMapper {
 	
 	List<LineItem> getLineItemsByOrderId(int orderId);
+	LineItem getLineItem(int orderId, int lineNumber);
 	void insertLineItem(LineItem lineItem);
 }

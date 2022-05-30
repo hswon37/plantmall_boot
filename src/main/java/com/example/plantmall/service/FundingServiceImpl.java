@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.plantmall.dao.FundingDao;
 import com.example.plantmall.domain.Funding;
-
+import com.example.plantmall.domain.Product;
+@Service
 public class FundingServiceImpl implements FundingService{
 
 	@Autowired
@@ -26,6 +27,11 @@ public class FundingServiceImpl implements FundingService{
 	@Override
 	public void insertFunding(Funding funding) {
 		fundingDao.insertFunding(funding);
+	}
+
+	@Override
+	public List<Product> getMyAllProductList(String email) {
+		return fundingDao.getMyAllProductList(email);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.plantmall.dao.FundingDao;
 import com.example.plantmall.dao.mybatis.mapper.FundingMapper;
 import com.example.plantmall.domain.Funding;
+import com.example.plantmall.domain.Product;
 
 @Repository
 public class MybatisFundingDao implements FundingDao{
@@ -28,10 +29,12 @@ public class MybatisFundingDao implements FundingDao{
 	@Override
 	public void insertFunding(Funding funding) {
 		fundingMapper.insertFunding(funding);
-		
 	}
 	
-	
-	
-	
+	@Override
+	public List<Product> getMyAllProductList(String email) {
+		return fundingMapper.getMyAllProductListByUserEmail(email);
+	}
+
+
 }

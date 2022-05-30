@@ -56,8 +56,22 @@ public class AuthController{
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String showForm() {
-		return formViewName;
+	public ModelAndView showForm(HttpServletRequest request) throws Exception{
+		UserSession userSession=
+				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
+		
+		ModelAndView mav  = new ModelAndView();
+		mav.setViewName(formViewName);
+		
+		if(userSession!=null) {
+			System.out.println("userSession!"+userSession.getUser());
+			mav.addObject("userForm",new UserForm(
+					authService.getUser(userSession.getUser().getEmail())));
+		}else {
+			mav.addObject("userForm",new UserForm());
+		}
+		
+		return mav;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -74,12 +88,10 @@ public class AuthController{
 			UserSession userSession = new UserSession(
 					authService.getUser(userForm.getUser().getEmail()));
 			
-			System.out.println("!!!"+userSession.getUser());
 			session.setAttribute("userSession", userSession);
 			return successViewName;
 	}
 
-	
 
 	@RequestMapping(path = "/authFuncList", method=RequestMethod.GET)
 	public String authFuncList(Model model, HttpServletRequest request, HttpSession session) {
@@ -89,6 +101,7 @@ public class AuthController{
 	
 	@RequestMapping(path = "/auth/created", method=RequestMethod.GET)
 	public String created(Model model, HttpServletRequest request, HttpSession session) {
+		System.out.println("!!!"+session.getAttribute("userSession"));
 		return "auth/created";
 	}	
 	

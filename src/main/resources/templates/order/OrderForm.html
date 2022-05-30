@@ -4,15 +4,25 @@
 <meta charset="UTF-8">
 <title>식몰</title>
 <link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+<script th:inline="javascript">
+	function windowReLoad() {
+		location.href="/order/orderReset";
+	}
+	function window() {
+		location.href="/order/orderReset?status=0"
+	}
+</script>
 </head>
 <body>
-<div class="orderForm">
+<div th:insert="~{header :: #top}"></div>
+<div class="orderForm" onload="window();">
 	<div class="pageTitle">주문</div>
 		<div class="formTitle">주문제품 정보</div>
 		<table class="orderElement">
-			<tr th:each="lineItem:${order.lineItems}`">
+			<tr th:each="lineItem:${orderForm.order.lineItems}">
 				<td class="imgBox">
-					<img src="">이미지
+					<img th:src="@{/static/images/} + ${lineItem.product.productImg}" />
 				</td>
 				<td class="content">
 					<dl>
@@ -20,14 +30,14 @@
 						<dd>
 							제품 가격: <span th:text="${lineItem.product.price}">16000</span>원 <br>
 							수량: <span th:text="${lineItem.quantity}">1</span>개 <br>
-							합계: <span th:text="${lineItem.unitPrice}">16000</span>원
+							합계: <span th:text="${lineItem.unitPrice * lineItem.quantity}">16000</span>원
 						</dd>
 					</dl>
 				</td>
 			</tr>
 		</table>
-		<form action="#" th:action="@{targetUrl}" th:object="${orderForm}" method="post">
-			<span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span>
+		<form action="#" th:action="@{/order/newOrderSubmitted(chkbox=${productIdArray})}" method="post" th:object="${orderForm}">
+			<!-- <span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span> -->
 			<div class= "division">
 				<div class="left">
 					<div class="formWrap">
@@ -35,24 +45,19 @@
 						<div class="formRow">
 							<div class="formCol head">이름</div>
 							<div class="formCol body">
-								<input type="text" class="input default" th:field="*{userName}" />
+								<input type="text" class="input default" th:field="*{order.userName}" />
 							</div>
 						</div>
 						<div class="formRow">
 							<div class="formCol head">휴대폰</div>
 							<div class="formCol body">
-								<input type="text" class="input default" th:field="*{phone}" />
+								<input type="text" class="input default" th:field="*{order.phoneNumber}" />
 							</div>
-						</div>
-						<div class="formRow">
-							<div class="formCol head">이메일</div>
-							<div class="formCol body">
-								<input type="text" class="input default" th:field="*{email}" /></div>
 						</div>
 						<div class="formRow">
 							<div class="formCol head">주소</div>
 							<div class="formCol body">
-								<input type="text" class="input default" th:field="*{billAddress}" />
+								<input type="text" class="input default" th:field="*{order.shipAddress}" />
 							</div>
 						</div>
 					</div>
@@ -62,24 +67,24 @@
 						<div class="formRow">
 							<div class="formCol head">카드 타입</div>
 							<div class="formCol body">
-								<span th:each="err:${#fields.errors('cartType')}" th:text="${err}"></span>
-								<select class="input default" th:field="{cardType}">
-									<option th:each="ty:${creditCardTypes}" th:value="${ty}" th:text="#{${ty}}">Visa</option>
+								<!-- <span th:each="err:${#fields.errors('orderForm.order.cardType')}" th:text="${err}"></span> -->
+								<select class="input default" th:field="*{order.cardType}">
+									<option th:each="ty:${creditCardTypes}" th:value="${ty}" th:text="${ty}">Visa</option>
 								</select>
 							</div>
 						</div>
 						<div class="formRow">
 							<div class="formCol head">카드 번호</div>
 							<div class="formCol body">
-								<span th:each="err:${#fields.errors('creditCard')}" th:text="${err}"></span>
-								<input type="text" class="input default" th:field="*{creditCard}" value="카드번호" />
+								<!-- <span th:each="err:${#fields.errors('orderForm.order.creditCard')}" th:text="${err}"></span> -->
+								<input type="text" class="input default" th:field="*{order.creditCard}" placeholder="9999-9999-9999-9999" />
 							</div>
 						</div>
 						<div class="formRow">
 							<div class="formCol head">유호기간 (MM/YY)</div>
 							<div class="formCol body">
-								<span th:each="err:${#fields.errors('expiryDate')}" th:text="${err}"></span>
-								<input type="text" class="input default" th:field="*{expiryDadte}" value="09/22" />
+								<!-- <span th:each="err:${#fields.errors('orderForm.order.expiryDate')}" th:text="${err}"></span> -->
+								<input type="text" class="input default" th:field="*{order.expiryDate}" placeholder="11/24" />
 							</div>
 						</div>
 					</div>
@@ -91,12 +96,12 @@
 							<tr>
 								<th colspan="2">전체주문금액</th>
 							</tr>
-							<tr>
+<!-- 							<tr>
 								<td> 주문 상품 수 </td>
 								<td class="txtRight">
 									<span class="quantity" id="quantity" th:text="${order.quantity}">1</span> 개
 								</td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td> 배송비 </td>
 								<td class="txtRight">
@@ -106,20 +111,20 @@
 							<tr>
 								<td> 총 상품 금액 </td>
 								<td class="txtRight">
-									<span th:text="${order.totalPrice}">16000</span> 원
+									<span th:text="*{order.totalPrice}">16000</span> 원
 								</td>
 							</tr>
 							<tr class="finalPrice">
 								<td> <b>결제 예정 금액</b> </td>
 								<td class="txtRight">
-									<span class="payAmount" id="payAmount" th:text="${order.totalPrice} + 3000">19000</span> 원
+									<span class="payAmount" id="payAmount" th:text="*{order.totalPrice + 3000}">19000</span> 원
 								</td>
 							</tr>
 						</tbody>
 					</table>
 					<div>
-						<a href="" class="button">결제하기</a>
-						<a href="" class="button">취소하기</a>
+						<button type="submit" class="gButton">결제하기</button>
+						<a href="javascript:void(0)" class="button" th:href="@{/order/orderReset}">취소하기</a>
 					</div>
 				</div>
 			</div>

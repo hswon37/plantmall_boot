@@ -49,7 +49,7 @@
 	    	phone = #{phone},
 	    	zipcode = #{zipcode},
 	    	address = #{address}
-    	WHERE userId =#{userId}
+    	WHERE USER_TABLE.EMAIL =#{email}
     </insert>
 
 </mapper>

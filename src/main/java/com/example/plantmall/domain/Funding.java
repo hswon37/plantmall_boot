@@ -21,6 +21,7 @@ public class Funding {
 	private String title;
 	private Date createAt;
 	private Date updateAt;
+	private String productImg;
 	
 	private List <Product> productList = new ArrayList<Product>();
 	

@@ -9,26 +9,34 @@
 	<div id="top">
 		<ul>
 			<li id="logo"><a href="" th:href="@{/}"><img th:src="@{/images/logoTemp.svg}" width="10%">식몰</a></li>
-			<li id="info"><a href="" th:href="@{/login}">로그인</a></li>
-			<li id="info"><a href="" th:href="@{/signup}">회원가입</a></li>
+			<div th:if="${userSession}">
+				<li id="info"><a href="" th:href="@{/auth}">마이페이지</a></li>	
+				<li id="info"><a href="" th:href="@{/signoff}">로그아웃</a></li>	
+			</div>
+			<div th:unless="${userSession}">	
+				<li id="info"><a href="" th:href="@{/login}">로그인</a></li>
+				<li id="info"><a href="" th:href="@{/signup}">회원가입</a></li>
+			</div>
+
 		</ul>
 		<ul id="nav">
 			<li><a href="" th:href="@{best.jsp}">BEST</a></li>
 			<li>CATEGORY
 				<ul>
 					<li><a href="" th:href="@{/product/list}">전체</a></li>
-					<li><a href="" th:href="@{#}">꽃</a></li>
-					<li><a href="" th:href="@{#}">야생화</a></li>
-					<li><a href="" th:href="@{#}">허브</a></li>
-					<li><a href="" th:href="@{#}">다육</a></li>
-					<li><a href="" th:href="@{#}">나무</a></li>
-					<li><a href="" th:href="@{#}">해조</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c1}">꽃</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c2}">야생화</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c3}">허브</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c4}">다육</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c5}">나무</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c6}">해조</a></li>
+					<li><a href="" th:href="@{/product/list?categoryId=c7}">원예용품</a></li>
 				</ul>
 			</li>
-			<li><a href="" th:href="@{Cart.jsp}">CART</a></li>
+			<li><a href="" th:href="@{/cart/list}">CART</a></li>
 			<li><a href="" th:href="@{OrderList.jsp}">ORDER</a></li>
 			<li><a href="" th:href="@{funding.jsp}">FUNDING</a></li>
-			<li><a href="" th:href="@{search.jsp}">SEARCH</a></li>
+			<li><a href="" th:href="@{/product/search}">SEARCH</a></li>
 		</ul>	
 	</div>
 </body>
