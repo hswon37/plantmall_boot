@@ -93,4 +93,37 @@
 		WHERE PRODUCTID = #{productId} and USERID = #{userId}		  
   </delete>
   
+  <!-- 제품에 리뷰 list도 담겨야됨 -->
+	<resultMap id="ProductAndReviewMap" type="Product">
+		<id column="PRODUCTID" property="productId" />
+		<result column="PRODUCT.USERID" property="userId" />
+		<result column="CATEGORY" property="category"/>
+ 		<result column="pNAME" property="p_name"/>
+ 		<result column="DESCRIPTION" property="description"/>
+ 		<result column="PRICE" property="price"/>
+ 		<result column="PRODUCTIMG" property="productImg" />
+  		<collection property="reviews" ofType="Review">
+    		<id column="REVIEWID" property="reviewId"/>
+    		<result column="PRODUCTID" property="productId"/>
+    		<result column="REVIEW.USERID" property="userId"/>
+    		<result column="ORDERID" property="orderId"/>
+    		<result column="REVIEWTITLE" property="reviewTitle"/>
+    		<result column="REVIEWCONTENT" property="reviewContent"/>
+    		<result column="REVIEWDATE" property="reviewDate"/>
+    	</collection>
+	</resultMap>
+	
+	<select id="getProductAndReviews" resultMap="ProductAndReviewMap">
+		 SELECT
+      		PRODUCT.PRODUCTID,
+      		CATEGORYID,
+      		PRODUCT.USERID,
+      		pNAME as p_name,
+      		DESCRIPTION,
+     		PRICE,
+      		PRODUCTIMG,
+      		REVIEW.REVIEWID, REVIEW.ORDERID, REVIEW.REVIEWTITLE, REVIEW.REVIEWCONTENT, REVIEW.REVIEWDATE, REVIEW.USERID
+    	FROM PRODUCT, REVIEW
+    	WHERE PRODUCT.PRODUCTID = #{productId} AND REVIEW.PRODUCTID= #{productId}
+	</select>
 </mapper>

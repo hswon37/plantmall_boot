@@ -55,5 +55,11 @@ public class MybatisOrderDao implements OrderDao {
     	}
 	}
 
+	@Override
+	public LineItem getLineItem(int orderId, int lineNumber) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return lineItemMapper.getLineItem(orderId, lineNumber);
+	}
+
 	
 }

@@ -1,6 +1,7 @@
 package com.example.plantmall.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,4 +17,6 @@ public class Product implements Serializable {
 	private String description;
 	private int price;
 	private String productImg;
+	//제품에 리뷰 정보 필요
+	private List<Review> reviews;
 }
