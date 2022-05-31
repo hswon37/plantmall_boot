@@ -15,9 +15,11 @@ import lombok.ToString;
 public class Enquiry {
 	private int enquiryId;
 	private String userId;
+	private String userName;
 	private String productId;
 	private String enqContent;
 	private Date enquiryDate;
+	private EnqComm enqComm;
 	
 	public void initEnq(String productId, String userId) {
 		this.productId = productId;

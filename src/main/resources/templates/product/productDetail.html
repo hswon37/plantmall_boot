@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
     <title>식몰</title>
    	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+   	<link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
    	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body onload="init();">
@@ -24,7 +25,7 @@
 			</tr>
 			<tr>
 				<td class="manageTable">판매자</td>
-				<td class="manageTable" th:text="${userName}">황세원</td> <!-- user_table에 있는거 가져오기 -->
+				<td class="manageTable" th:text="${seller}">황세원</td> <!-- user_table에 있는거 가져오기 -->
 			</tr>
 			<tr>
 				<td class="manageTable">가격</td>
@@ -64,15 +65,16 @@
 		<div>
 			<div align="center">
 				<ul>
-					<li class="detailTable"><a class="detailTable" href="" th:href="@{/product/detail?productId=}+${product.productId}">제품 설명</a></li>			
+					<!-- <li class="detailTable"><a class="detailTable" href="#" th:href="@{/product/detail?productId=}+${product.productId}">제품 설명</a></li>	 -->		
+					<li class="detailTable"><a class="detailTable" href="#" th:onclick="|javascript:getBottom('description')|">제품 설명</a></li>	
 					<li class="detailTable">|</li>
-					<li class="detailTable"><a class="detailTable" th:onclick="getReview()">리뷰</a></li>
+					<li class="detailTable"><a class="detailTable" href="#" th:onclick="|javascript:getBottom('review')|">리뷰</a></li>
 					<li class="detailTable">|</li>
-					<li class="detailTable"><a class="detailTable" href="" th:href="@{/}">문의</a></li>
+					<li class="detailTable"><a class="detailTable" href="#" th:onclick="|javascript:getBottom('enquiry')|">문의</a></li>
 				</ul>
 			</div>
 			<hr>
-			<div align="center" th:text="${product.description}"> <!-- 제품 설명 -->
+			<div align="center" class="bottom_description" th:text="${product.description}"> <!-- 제품 설명 -->
 			
 				활용도 높은 식물 찾고 있다면?<br>
 				어느 공간에서나 존재감을 발하는<br>
@@ -92,6 +94,12 @@
 				줄기가 살짝 주름졌을 때 충분히 분무한다.<br>
 				환경 통풍이 잘 되는 곳이 좋으며<br>
 				여름에는 환기로 습도를 조절해 주자.<br>
+			</div>
+			<div class="bottom_review" style="display:none;">
+				<div th:insert="review/IncludeReview.html :: includeReview"></div>
+			</div>
+			<div class="bottom_enquiry" style="display:none;">
+				<div th:insert="enquiry/IncludeEnquiry.html :: includeEnquiry"></div>
 			</div>
 		</div>
 	</div>
@@ -155,8 +163,22 @@
 	   		})
 		}
 		
-		function getReview() {
-			
+		function getBottom(status) {
+			if (status == "description") {
+				$(".bottom_description").show();
+				$(".bottom_review").hide();
+				$(".bottom_enquiry").hide();
+			}
+			else if (status == "review") {
+				$(".bottom_description").hide();
+				$(".bottom_review").show();
+				$(".bottom_enquiry").hide();
+			}
+			else if (status == "enquiry") {
+				$(".bottom_description").hide();
+				$(".bottom_review").hide();
+				$(".bottom_enquiry").show();
+			}
 		}
 	</script>
 </body>

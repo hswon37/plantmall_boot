@@ -17,6 +17,7 @@ import lombok.ToString;
 public class Review implements Serializable {
 	private int reviewId;
 	private String userId;
+	private String userName;
 	private String productId;
 	private int orderId;
 	private int lineNumber;

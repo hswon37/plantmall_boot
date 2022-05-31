@@ -35,5 +35,5 @@ public class User {
 	
 	private List<Review> reviewList = new ArrayList<Review>();
 	private List<Enquiry> enquiryList = new ArrayList<Enquiry>();
-	private List<EnquiryComment> enquiryCommList = new ArrayList<EnquiryComment>();
+	private List<EnqComm> enquiryCommList = new ArrayList<EnqComm>();
 }

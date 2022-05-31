@@ -39,6 +39,7 @@ public class ReviewController {
 			@ModelAttribute("reviewForm") ReviewForm reviewForm, ModelAndView mav) throws ModelAndViewDefiningException
 	{
 		LineItem lineItem = orderService.getLineItem(orderId, lineNumber);
+		
 		reviewForm.getReview().initReview(lineItem.getProductId(), userId, orderId, lineItem);
 		
 		Review review = reviewService.getReview(reviewForm.getReview());

@@ -10,13 +10,18 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.plantmall.service.AuthService;
 import com.example.plantmall.service.ProductService;
+import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Product;
+import com.example.plantmall.domain.Review;
 
 @Controller
 public class ViewProductController {
 	
 	private ProductService productService;
+	@Autowired
+	private AuthService authService;
 	
 	@Autowired
 	public void setProductService(ProductService productService) {
@@ -92,13 +97,39 @@ public class ViewProductController {
 			ModelMap model) throws Exception {
 		Product product = this.productService.getProduct(productId);
 		//String userName = this.~.getUserName(p.userId);	//예상 사용자명 가져오기 코드
-		String userName = "admin";	//임시 userName
+		String seller = "admin";	//임시 userName
 		//Date orderDate = this.~.getOrderDate(p.userId);	//예상 주문일자 가져오기 코드
 		String orderDate = "5월 27일 (금)"; 	//임시 orderDate 
 		
+		// productDetail에서 보일 리뷰 리스트
+		List<Review> list = new ArrayList<Review>();
+		if (productService.getReviewsByProductId(productId) != null) {
+			product.setReviews(productService.getReviewsByProductId(productId));
+			list = product.getReviews();
+			for (int i = 0; i < product.getReviews().size(); i++) {
+				String reviewUserName = authService.getUserById(list.get(i).getUserId()).getUserName();
+				product.getReviews().get(i).setUserName(reviewUserName);
+				System.out.println(product.getReviews().get(i));
+			}
+		}
+		
+		// productDetail에서 보일 문의 리스트
+		List<Enquiry> enquiryList = new ArrayList<Enquiry>();
+		if (productService.getEnquiryListByProductId(productId) != null) {
+			product.setEnquiryList(productService.getEnquiryListByProductId(productId));
+			enquiryList = product.getEnquiryList();
+			for (int i = 0; i < enquiryList.size(); i++) {
+				String enquiryUserName = authService.getUserById(enquiryList.get(i).getUserId()).getUserName();
+				product.getEnquiryList().get(i).setUserName(enquiryUserName);
+				System.out.println(product.getEnquiryList().get(i));
+			}
+		}
+
 		model.put("product",  product);
-		model.put("userName", userName);
+		model.put("seller", seller);
 		model.put("orderDate", orderDate);
+		model.addAttribute("reviewList", list);
+		model.addAttribute("enquiryList", enquiryList);
 		
 		System.out.println(product.getP_name()+" 제품 상세 model -> view 전달");
 		
