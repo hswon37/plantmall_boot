@@ -58,6 +58,7 @@ public class CartController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		// session에 저장된 userId
+
 //		UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		System.out.println(userSession);
