@@ -425,6 +425,9 @@ a.btnUpdate {
 	padding: 25px 8px;
 	margin: 0;
 }
+.enquiryElements {
+	width: 100%;
+}
 .navSideBtn{
 	position: absolute;
 	right: 3px;

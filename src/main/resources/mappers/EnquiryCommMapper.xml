@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.plantmall.dao.mybatis.mapper.EnquiryCommMapper">
+<cache />
+	<select	id="getEnqCommByEuquiryId" resultType="EnqComm">
+		SELECT ENQUIRYCOMMMENTID, ENQUIRYID, USERID, ENQCOMM FROM ENQUIRYCOMMENT WHERE ENQUIRYID = #{enquiryId}
+	</select>
+	
+	<select id="getEnqCommByEnquiryCommId" resultType="EnqComm">
+		SELECT ENQUIRYCOMMENTID, ENQUIRYID, USERID, ENQCOMM FROM ENQUIRYCOMMENT WHERE ENQUIRYCOMMENTID = #{enquiryCommId}
+	</select>
+	
+</mapper>

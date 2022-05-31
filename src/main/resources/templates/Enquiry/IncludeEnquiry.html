@@ -20,65 +20,26 @@
 						<div class="enquiry">
 							<div class="miniTab">
 								<span th:text="${enquiry.userName}">서가람</span>
-								<span th:text="${enquiry.enquiryDate}">2022-04-15</span>
-								<!-- <div class="updateReview" th:if="*${enquiry.userId} && *{enquiryComm} == null">
-									<a href="#" class="updateEnq" th:href="@{/review/UpdateReview}">수정</a>
+								<span th:text="${#dates.format(enquiry.enquiryDate, 'yyyy.MM.dd HH:mm')}">2022-04-15</span>
+								<div class="updateReview" th:if="${#strings.equals(enquiry.userId,'test')} and ${enquiry.enqComm} == null">
+									<a href="#" class="updateEnq" th:href="@{/enquiry/updateEnquiryForm(enquiryId=${enquiry.enquiryId})}">수정</a>
 								</div>
-								<div class="updateReview" th:if="*{userId} ==${#session.getAttribute('sellerId')} && *{enquiryComm} == null">
-									<a href="#" class="updateEnq" th:href="@{/review/UpdateReview}">답변 달기</a>
-								</div> -->
+								<div class="updateReview" th:if="${#strings.equals(seller,'admin')} and ${enquiry.enqComm} == null">
+									<a href="javascript:void(0)" class="updateEnq enqCommentBtn" th:onclick="commentFunction([[${enquiry.enquiryId}]], [[${seller}]])">답변 달기</a>
+								</div>
 							</div>
 							<div class="question">
 								Q
 								<span th:text="${enquiry.enqContent}">문의내역</span>
+								<textarea rows="3" cols="100" class="enqCommentText" th:attr="data-enqNum=${enquiry.enquiryId}" style="border: 1px solid;"></textarea>
 							</div>
-							<div class="answer">
+							<div class="answer" th:if="${enquiry.enqComm} != null">
 								<div class="replyCell">
 									<div class="info">
 										<span th:text="${seller}">판매 회원 이름</span>
 									</div>
 									<div class="replyText">
-										<!-- <span th:text="${enquiryComment.enquiryComm}">답변</span> -->
-									</div>
-								</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr th:remove="all">
-					<td>
-						<div class="enquiry">
-							<div class="miniTab">
-								<span>sdfsd</span>
-								<span>2022-04-15</span>
-							</div>
-							<div class="question">
-								Q
-								내용ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							</div>
-							<div class="answer">
-								<div class="replyCell">
-									<div class="info">
-										판매회원이름이 보영됨
-									</div>
-									<div class="replyText">
-										내용ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+										<span th:text="${enquiry.enqcomm.enqComm}">답변</span>
 									</div>
 								</div>
 							</div>

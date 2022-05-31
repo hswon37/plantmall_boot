@@ -13,16 +13,16 @@
 </head>
 <body onload="MoveFocus();">
 	<div class="enquiryForm">
-		<form name="rForm" action="#" th:action="@{targetUrl}" th:object="${EnquiryForm}" method="post">
-			<span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span>
+		<form name="rForm" action="#" th:action="@{/enquiry/updateEnquirySubmitted}" th:object="${enqForm}" method="post">
+			<!-- <span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span> -->
 			<div class="formWrap">
 				<div class="write_area">
 					<div class="rFormCol reviewBody">
-						<textarea th:field="*{enquiryContent}" rows="20" required>문의 내용</textarea>
+						<textarea th:field="*{enquiry.enqContent}" rows="20" required>문의 내용</textarea>
 					</div>
 				</div>
 				<div>
-					<a href="#" class="button" th:href="@{/review/UpdateEnquiry}" >문의 수정</a>
+					<button type="submit" class="gButton">문의 수정</button>
 				</div>
 			</div>
 		</form>

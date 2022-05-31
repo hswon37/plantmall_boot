@@ -9,6 +9,6 @@ public interface EnquiryService {
 	Enquiry getEnquiry(Enquiry enq);
 	Enquiry getEnquiryByEnquiryId(int enq);
 	void insertEnquiry(Enquiry enq);
-	Enquiry updateEnquiry(Enquiry enq);
+	void updateEnquiry(Enquiry enq);
 	void deleteEnquiry(int enq);
 }

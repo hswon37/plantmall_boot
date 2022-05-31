@@ -41,9 +41,9 @@ public class MybatisEnquiryDao implements EnquiryDao{
 	}
 
 	@Override
-	public Enquiry updateEnquiry(Enquiry enq) throws DataAccessException {
+	public void updateEnquiry(Enquiry enq) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return enqMapper.updateEnquiry(enq);
+		enqMapper.updateEnquiry(enq);
 	}
 
 	@Override
