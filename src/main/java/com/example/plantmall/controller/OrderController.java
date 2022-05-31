@@ -52,10 +52,11 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/newOrder")
-	public ModelAndView initNewOrder(@RequestParam(value="chkbox") String productIdArray,
+	public ModelAndView initNewOrder(@RequestParam(value="chkbox") String productIdArray,HttpSession session,
 			@ModelAttribute("sessionCart") Cart cart,  @ModelAttribute("orderForm") OrderForm orderForm, ModelAndView mav) throws ModelAndViewDefiningException {
-//		User user = (User) request.getSession().getAttribute("user");
-		User user = new User("admin", "admin", "admin", "admin@naver.com", "010-0000-0000", "00000", "경기도");
+		UserSession userSession = (UserSession)session.getAttribute("userSession");
+		User user = userSession.getUser();
+//		User user = new User("admin", "admin", "admin", "admin@naver.com", "010-0000-0000", "00000", "경기도");
 		String[] productId = productIdArray.split(",");
 		
 		if (orderForm.getOrder().getLineItems().size() == 0) {

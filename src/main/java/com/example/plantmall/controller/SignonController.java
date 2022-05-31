@@ -1,6 +1,7 @@
 package com.example.plantmall.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +35,7 @@ public class SignonController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView handleRequest(HttpServletRequest request,
+	public ModelAndView handleRequest(HttpServletRequest request,HttpSession session,
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
@@ -49,6 +50,7 @@ public class SignonController {
 		}else {
 			UserSession userSession = new UserSession(user);
 			model.addAttribute("userSession",userSession);
+			session.setAttribute("userSession", userSession);
 
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);

@@ -55,8 +55,9 @@ public class CartController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		// session에 저장된 userId
-//		String userId = (String) session.getAttribute("userId");
-		String userId = "admin";
+		UserSession userSession = (UserSession)session.getAttribute("userSession");
+		
+		String userId = userSession.getUser().getUserId();
 //		if (userId == null) {
 //			return new ModelAndView("user/login");
 //		}
