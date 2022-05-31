@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+</head>
+<body>
+<div th:insert="~{header :: #top}"></div>
+
+<div th:if="${userForm}">
+	<h2> AUTH UPDATE FORM</h2>
+</div>
+<div th:unless="${userForm}">
+	<h2> SIGNUPFORM</h2>
+</div>
+
+<table style="border-collapse: collapse; width: 50%; height: 126px;" >
+	<form th:action="@{/signup}" th:object="${userForm}" method="post">
+	<tr>
+		<td><label for="userId" >아이디</label></td>
+		<td><input type="text" id="user.userId" th:field="*{user.userId}"/></td>
+	</tr>
+	
+	<tr>
+		<td><label for="pw" >비밀번호</label></td>
+		<td><input type="password" id="user.password" th:field="*{user.password}"/></td>
+	</tr>
+	<tr>
+		<td><label for="userName" >userName</label></td>
+		<td><input type="text" id="user.userName" th:field="*{user.userName}"/></td>
+	</tr>
+	<tr>
+		<td><label for="email" >이메일</label></td>
+		<td> <input type="text" id="user.email" th:field="*{user.email}"/></td>
+	</tr>
+	<tr>
+		<td> <label for="phone" >핸드폰</label></td>
+		<td> <input type="text" id="user.phone" th:field="*{user.phone}"/></td>
+	</tr>
+	<tr>
+		<td> <label for="zipcode" >우편번호</label></td>
+		<td><input type="text" id="user.zipcode" th:field="*{user.zipcode}"/></td>
+	</tr>
+	<tr>
+		<td><label for="address">주소</label></td>
+		<td><input type="text" id="user.address" th:field="*{user.address}"/></td>
+	</tr>
+	
+	<tr>
+	<td></td>
+		<td ><input type="submit" value="로그인"/></td>
+	</tr>
+
+	</form>
+
+</body>
+</html>

@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <title>식몰</title>
 <link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
 </head>
 <body>
-<hr>
+	<div th:insert="~{header :: #top}"></div>
+	<hr>
 	<div class="orderPage">
-		<div class="pageTitle">주문 목록</div>
 		<div class="orderList">
 			<table class="orderElement">
 				<tbody>
@@ -23,17 +24,17 @@
 									<a href="#" th:href="@{/order/orderDetail(orderId=${order.orderId})}">주문 상세보기</a>
 								</span>
 							</div>
-							<div class="orderContents" th:each="lineItem,index : ${order.lineItems}">
+							<div class="orderContents" th:each="lineItem,index : ${order.lineItems}" th:if="${index.first}">
 								<div class="imgBox" th:if="${index.index} < 1">
 									<a href="#" th:href="@{/product(productId=${lineItem.productId})}">
 										<img th:src="@{/static/images/} + ${lineItem.product.productImg}" />
 									</a>
 								</div>
-								<div class="content" th:if="${index.index} < 1">
-									<p th:text="${lineItem.product.p_name}">첫번째 상품</p>
-									<p th:if="${index.size} > 1" th:text="|외 ${index.size - 1}개|">외 1개</p>
+								<div>
+									<p th:if="${index.size} &gt 1" th:text="|${lineItem.product.p_name} 외 ${index.size - 1}개|">첫번째 상품</p>
+									<p th:if="${index.size} == 1"  th:text="|${lineItem.product.p_name}|">첫번째 상품</p>
 									<br><br><br>
-									<span class="itemPrice" th:text="${order.totalPrice}">16000원</span>
+									<span class="itemPrice" th:text="|${order.totalPrice + 3000}원|">16000원</span>
 								</div>
 							</div>
 						</td>

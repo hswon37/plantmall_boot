@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,17 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.example.plantmall.domain.Cart;
 import com.example.plantmall.domain.CartItem;
 import com.example.plantmall.domain.Product;
+import com.example.plantmall.domain.User;
 import com.example.plantmall.service.CartService;
 import com.example.plantmall.service.ProductService;
 
@@ -43,7 +48,7 @@ public class CartController {
 	}
 	
 	@RequestMapping("/list")
-	public ModelAndView getCartItems(HttpSession session, ModelAndView mav) throws Exception {
+	public ModelAndView getCartItems(HttpServletRequest request, HttpSession session, ModelAndView mav) throws Exception {
 		Cart cart = (Cart) session.getAttribute("sessionCart");
 
 		Map<String, CartItem> cartItemMap = new HashMap<String, CartItem>();
@@ -55,11 +60,15 @@ public class CartController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		// session에 저장된 userId
-//		String userId = (String) session.getAttribute("userId");
-		String userId = "admin";
-//		if (userId == null) {
-//			return new ModelAndView("user/login");
-//		}
+//		UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		System.out.println(userSession);
+		User user = userSession.getUser();
+		if (user == null) {
+			return new ModelAndView("auth/loginForm");
+		}
+
+		String userId = user.getUserId();	
 
 		List<CartItem> cartList = cartService.getCartItemList(userId);
 		
@@ -101,17 +110,33 @@ public class CartController {
 		return mav;
 	}
 	
-	@RequestMapping("/addItemToCart")
-	public ModelAndView addItemToCart(@RequestParam("productId") String productId,
-			@ModelAttribute("sessionCart") Cart cart) throws Exception {
+	@RequestMapping(value="/addItemToCart", method= {RequestMethod.POST})
+	@ResponseBody
+	public int addItemToCart(@RequestParam("productId") String productId, @RequestParam("quantity") int quantity,
+			@ModelAttribute("sessionCart") Cart cart, HttpSession session) throws Exception {
+		
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		User user = userSession.getUser();
+		if (user == null) {
+			return -1;
+		}
+		
+		String userId= user.getUserId();
+		System.out.println("\n addItemToCart");
+
+		Product product = productService.getProduct(productId);
+		CartItem cartItem = new CartItem(userId, productId, quantity, product.getPrice(), quantity * product.getPrice(), product);
+		
 		if (cart.containsProductId(productId)) {
-			cart.incrementQuantityByProductId(productId);
+			System.out.println("containsProduct");
+			return 0;
 		}
 		else {
-			Product product = productService.getProduct(productId);
-			cart.addProduct(product);
+			System.out.println("cartItem: " + cartItem);
+			cart.addProduct(cartItem);
+			cartService.insertCartItem(cartItem);
 		}
-		return new ModelAndView("Cart", "cart", cart);
+		return 1;
 	}
 	
 	@RequestMapping("/deleteCartItem")

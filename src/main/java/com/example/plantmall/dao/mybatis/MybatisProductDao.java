@@ -10,14 +10,22 @@ import org.springframework.stereotype.Repository;
 
 import com.example.plantmall.controller.SearchValueCommand;
 import com.example.plantmall.dao.ProductDao;
+import com.example.plantmall.dao.mybatis.mapper.EnquiryMapper;
 import com.example.plantmall.dao.mybatis.mapper.ProductMapper;
+import com.example.plantmall.dao.mybatis.mapper.ReviewMapper;
+import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Product;
+import com.example.plantmall.domain.Review;
 
 @Repository
 public class MybatisProductDao implements ProductDao {
 	@Autowired
 	private ProductMapper productMapper;
-
+	@Autowired
+	private ReviewMapper reviewMapper;
+	@Autowired
+	private EnquiryMapper enquiryMapper;
+	
 	@Override
 	public Product getProduct(String productId) throws DataAccessException {
 	    return productMapper.getProduct(productId);
@@ -91,4 +99,22 @@ public class MybatisProductDao implements ProductDao {
 		productMapper.deleteContentHaveProduct(product);
 	}
 
+	// 제품 리뷰 관련
+	@Override
+	public List<Review> getReviewsByProductId(String productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return reviewMapper.getReviewsByProductId(productId);
+	}
+
+	@Override
+	public Product getProductAndReviewEnquiry(String productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return productMapper.getProductAndReviewEnquiry(productId);
+	}
+
+	@Override
+	public List<Enquiry> getEnquiryListByProductId(String productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return enquiryMapper.getEnquiryListByProductId(productId);
+	}	
 }

@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <title>식몰</title>
 <link rel="stylesheet" href="../static/style/garam.css" type="text/css" >
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
+	<div th:insert="~{header :: #top}"></div>
 	<div class="wishList">
-		<div class="pageTitle">장바구니</div>
 		<script th:inline="javascript">
 			function itemSum() {
 				var str = "";
@@ -48,7 +49,7 @@
 		   		})
 		   	}
 			
-			function deleteByProductId(pId, uId) {
+			function deleteByProductId(pId) {
 				var confirm_val = confirm("정말 삭제하시겠습니까?");
 				 
 				 if(confirm_val) {
@@ -109,7 +110,7 @@
 									</span>
 									<div class="cartItemBox" th:object="${cartItem.product}">
 										<div class="imgBox">
-											<a href="#" th:href="@{/product(productId=${cartItem.productId})}">
+											<a href="#" th:href="@{/product/detail(productId=${cartItem.productId})}">
 											<img th:src="@{/static/images/} + ${cartItem.product.productImg}" /></a>
 										</div>
 										<div class="content">
@@ -170,15 +171,6 @@
 							$("input[class='chkbox']:checked").each(function() {
 								checkArr.push($(this).attr("data-cartNum"));
 							});
- 							/* $.ajax({
-								url: "/order/newOrder",
-								type: "post",
-								data: {chkbox : checkArr},
-								success : function(result){
-									alert("녗ㅊㄷㄴㄴ");
-					    			location.href="/order/OrderForm"
-					    		}
-							});  */
 							location.href="/order/newOrder?chkbox=" + checkArr;
 						});
 					</script>

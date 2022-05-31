@@ -31,4 +31,8 @@ public interface ProductMapper {
 	void deleteProduct(Product product);
 	
 	void deleteContentHaveProduct(Product product);
+
+	// 리뷰를 담기 위한 mapper
+	Product getProductAndReviewEnquiry(String productId);
+	List<Product> searchProductList(String keywords);
 }
