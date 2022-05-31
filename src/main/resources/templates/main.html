@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+    <title>식몰</title>
+   	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+</head>
+<body>
+	<div th:insert="~{header :: #top}"></div>
+	<div align="center">
+		<table>
+			<tr>
+				<td rowspan="3"><img th:src="@{/images/temp.jpg}" width="100%"><a href="" th:href="@{/}">BEST</a></td>
+				<td><img th:src="@{/images/temp.jpg}" width="30%"><a href="" th:href="@{/}">식물</a></td>
+			</tr>
+			<tr>
+				<td><img th:src="@{/images/temp.jpg}" width="30%"><a href="" th:href="@{/product/list?categoryId=c7}">원예용품</a></td>
+			</tr>
+			<tr>
+				<td><img th:src="@{/images/temp.jpg}" width="30%"><a href="" th:href="@{/}">펀딩</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
+

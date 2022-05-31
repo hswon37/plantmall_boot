@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+    <title>식몰</title>
+   	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+</head>
+<body onload="init();">
+	<div th:insert="~{headerAfterLogin :: #top}"></div>
+	<h2>제품 관리 목록
+		<input type="button" value="새 제품 등록" onclick="location.href='/product/registration'">
+	</h2>
+	<div align="center">
+	 	<table class="noLineTable">
+			<!-- 현재: 한 행당 4개씩이 아닌, 한 행에 모든 제품이 출력되는 형태. 4줄씩 나눠서 출력해야하는데 어떻게하죠? -->
+			<!--  이것저것 변수명하고 연결 안돼서 이거 때매 에러남, 추후 다 연결되면 주석 해제하고 확인
+			<tr th:each="product : ${productList.pageList}">
+				<td>
+					<a href="" th:href="@{/product/detail}" name="productId" value="${product.productId}">				
+						<img th:src="${product.img}" style="width:200px">			<!-- 이미지도 jpetstore예제 보면 아예 img태그 자체가 db에 저장되어있음.jpetstore/src/main/resources/db/hsqldb/jpetstore.script -->	
+	<!-- 				<div th:text="${product.name}">제품명</div>
+						<div th:text="${product.price}">가격</div>
+						<div>	
+							<input type="button" value="�닔�젙" onclick="location.href='<c:url value="/plantmall/productModify.do">
+	    						<c:param name="productId" value="${product.productId}"/></c:url>'">
+							<input type="button" value="�궘�젣" onclick="location.href='<c:url value="/plantmall/productDelete.do">
+	    						<c:param name="productId" value="${product.productId}"/></c:url>'">
+						</div>
+					</a>
+					
+				</td>
+			</tr> -->
+			<tr>
+				<td>
+					<img th:src="@{/images/temp.jpg}" style="width:200px">				
+					<div>제품명</div>
+					<div>가격</div>
+					<div>	
+						<input type="button" value="수정" onclick="location.href='/product/modify'">
+						<input type="button" value="삭제" onclick="location.href='/product/delete'">
+					</div>
+				</td>
+				<td>
+					<img th:src="@{/images/temp.jpg}" style="width:200px">				
+					<div>제품명</div>
+					<div>가격</div>
+					<div>	
+						<input type="button" value="수정" onclick="location.href='/product/modify'">
+						<input type="button" value="삭제" onclick="location.href='/product/delete'">
+					</div>
+				</td>
+				<td>
+					<img th:src="@{/images/temp.jpg}" style="width:200px">				
+					<div>제품명</div>
+					<div>가격</div>
+					<div>	
+						<input type="button" value="수정" onclick="location.href='/product/modify'">
+						<input type="button" value="삭제" onclick="location.href='/product/delete'">
+					</div>
+				</td>
+				<td>
+					<img th:src="@{/images/temp.jpg}" style="width:200px">				
+					<div>제품명</div>
+					<div>가격</div>
+					<div>	
+						<input type="button" value="수정" onclick="location.href='/product/modify'">
+						<input type="button" value="삭제" onclick="location.href='/product/delete'">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img th:src="@{/images/temp.jpg}" style="width:200px">				
+					<div>제품명</div>
+					<div>가격</div>
+					<div>	
+						<input type="button" value="수정" onclick="location.href='/product/modify'">
+						<input type="button" value="삭제" onclick="location.href='/product/delete'">
+					</div>
+				</td>
+				<td>
+					<img th:src="@{/images/temp.jpg}" style="width:200px">				
+					<div>제품명</div>
+					<div>가격</div>
+					<div>	
+						<input type="button" value="수정" onclick="location.href='/product/modify'">
+						<input type="button" value="삭제" onclick="location.href='/product/delete'">
+					</div>
+				</td>
+				<td>
+					<img th:src="@{/images/temp.jpg}" style="width:200px">				
+					<div>제품명</div>
+					<div>가격</div>
+					<div>	
+						<input type="button" value="수정" onclick="location.href='/product/modify'">
+						<input type="button" value="삭제" onclick="location.href='/product/delete'">
+					</div>
+				</td>
+				<td>
+					<img th:src="@{/images/temp.jpg}" style="width:200px">				
+					<div>제품명</div>
+					<div>가격</div>
+					<div>	
+						<input type="button" value="수정" onclick="location.href='/product/modify'">
+						<input type="button" value="삭제" onclick="location.href='/product/delete'">
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
+        

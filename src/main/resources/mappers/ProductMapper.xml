@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.plantmall.dao.mybatis.mapper.ProductMapper">
+
+  <cache />
+
+  <select id="getProduct" parameterType="String" resultType="Product">
+    SELECT
+      PRODUCTID,
+      CATEGORYID,
+      USERID,
+      PNAME as p_name,
+      DESCRIPTION,
+      PRICE,
+      PRODUCTIMG
+    FROM PRODUCT
+    WHERE PRODUCTID = #{productId}
+  </select>
+
+  <select id="getProductListByCategory" parameterType="String" resultType="Product">
+    SELECT
+      PRODUCTID,
+      CATEGORYID,
+      USERID,
+      PNAME as p_name,
+      DESCRIPTION,
+      PRICE,
+      PRODUCTIMG
+    FROM PRODUCT
+    WHERE CATEGORYID = #{value}
+  </select>
+
+  <select id="searchProductList" parameterType="com.example.plantmall.controller.SearchValueCommand" resultType="Product">
+    SELECT
+      PRODUCTID,
+      CATEGORYID,
+      USERID,
+      PNAME as p_name,
+      DESCRIPTION,
+      PRICE,
+      PRODUCTIMG
+    FROM PRODUCT
+    <where>
+		<if test="categoryId != null">
+			CATEGORYID = #{categoryId}
+		</if>
+		<if test="keyword != null">
+			AND (PNAME LIKE '%'||#{keyword}||'%'
+			OR DESCRIPTION LIKE '%'||#{keyword}||'%')
+		</if>
+		<if test="lowPrice != null and highPrice != null">
+			AND PRICE BETWEEN #{lowPrice} AND #{highPrice}
+		</if>
+		<if test="lowPrice == null and highPrice != null">
+			AND PRICE BETWEEN 0 AND #{highPrice}
+		</if>
+		<if test="lowPrice != null and highPrice == null">
+			AND PRICE BETWEEN 0 AND #{lowPrice}
+		</if>
+	</where>
+  </select>
+  
+  <select id="getAllProduct" resultType="Product">
+    SELECT
+      PRODUCTID,
+      CATEGORYID,
+      USERID,
+      PNAME as p_name,
+      DESCRIPTION,
+      PRICE,
+      PRODUCTIMG
+    FROM PRODUCT
+  </select>
+  
+  <insert id="insertProduct" parameterType="Product">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT Product_seq.nextval AS id FROM DUAL
+		</selectKey>
+		INSERT INTO PRODUCT (PRODUCTID, CATEGORYID, PNAME, DESCRIPTION, PRICE, PRODUCTIMG, USERID)
+		VALUES (#{productId}, #{categoryId}, #{p_name}, #{description}, #{price}, #{productImg}, #{userId})
+		  
+  </insert>
+  
+  <update id="updateProduct" parameterType="Product">
+		UPDATE PRODUCT 
+		SET CATEGORYID = #{categoryId}, PNAME = #{p_name}, DESCRIPTION = #{description}, PRICE = #{price}, PRODUCTIMG = #{productImg}
+		WHERE PRODUCTID = #{productId} and USERID = #{userId}
+  </update>
+  
+  <delete id="deleteProduct" parameterType="Product">
+		DELETE FROM PRODUCT
+		WHERE PRODUCTID = #{productId} and USERID = #{userId}		  
+  </delete>
+  
+  <!-- 제품에 리뷰 list도 담겨야됨 -->
+	<resultMap id="ProductAndReviewEnquiryMap" type="Product">
+		<id column="PRODUCTID" property="productId" />
+		<result column="PRODUCT.USERID" property="userId" />
+		<result column="CATEGORY" property="category"/>
+ 		<result column="pNAME" property="p_name"/>
+ 		<result column="DESCRIPTION" property="description"/>
+ 		<result column="PRICE" property="price"/>
+ 		<result column="PRODUCTIMG" property="productImg" />
+  		<collection property="reviews" ofType="Review">
+    		<id column="REVIEWID" property="reviewId"/>
+    		<result column="PRODUCTID" property="productId"/>
+    		<result column="REVIEW.USERID" property="userId"/>
+    		<result column="ORDERID" property="orderId"/>
+    		<result column="REVIEWTITLE" property="reviewTitle"/>
+    		<result column="REVIEWCONTENT" property="reviewContent"/>
+    		<result column="REVIEWDATE" property="reviewDate"/>
+    	</collection>
+    	<collection property="enquiryList" ofType="Enquiry">
+    		<id column="ENQUIRYID" property="enquiryId"/>
+    		<result column="PRODUCTID" property="productId"/>
+    		<result column="ENQUIRY.USERID" property="userId"/>
+    		<result column="ENQCONTENT" property="enqContent"/>
+    		<result column="ENQUIRYDATE" property="enquiryDate"/>
+    	</collection>
+	</resultMap>
+	
+	<select id="getProductAndReviewEnquiry" resultMap="ProductAndReviewEnquiryMap">
+		 SELECT
+      		PRODUCT.PRODUCTID,
+      		CATEGORYID,
+      		PRODUCT.USERID,
+      		pNAME as p_name,
+      		DESCRIPTION,
+     		PRICE,
+      		PRODUCTIMG,
+      		REVIEW.REVIEWID, REVIEW.ORDERID, REVIEW.REVIEWTITLE, REVIEW.REVIEWCONTENT, REVIEW.REVIEWDATE, REVIEW.USERID
+    	FROM PRODUCT, REVIEW
+    	WHERE PRODUCT.PRODUCTID = #{productId} AND REVIEW.PRODUCTID= #{productId}
+	</select>
+</mapper>

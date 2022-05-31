@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+</head>
+<body>
+<div th:insert="~{header :: #top}"></div>
+
+<div th:if="${isNewUser}">
+	<h1 style="text-align: center;"><span style="background-color: #339966; color: #333333;">회원 가입을 축하합니다</span></h1>
+</div>
+<div th:unless="${isNewUser}">
+	<h1 style="text-align: center;"><span style="background-color: #339966; color: #333333;">수정되었습니다.</span></h1>
+</div>
+
+<table style="border-collapse: collapse; width: 86.8707%; height: 204px; margin-left: auto; margin-right: auto;" border="1">
+<tbody>
+<tr style="height: 18px;">
+<td style="width: 25%; text-align: center; height: 18px;">ID</td>
+<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.userId}"></td>
+</tr>
+<tr style="height: 18px;">
+<td style="width: 25%; text-align: center; height: 18px;">NAME</td>
+<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.userName}"></td>
+</tr>
+<tr style="height: 18px;">
+<td style="width: 25%; text-align: center; height: 18px;">EMAIL</td>
+<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.email}"></td>
+</tr>
+<tr style="height: 18px;">
+<td style="width: 25%; text-align: center; height: 18px;">PHONE</td>
+<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.phone}"></td>
+</tr>
+<tr style="height: 18px;">
+<td style="width: 25%; text-align: center; height: 18px;">ZIPCODE</td>
+<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.zipcode}"></td>
+</tr>
+<tr style="height: 18px;">
+<td style="width: 25%; text-align: center; height: 18px;">ADDRESS</td>
+<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.address }"></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;"><button> 메인으로</button></p>
+</body>
+</html>

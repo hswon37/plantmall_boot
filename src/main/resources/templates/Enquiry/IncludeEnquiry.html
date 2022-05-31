@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>식몰</title>
+<link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+</head>
+<body>
+<div class="includeEnquiry">
+		<div class="createEnq">
+			<div class="navSideBtn">
+				<a th:href="@{/enquiry/newEnquiry(productId=${productId})}" class="enqButton">문의하기</a>
+			</div>
+		</div>
+		<table class="enquiryElements">
+			<tbody>
+				<tr th:if="${enquiry.numberOfItems} == 0">
+					<td style="text-align:center;" colspan="8">문의 내역이 없습니다.</td>
+				</tr>
+				<tr th:each="enquiry: ${enquiryList}">
+					<td>
+						<div class="enquiry">
+							<div class="miniTab">
+								<span th:text="*{userName}">서가람</span>
+								<span th:text="*{enquiryDate}">2022-04-15</span>
+								<div class="updateReview" th:if="*{userId} ==${#session.getAttribute('userName')} && *{enquiryComm} == null">
+									<a href="#" class="updateEnq" th:href="@{/review/UpdateReview}">수정</a>
+								</div>
+								<div class="updateReview" th:if="*{userId} ==${#session.getAttribute('sellerId')} && *{enquiryComm} == null">
+									<a href="#" class="updateEnq" th:href="@{/review/UpdateReview}">답변 달기</a>
+								</div>
+							</div>
+							<div class="question">
+								Q
+								<span th:text="*{enquiry}">문의내역</span>
+							</div>
+							<div class="answer">
+								<div class="replyCell">
+									<div class="info">
+										<span th:text="${product.userName">판매 회원 이름</span>
+									</div>
+									<div class="replyText">
+										<span th:text="${enquiryComment.enquiryComm}">답변</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr th:remove="all">
+					<td>
+						<div class="enquiry">
+							<div class="miniTab">
+								<span>sdfsd</span>
+								<span>2022-04-15</span>
+							</div>
+							<div class="question">
+								Q
+								내용ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							</div>
+							<div class="answer">
+								<div class="replyCell">
+									<div class="info">
+										판매회원이름이 보영됨
+									</div>
+									<div class="replyText">
+										내용ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+							dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
