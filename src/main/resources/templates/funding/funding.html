@@ -1,45 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
 </head>
 <body>
+<div th:insert="~{header :: #top}"></div>
+
 <div>
 <table style="border-collapse: collapse; width: 100%; height: 126px;" border="1">
 <tbody>
-<tr style="height: 18px;">
-<td style="width: 54.0168%; height: 126px; text-align: center;" rowspan="7">&nbsp;</td>
-<td style="width: 12.6498%; height: 18px; text-align: center;">제품명</td>
-<td style="width: 33.3333%; height: 18px; text-align: center;">&nbsp;</td>
+<tr>
+<td style="width: 54.0168%; height: 50%; text-align: center;" rowspan="7">
+<img th:src="@{/images/}+${product.productImg}" style="width:100%;height:100%;" alt="제품사진">
+</td>
+<td >FUNDING명</td>
+<td th:text="${funding.title}">&nbsp;</td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 12.6498%; height: 18px; text-align: center;">가격</td>
-<td style="width: 33.3333%; height: 18px; text-align: center;">3,771,000원</td>
+<td >PRODUCT명</td>
+<td th:text="${product.p_name}">&nbsp;</td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 12.6498%; height: 18px; text-align: center;">진행률</td>
-<td style="width: 33.3333%; height: 18px; text-align: center;">123%</td>
+<tr>
+<td>가격</td>
+<td th:text="${product.price}">3,771,000원</td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 12.6498%; height: 18px; text-align: center;">일정</td>
-<td style="width: 33.3333%; height: 18px; text-align: center;">22-03-25 ~ 22-04-05</td>
+
+<tr>
+<td>진행률</td>
+<td th:text="${funding.targetQuantity}">123%</td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 12.6498%; height: 18px; text-align: center;">배송</td>
-<td style="width: 33.3333%; height: 18px; text-align: center;">6월 20일(화) 도착 예정/배송비 0원</td>
+
+<tr>
+<td>일정</td>
+<td th:text="${funding.openDate}">22-03-25</td>
+<td th:text="${funding.closeDate}"> 22-04-05</td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 12.6498%; height: 18px; text-align: center;">수량</td>
-<td style="width: 33.3333%; height: 18px; text-align: center;">4개</td>
+<tr >
+<td>배송</td>
+<td th:text="${funding.deliveryDate}">6월 20일(화) 도착 예정/배송비 0원</td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 12.6498%; height: 18px; text-align: center;">총</td>
-<td style="width: 33.3333%; height: 18px; text-align: center;">3,771,000*15,084,000</td>
-</tr>
+<div th:unless="${isSeller}">
+	<tr>
+		<td>수량</td>
+		<td>4개</td>
+	</tr>
+	<tr>
+		<td>총</td>
+		<td>3,771,000*15,084,000</td>
+	</tr>
+</div>
 </tbody>
 </table>
-<p style="text-align: right;"><button>구매하기 </button></p>
+<div th:if="${isSeller}">
+	<p style="text-align: right;"><a th:href="@{/funding/update(fundingId=${funding.fundingId})}">수정하기</a></p>
+	<p style="text-align: right;"><a th:href="@{/funding/delete(fundingId=${funding.fundingId})}">삭제하기</a></p>
+</div>
+
+<div th:unless="${isSeller}">
+	<p style="text-align: right;"><button>구매하기</button></p>
+</div>
+
 <p style="text-align: center;">&nbsp;</p>
 <p style="text-align: center;"><button>QnA </button><button>Review </button><button>community </button></p>
 <p style="text-align: center;">&nbsp;</p>

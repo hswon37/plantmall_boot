@@ -34,4 +34,16 @@ public class FundingServiceImpl implements FundingService{
 		return fundingDao.getMyAllProductList(email);
 	}
 
+	@Override
+	public void updateFunding(Funding funding) {
+		fundingDao.updateFunding(funding);
+		
+	}
+
+	@Override
+	public void deleteFunding(String id) {
+		fundingDao.deleteFunding(id);
+		
+	}
+
 }
