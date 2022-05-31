@@ -35,7 +35,8 @@ public class SignonController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView handleRequest(HttpServletRequest request, HttpSession session,
+	public ModelAndView handleRequest(HttpServletRequest request,HttpSession session,
+
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
@@ -50,8 +51,7 @@ public class SignonController {
 		}else {
 			UserSession userSession = new UserSession(user);
 			model.addAttribute("userSession",userSession);
-			session.setAttribute("userSession", userSession);
-			
+
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 

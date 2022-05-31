@@ -63,10 +63,9 @@ public class AccountController{
 		mav.setViewName(formViewName);
 		
 		if(userSession!=null) {
-			mav.addObject("userForm",new UserForm(
-					authService.getUser(userSession.getUser().getEmail())));
+			mav.addObject("isNew",false);
 		}else {
-			mav.addObject("userForm",new UserForm());
+			mav.addObject("isNew",true);
 		}
 		
 		return mav;

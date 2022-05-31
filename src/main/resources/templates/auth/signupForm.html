@@ -8,10 +8,10 @@
 <body>
 <div th:insert="~{header :: #top}"></div>
 
-<div th:if="${userForm}">
+<div th:unless="${isNew}">
 	<h2> AUTH UPDATE FORM</h2>
 </div>
-<div th:unless="${userForm}">
+<div th:if="${isNew}">
 	<h2> SIGNUPFORM</h2>
 </div>
 
@@ -53,6 +53,6 @@
 	</tr>
 
 	</form>
-
+</table>
 </body>
 </html>
