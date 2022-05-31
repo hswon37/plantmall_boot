@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -101,17 +103,29 @@ public class CartController {
 		return mav;
 	}
 	
-	@RequestMapping("/addItemToCart")
-	public ModelAndView addItemToCart(@RequestParam("productId") String productId,
-			@ModelAttribute("sessionCart") Cart cart) throws Exception {
+	@RequestMapping(value="/addItemToCart", method= {RequestMethod.POST})
+	@ResponseBody
+	public int addItemToCart(@RequestParam("productId") String productId, @RequestParam("quantity") int quantity,
+			@ModelAttribute("sessionCart") Cart cart, HttpSession session) throws Exception {
+		//String userId = (String) session.getAttribute("userId");
+		String userId= "admin";
+		System.out.println("\n addItemToCart");
+//		if (userId == null) {
+//			return new ModelAndView("user/login");
+//		}
+		Product product = productService.getProduct(productId);
+		CartItem cartItem = new CartItem(userId, productId, quantity, product.getPrice(), quantity * product.getPrice(), product);
+		
 		if (cart.containsProductId(productId)) {
-			cart.incrementQuantityByProductId(productId);
+			System.out.println("containsProduct");
+			return 0;
 		}
 		else {
-			Product product = productService.getProduct(productId);
-			cart.addProduct(product);
+			System.out.println("cartItem: " + cartItem);
+			cart.addProduct(cartItem);
+			cartService.insertCartItem(cartItem);
 		}
-		return new ModelAndView("Cart", "cart", cart);
+		return 1;
 	}
 	
 	@RequestMapping("/deleteCartItem")

@@ -5,10 +5,13 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
 @Getter @Setter
+@ToString
 public class Product implements Serializable {
 	private String productId;
 	private String categoryId;

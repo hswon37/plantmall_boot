@@ -35,15 +35,16 @@ public class Cart implements Serializable {
 		return itemMap.containsKey(productId);
 	}
 
-	public void addProduct(Product product) {
-		CartItem cartItem = itemMap.get(product.getProductId());
-		if (cartItem == null) {
-			cartItem = new CartItem();
-			cartItem.setQuantity(0);
-			itemMap.put(product.getProductId(), cartItem);
-			itemList.getSource().add(cartItem);
+	public void addProduct(CartItem cartItem) {
+		System.out.println("\n Cart.addProduct()");
+		CartItem c = itemMap.get(cartItem.getProductId());
+		if (c == null) {
+			System.out.println("c == null");
+			c = cartItem;
+			System.out.println("addProduct - CartItem c: " + c);
+			itemMap.put(c.getProductId(), c);
+			itemList.getSource().add(c);
 		}
-		cartItem.incrementQuantity();
 	}
 
 	public Product removeCartItemById(String produtId) {
@@ -56,10 +57,10 @@ public class Cart implements Serializable {
 		}
 	}
 	
-	public void incrementQuantityByProductId(String productId) {
-	    CartItem cartItem = itemMap.get(productId);
-	    cartItem.incrementQuantity();
-	}
+//	public void incrementQuantityByProductId(String productId) {
+//	    CartItem cartItem = itemMap.get(productId);
+//	    cartItem.incrementQuantity();
+//	}
 
 	public void setQuantityByProductId(String productId, int quantity) {
 	    CartItem cartItem = itemMap.get(productId);
