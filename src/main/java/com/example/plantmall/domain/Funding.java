@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,15 +16,18 @@ import lombok.Setter;
 public class Funding {
 
 	private String fundingId;
-	private String categoryId;
-	private Date calendar;
 	private String productInformation;
 	private String productId;
 	private String title;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	private String productImg;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date openDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date closeDate;
 	
-	private List <Product> productList = new ArrayList<Product>();
 	
 }

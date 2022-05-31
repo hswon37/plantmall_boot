@@ -26,15 +26,14 @@
     <insert id="insertFunding" parameterType="Funding">
     	INSERT INTO FUNDING
     	(FUNDINGID,
-	    	CATEGORYID,
 	    	PRODUCTID,
-	    	CALENDAR,
 	    	PRODUCTINFORMATION,
 	    	TITLE,
-	    	CREATE_AT,
-	    	UPDATE_AT)
+	    	OPENDATE,
+	    	CLOSEDATE
+	    	)
     	VALUES
-    	(#{fundingId},#{categoryId},#{productId},#{calendar},#{productInformation},#{title},#{createAt},#{updateAt})
+    	(#{fundingId},#{productId},#{productInformation},#{title},#{openDate},#{closeDate})
     	<selectKey keyProperty="fundingId" resultType="String" order="BEFORE">
 			SELECT FUNDING_SEQ.NEXTVAL AS fundingId FROM DUAL
 		</selectKey>

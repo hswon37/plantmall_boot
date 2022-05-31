@@ -37,7 +37,6 @@ public class FundingController {
 	
 	@ModelAttribute("fundingForm")
 	public FundingForm formBackingObject() throws Exception{
-			
 		return new FundingForm();
 	}
 	
@@ -49,10 +48,27 @@ public class FundingController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(userSession!=null) {
-			List<Product> list = fundingService.getMyAllProductList(userSession.getUser().getUserId());
+			List<Product> list = productService.getProductListforUser(userSession.getUser().getUserId());
 			mav.setViewName(formViewName);
 			mav.addObject("fundingForm",new FundingForm());
 			mav.addObject("productList",list);
+		}else {
+			mav.setViewName("/auth/error");
+			mav.addObject("errorMessage", "로그인을 해주세요.");
+		}
+		return mav;
+	}
+	
+	@RequestMapping(path="/create",method=RequestMethod.POST)
+	public ModelAndView submitted(HttpServletRequest request, @ModelAttribute("fundingForm") FundingForm fundingForm) {
+		UserSession userSession=
+				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(userSession!=null) {
+			fundingService.insertFunding(fundingForm.getFunding());
+			mav.setViewName("funding/fundingList");
 		}else {
 			mav.setViewName("/auth/error");
 			mav.addObject("errorMessage", "로그인을 해주세요.");
@@ -72,6 +88,7 @@ public class FundingController {
 		return mav;
 		
 	}
+	
 	
 
 	
