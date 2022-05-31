@@ -94,7 +94,7 @@
   </delete>
   
   <!-- 제품에 리뷰 list도 담겨야됨 -->
-	<resultMap id="ProductAndReviewMap" type="Product">
+	<resultMap id="ProductAndReviewEnquiryMap" type="Product">
 		<id column="PRODUCTID" property="productId" />
 		<result column="PRODUCT.USERID" property="userId" />
 		<result column="CATEGORY" property="category"/>
@@ -111,9 +111,16 @@
     		<result column="REVIEWCONTENT" property="reviewContent"/>
     		<result column="REVIEWDATE" property="reviewDate"/>
     	</collection>
+    	<collection property="enquiryList" ofType="Enquiry">
+    		<id column="ENQUIRYID" property="enquiryId"/>
+    		<result column="PRODUCTID" property="productId"/>
+    		<result column="ENQUIRY.USERID" property="userId"/>
+    		<result column="ENQCONTENT" property="enqContent"/>
+    		<result column="ENQUIRYDATE" property="enquiryDate"/>
+    	</collection>
 	</resultMap>
 	
-	<select id="getProductAndReviews" resultMap="ProductAndReviewMap">
+	<select id="getProductAndReviewEnquiry" resultMap="ProductAndReviewEnquiryMap">
 		 SELECT
       		PRODUCT.PRODUCTID,
       		CATEGORYID,

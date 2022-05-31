@@ -18,12 +18,12 @@
 			<div class="formWrap">
 				<div class="write_area">
 					<div class="rFormCol reviewBody">
-						<textarea th:field="*{enquiryContent}" rows="20" placeholder="문의 내용" required></textarea>
+						<textarea th:field="*{enquiry.enqContent}" rows="20" placeholder="문의 내용" required></textarea>
 					</div>
 				</div>
 				<div>
-					<a th:href="@{/product/productDetail(productId=${productId})">문의 작성 취소</a>
-					<a href="#" class="button" th:href="@{/review/ReviewForm}">문의 작성</a>
+					<a class="button" th:href="@{/product/productDetail(productId=${enqForm.enquiry.productId})">뒤로가기</a>
+					<button type="submit" class="gButton">문의 작성</button>
 				</div>
 			</div>
 		</form>

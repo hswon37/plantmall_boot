@@ -16,7 +16,6 @@ public class Enquiry {
 	private int enquiryId;
 	private String userId;
 	private String productId;
-	private String enqTitle;
 	private String enqContent;
 	private Date enquiryDate;
 	
@@ -24,7 +23,6 @@ public class Enquiry {
 		this.productId = productId;
 		this.userId = userId;
 		
-		enqTitle="";
 		enqContent="";
 		enquiryDate = new Date();
 	}
@@ -33,7 +31,6 @@ public class Enquiry {
 		this.enquiryId = enq.getEnquiryId();
 		this.userId = enq.getUserId();
 		this.productId = enq.getProductId();
-		this.enqTitle = enq.getEnqTitle();
 		this.enqContent = enq.getEnqContent();
 		this.enquiryDate = enq.getEnquiryDate();
 	}

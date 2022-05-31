@@ -22,4 +22,5 @@ public class Product implements Serializable {
 	private String productImg;
 	//제품에 리뷰 정보 필요
 	private List<Review> reviews;
+	private List<Enquiry> enquiryList;
 }

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.plantmall.dao.CategoryDao;
 import com.example.plantmall.dao.ProductDao;
 import com.example.plantmall.domain.Category;
+import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Product;
 import com.example.plantmall.domain.Review;
 import com.example.plantmall.controller.SearchValueCommand;
@@ -50,11 +51,15 @@ public class ProductService {
 	}
 
 	// 제품 + 리뷰리스트
-	public Product getProductAndReviewList(String productId) {
-		return productDao.getProductAndReviewList(productId);
+	public Product getProductAndReviewEnquiry(String productId) {
+		return productDao.getProductAndReviewEnquiry(productId);
 	}
 		
 	public List<Review> getReviewsByProductId(String productId) {
 		return productDao.getReviewsByProductId(productId);
+	}
+	
+	public List<Enquiry> getEnquiryListByProductId(String productId) {
+		return productDao.getEnquiryListByProductId(productId);
 	}
 }

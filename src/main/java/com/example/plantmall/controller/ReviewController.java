@@ -29,7 +29,7 @@ public class ReviewController {
 	private OrderService orderService;
 	
 	@ModelAttribute("reviewForm")
-	public ReviewForm createOrderForm() {
+	public ReviewForm createReviewForm() {
 		System.out.println("@ModelAttribute(reviewForm) work\n");
 		return new ReviewForm();
 	}
@@ -61,7 +61,7 @@ public class ReviewController {
 		System.out.println("\n /newReviewSubmitted");
 		if (result.hasErrors()) {
 			System.out.println("hasErrore()\n");
-			mav.setViewName("review/reviewForm");
+			mav.setViewName("review/ReviewForm");
 			return mav;
 		}
 		reviewService.insertReview(reviewForm.getReview());
