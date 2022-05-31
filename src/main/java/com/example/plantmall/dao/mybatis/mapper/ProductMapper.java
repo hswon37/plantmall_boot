@@ -12,6 +12,8 @@ public interface ProductMapper {
 
 	Product getProduct(String productId);
 	
+	List<Product> getProductHaveLineItem(String productId);
+	
 	List<Product> getProductListByCategory(String categoryId);
 	
 	List<Product> searchProductList(SearchValueCommand svc);
@@ -19,10 +21,14 @@ public interface ProductMapper {
 	List<Product> showProductList(String productId);
 	
 	List<Product> getAllProduct();
-
+	
+	List<Product> getProductListforUser(String userId);
+	
 	void insertProduct(Product product);
 	
 	void updateProduct(Product product);
-	
+
 	void deleteProduct(Product product);
+	
+	void deleteContentHaveProduct(Product product);
 }

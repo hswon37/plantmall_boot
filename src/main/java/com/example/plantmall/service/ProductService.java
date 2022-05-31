@@ -1,52 +1,38 @@
 package com.example.plantmall.service;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import com.example.plantmall.dao.CategoryDao;
-import com.example.plantmall.dao.ProductDao;
+
 import com.example.plantmall.domain.Category;
 import com.example.plantmall.domain.Product;
 
 import com.example.plantmall.controller.SearchValueCommand;
-//import com.example.plantmall.domain.User;
 
-@Service
-@Transactional
-public class ProductService {
-	@Autowired   
-	private CategoryDao categoryDao;	
+public interface ProductService {
 
-	@Autowired  
-	private ProductDao productDao;
+	public Product getProduct(String productId);
 	
-	public Product getProduct(String productId) {
-		return productDao.getProduct(productId);
-	}
+	public List<Product> getProductHaveLineItem(String productId);
 	
-	public Category getCategory(String categoryId) {
-		return categoryDao.getCategory(categoryId);
-	}
+	public Category getCategory(String categoryId);
 	
-	public List<Category> getCategoryList() {
-		return categoryDao.getCategoryList();
-	}
+	public List<Category> getCategoryList();
 
-	public List<Product> getProductListByCategory(String categoryId) {
-		return productDao.getProductListByCategory(categoryId);
-	}
+	public List<Product> getProductListByCategory(String categoryId);
+	
+	public List<Product> getAllProduct();
+	
+	public List<Product> searchProductList(SearchValueCommand svc);
+	
+	public List<Product> showProductList(String productId);
+	
+	public List<Product> getProductListforUser(String userId);
 
-	public List<Product> getAllProduct() {
-		return productDao.getAllProduct();
-	}
+	public void insertProduct(Product product);
 	
-	public List<Product> searchProductList(SearchValueCommand svc) {
-		return productDao.searchProductList(svc);
-	}
+	public void updateProduct(Product product);
 	
-	public List<Product> showProductList(String productId){
-		return productDao.showProductList(productId);
-	}
+	public void deleteProduct(Product product);
+
+	public void deleteContentHaveProduct(Product product);
 
 }

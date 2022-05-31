@@ -11,6 +11,8 @@ public interface ProductDao {
 
 	Product getProduct(String productId) throws DataAccessException;
 
+	List<Product> getProductHaveLineItem(String productId) throws DataAccessException;
+
 	List<Product> getProductListByCategory(String categoryId) throws DataAccessException;
 
 	List<Product> searchProductList(SearchValueCommand svc) throws DataAccessException;
@@ -19,9 +21,13 @@ public interface ProductDao {
 
 	List<Product> getAllProduct() throws DataAccessException;
 
+	List<Product> getProductListforUser(String userId);
+	
 	void insertProduct(Product product) throws DataAccessException;
 	
 	void updateProduct(Product product) throws DataAccessException;
-	
+
 	void deleteProduct(Product product) throws DataAccessException;
+
+	void deleteContentHaveProduct(Product product) throws DataAccessException;
 }

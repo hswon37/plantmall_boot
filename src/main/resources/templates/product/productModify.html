@@ -11,40 +11,36 @@
 	<h2>제품 수정</h2>
 	<div>
 	<form id="editForm" method="post">
+	 	<input type="hidden" name="productId" th:value="${product.productId}">
+	 	<input type="hidden" name="userId" th:value="${product.userId}">
 	 	<table class="lineTable">
 			<tr>
 				<td class="manageTable" rowspan="6" style="border-bottom: none; border:1px solid;">
-					<img th:src="@{/images/temp.jpg}" style="width:200px">	
-					<input type="file" id="image" name="image">							
+					<input type="file" name="productImg" th:value="${product.productImg}">				
 				</td>
 				<td class="manageTable">제품명</td>
-				<td class="manageTable"><input type="text" id="name" name="name"></td>
+				<td class="manageTable"><input type="text" name="p_name" th:value="${product.p_name}"></td>
 			</tr>
 			<tr>
 				<td class="manageTable">가격</td>
-				<td class="manageTable"><input type="text" id="price" name="price">원</td>
+				<td class="manageTable"><input type="text" name="price" th:value="${product.price}">원</td>
 			</tr>
 			<tr>
 				<td class="manageTable">카테고리</td>
 				<td class="manageTable">
-					<select id="category" name="category">
-						<option value="꽃">꽃</option>
-						<option value="야생화">야생화</option>
-						<option value="허브">허브</option>
-						<option value="나무">나무</option>
-						<option value="다육">다육</option>
-						<option value="해조">해조</option>
+					<select name="categoryId">
+						<option value="">카테고리 선택</option>
+						<option th:each="val : ${categoryList}"
+									th:value="${val?.categoryId}"
+									th:utext="${val?.c_name}"
+									th:selected="${product.categoryId.equals(val?.categoryId)}">카테고리</option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td class="manageTable">수량</td>
-				<td class="manageTable"><input type="text" id="quantity" name="quantity">개</td>
-			</tr>
-			<tr>
 				<td class="manageTable" style="border-bottom: none">제품 설명</td>
 				<td class="manageTable" style="border-bottom: none">
-					<textarea cols="50" rows="10" placeholder="제품의 상세 설명을 작성해주세요" id="description" name="description"></textarea>
+					<textarea cols="50" rows="10" placeholder="제품의 상세 설명을 작성해주세요" th:text="${product.description}" name="description"></textarea>
 				</td>
 			
 			</tr>
@@ -52,44 +48,59 @@
 				<td class="manageTable" style="border-bottom: none"></td>
 				<td class="manageTable" style="border-bottom: none"></td>
 				<td class="manageTable" style="border-bottom: none">
-					<input type="button" value="수정" onclick="alert('해당 제품을 수정 하시겠습니까?')" id="editBtn">
-					<input type="button" value="삭제" onclick="alert('해당 제품을 삭제 하시겠습니까?')" id="deleteBtn">
+					<input type="button" value="수정" id="modal_open_editBtn">
+					<input type="button" value="삭제" id="modal_open_deleteBtn">
 				</td>
 			</tr>
 		</table>
 		</form>
 	</div>
-	<script>
-		$(document).ready(function(){
-			$("#editBtn").click(function(){
-				var productName = $("#name").val();
-				var productPrice = $("#price").val();
-				var productDesc = $("#description").val();
-				var productPhoto = $("#image").val();
-				
-				if(productName == "") {
-					alert("상품명을 입력해주세요");
-					productName.foucs();
-				} else if (productPrice == "") {
-					alert("상품 가격을 입력해주세요");
-					productPrice.focus();
-				} else if (productDesc == "") {
-					alert("상품 설명을 입력해주세요");
-					productDesc.focus();
-				} /* else if (productPhoto == "") {
-					alert("상품 사진을 입력해주세요");
-					productPhoto.focus();
-				} */
-				document.editForm.action = "${path}/shop/product/update.do";
-				document.editForm.submit();
-			});
-			$("#deleteBtn").click(function(){
-				if(confirm("상품을 삭제하시겠습니까?")){
-					document.editForm.action = "${path}/shop/product/delete.do";
-					document.editForm.submit();
-				}
-			});
-		});
+	<div id="modal1">
+		<div class="modal_content">
+	        <h2>Alert</h2>
+	        <p>해당 제품을 수정하시겠습니까?</p>
+			<input type="submit" value="OK" id="modal_ok_editBtn">
+			<input type="button" value="Cancel" id="modal_cancel_editBtn">
+		</div>
+		<div class="modal_layer"></div>
+	</div>
+	<div id="modal2">
+		<div class="modal_content">
+	        <h2>Alert</h2>
+	        <p>해당 제품을 삭제하시겠습니까?</p>
+			<input type="submit" value="OK" id="modal_ok_deleteBtn">
+			<input type="button" value="Cancel" id="modal_cancel_deleteBtn">
+		</div>
+		<div class="modal_layer"></div>
+	</div>
+	<script th:inline="javascript">
+		/* 수정 버튼 클릭 */
+    	document.getElementById("modal_open_editBtn").onclick = function() {
+        	document.getElementById("modal1").style.display="block";
+    	}
+   
+    	document.getElementById("modal_ok_editBtn").onclick = function() {
+	        document.getElementById("modal1").style.display="none";
+			editForm.action="/product/modifyResult";
+			editForm.submit();
+	    }
+   		document.getElementById("modal_cancel_editBtn").onclick = function() {
+	        document.getElementById("modal1").style.display="none";
+	    }
+	
+		/* 삭제 버튼 클릭 */
+		document.getElementById("modal_open_deleteBtn").onclick = function() {
+        	document.getElementById("modal2").style.display="block";
+    	}
+   
+    	document.getElementById("modal_ok_deleteBtn").onclick = function() {
+	        document.getElementById("modal2").style.display="none";
+			editForm.action="/product/deleteResult";
+			editForm.submit();
+	    }
+   		document.getElementById("modal_cancel_deleteBtn").onclick = function() {
+	        document.getElementById("modal2").style.display="none";
+	    }   
 	</script>
 </body>
 </html>

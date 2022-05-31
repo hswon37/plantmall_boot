@@ -22,6 +22,11 @@ public class MybatisProductDao implements ProductDao {
 	public Product getProduct(String productId) throws DataAccessException {
 	    return productMapper.getProduct(productId);
 	}
+
+	@Override
+	public List<Product> getProductHaveLineItem(String productId) throws DataAccessException {
+	    return productMapper.getProductHaveLineItem(productId);
+	}
 	
 	@Override
 	public List<Product> getProductListByCategory(String categoryId) 
@@ -60,6 +65,11 @@ public class MybatisProductDao implements ProductDao {
 	public List<Product> getAllProduct(){
 		return productMapper.getAllProduct();
 	}
+	
+	@Override
+	public List<Product> getProductListforUser(String userId){
+		return productMapper.getProductListforUser(userId);
+	}
 
 	@Override
 	public void insertProduct(Product product) throws DataAccessException{
@@ -74,6 +84,11 @@ public class MybatisProductDao implements ProductDao {
 	@Override
 	public void deleteProduct(Product product) throws DataAccessException{
 		productMapper.deleteProduct(product);
+	}
+
+	@Override
+	public void deleteContentHaveProduct(Product product) throws DataAccessException{
+		productMapper.deleteContentHaveProduct(product);
 	}
 
 }
