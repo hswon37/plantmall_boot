@@ -39,9 +39,9 @@ public class EnquiryServiceImpl implements EnquiryService {
 	}
 
 	@Override
-	public Enquiry updateEnquiry(Enquiry enq) {
+	public void updateEnquiry(Enquiry enq) {
 		// TODO Auto-generated method stub
-		return enqDao.updateEnquiry(enq);
+		enqDao.updateEnquiry(enq);
 	}
 
 	@Override

@@ -180,6 +180,28 @@
 				$(".bottom_enquiry").show();
 			}
 		}
+		
+		function commentFunction(enqId, seller) {
+			$(".enqCommentText").each(function() {
+				if ($(this).attr(data-enqNum) == enqId) {
+					var text = $(this).val();
+					alert(text);
+					$.ajax({
+						type: "post",
+						url: "/enquiry/insertComment",
+						data: {
+							enquiryId: enqId,
+							comment: text,
+							seller: seller
+						},
+						success: function() {
+							alert("success");
+							location.reload();
+						}
+					})
+				}
+			});
+		}
 	</script>
 </body>
 </html>

@@ -11,6 +11,6 @@ public interface EnquiryDao {
 	Enquiry getEnquiry(Enquiry enq) throws DataAccessException;
 	Enquiry getEnquiryByEnquiryId(int enq) throws DataAccessException;
 	void insertEnquiry(Enquiry enq) throws DataAccessException;
-	Enquiry updateEnquiry(Enquiry enq) throws DataAccessException;
+	void updateEnquiry(Enquiry enq) throws DataAccessException;
 	void deleteEnquiry(int enq) throws DataAccessException;
 }

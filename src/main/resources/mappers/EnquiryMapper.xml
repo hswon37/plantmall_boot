@@ -15,14 +15,14 @@
 		WHERE PRODUCTID = #{productId} ORDER BY ENQUIRYDATE DESC
 	</select>
 
-	<select resultType="Enquiry" id="getEnquiryByReviewId">
+	<select resultType="Enquiry" id="getEnquiryByEnquiryId">
 		SELECT ENQUIRYID, USERID, PRODUCTID, ENQCONTENT, ENQUIRYDATE
 		FROM ENQUIRY
 		WHERE ENQUIRYID = #{enquiryId}
 	</select>
 
 	<insert id="insertEnquiry" parameterType="Enquiry">
-		INSERT INTO ENQUIRYI
+		INSERT INTO ENQUIRY
 		VALUES (#{enquiryId}, #{userId}, #{productId}, #{enqContent}, #{enquiryDate})
 		<selectKey keyProperty="enquiryId" resultType="int" order="BEFORE">
 			SELECT ENQ_SEQ.NEXTVAL AS ENQUIRYID FROM DUAL

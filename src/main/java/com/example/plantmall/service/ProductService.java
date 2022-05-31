@@ -3,9 +3,7 @@ package com.example.plantmall.service;
 import java.util.List;
 
 import com.example.plantmall.domain.Category;
-import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Product;
-import com.example.plantmall.domain.Review;
 import com.example.plantmall.controller.SearchValueCommand;
 
 public interface ProductService {
@@ -35,12 +33,5 @@ public interface ProductService {
 	public void deleteProduct(Product product);
 
 	public void deleteContentHaveProduct(Product product);
-
-	// 제품 + 리뷰리스트
-	public Product getProductAndReviewEnquiry(String productId);
-		
-	public List<Review> getReviewsByProductId(String productId);
-	
-	public List<Enquiry> getEnquiryListByProductId(String productId);
 
 }

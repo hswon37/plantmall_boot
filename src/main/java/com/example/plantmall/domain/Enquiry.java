@@ -1,5 +1,6 @@
 package com.example.plantmall.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -8,11 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@SuppressWarnings("serial")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Enquiry {
+public class Enquiry implements Serializable {
 	private int enquiryId;
 	private String userId;
 	private String userName;
@@ -27,6 +29,7 @@ public class Enquiry {
 		
 		enqContent="";
 		enquiryDate = new Date();
+		enqComm = null;
 	}
 
 	public void initEnq(Enquiry enq) {
@@ -35,6 +38,7 @@ public class Enquiry {
 		this.productId = enq.getProductId();
 		this.enqContent = enq.getEnqContent();
 		this.enquiryDate = enq.getEnquiryDate();
+		this.enqComm = enq.getEnqComm();
 	}
 
 	

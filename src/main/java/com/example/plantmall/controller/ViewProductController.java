@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.plantmall.service.AuthService;
+import com.example.plantmall.service.EnquiryService;
 import com.example.plantmall.service.ProductService;
+import com.example.plantmall.service.ReviewService;
 import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Product;
 import com.example.plantmall.domain.Review;
@@ -22,6 +24,10 @@ public class ViewProductController {
 	private ProductService productService;
 	@Autowired
 	private AuthService authService;
+	@Autowired
+	private ReviewService reviewService;
+	@Autowired
+	private EnquiryService enquiryService;
 	
 	@Autowired
 	public void setProductService(ProductService productService) {
@@ -102,34 +108,30 @@ public class ViewProductController {
 		String orderDate = "5월 27일 (금)"; 	//임시 orderDate 
 		
 		// productDetail에서 보일 리뷰 리스트
-		List<Review> list = new ArrayList<Review>();
-		if (productService.getReviewsByProductId(productId) != null) {
-			product.setReviews(productService.getReviewsByProductId(productId));
-			list = product.getReviews();
-			for (int i = 0; i < product.getReviews().size(); i++) {
+		List<Review> list = reviewService.getReviewsByProductId(productId);
+		if (list != null) {
+			product.setReviews(list);
+			for (int i = 0; i < list.size(); i++) {
 				String reviewUserName = authService.getUserById(list.get(i).getUserId()).getUserName();
 				product.getReviews().get(i).setUserName(reviewUserName);
-				System.out.println(product.getReviews().get(i));
 			}
 		}
 		
 		// productDetail에서 보일 문의 리스트
-		List<Enquiry> enquiryList = new ArrayList<Enquiry>();
-		if (productService.getEnquiryListByProductId(productId) != null) {
-			product.setEnquiryList(productService.getEnquiryListByProductId(productId));
-			enquiryList = product.getEnquiryList();
+		List<Enquiry> enquiryList = enquiryService.getEnquiryListByProductId(productId);
+		if (enquiryList != null) {
+			product.setEnquiryList(enquiryList);
 			for (int i = 0; i < enquiryList.size(); i++) {
 				String enquiryUserName = authService.getUserById(enquiryList.get(i).getUserId()).getUserName();
 				product.getEnquiryList().get(i).setUserName(enquiryUserName);
-				System.out.println(product.getEnquiryList().get(i));
 			}
 		}
 
 		model.put("product",  product);
 		model.put("seller", seller);
 		model.put("orderDate", orderDate);
-		model.addAttribute("reviewList", list);
-		model.addAttribute("enquiryList", enquiryList);
+		model.addAttribute("reviewList", product.getReviews());
+		model.addAttribute("enquiryList", product.getEnquiryList());
 		
 		System.out.println(product.getP_name()+" 제품 상세 model -> view 전달");
 		
