@@ -17,7 +17,9 @@
 	    	DESCRIPTION,
 	    	PRICE,
 	    	PRODUCTIMG,
-	    	USERID 
+	    	USERID,
+	    	TARGETQUANTITY,
+	    	DELIVERYDATE
 	      FROM PRODUCT
 	      WHERE PRODUCT.USERID =#{param1}
 	      
@@ -30,10 +32,12 @@
 	    	PRODUCTINFORMATION,
 	    	TITLE,
 	    	OPENDATE,
-	    	CLOSEDATE
+	    	CLOSEDATE,
+	    	TARGETQUANTITY,
+	    	DELIVERYDATE
 	    	)
     	VALUES
-    	(#{fundingId},#{productId},#{productInformation},#{title},#{openDate},#{closeDate})
+    	(#{fundingId},#{productId},#{productInformation},#{title},#{openDate},#{closeDate},#{targetQuantity},#{deliveryDate})
     	<selectKey keyProperty="fundingId" resultType="String" order="BEFORE">
 			SELECT FUNDING_SEQ.NEXTVAL AS fundingId FROM DUAL
 		</selectKey>
@@ -41,17 +45,37 @@
 
     <select id="getFundingById" resultType="Funding">
 	    SELECT
-	    	FUNDINGID,
-	    	CATEGORYID,
+			FUNDINGID,
 	    	PRODUCTID,
-	    	CALENDAR,
 	    	PRODUCTINFORMATION,
 	    	TITLE,
-	    	CREATE_AT,
-	    	UPDATE_AT
+	    	OPENDATE,
+	    	CLOSEDATE,
+ 		    TARGETQUANTITY,
+	    	DELIVERYDATE
 	    FROM FUNDING
-	    WHERE USER_TABLE.FUNDINGID = #{param1}
+	    WHERE FUNDING.FUNDINGID = #{param1}
   </select>
+  
+  <update id="updateFunding" parameterType="Funding">
+  	UPDATE FUNDING SET
+  			FUNDINGID=#{fundingId},
+	    	PRODUCTID=#{productId},
+	    	PRODUCTINFORMATION=#{productInformation},
+	    	TITLE=#{title},
+	    	OPENDATE=#{openDate},
+	    	CLOSEDATE=#{closeDate},
+	    	UPDATE_AT=SYSDATE,
+	    	TARGETQUANTITY=#{targetQuantity},
+	    	DELIVERYDATE=#{deliveryDate}
+   WHERE FUNDINGID=#{fundingId}
+  	
+  </update>
+  
+  <delete id="deleteFunding">
+  	DELETE FROM FUNDING
+  	WHERE FUNDINGID = #{param1}
+  </delete>
   
 
 </mapper>

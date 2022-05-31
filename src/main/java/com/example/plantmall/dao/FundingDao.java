@@ -9,5 +9,7 @@ public interface FundingDao {
 	Funding getFunding(String id);
 	void insertFunding(Funding funding);
 	List<Product> getMyAllProductList(String email);
+	void updateFunding(Funding funding);
+	void deleteFunding(String id);
 	
 }

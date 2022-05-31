@@ -28,6 +28,9 @@ public class Funding {
 	private Date openDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date closeDate;
+	private int targetQuantity;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date deliveryDate;
 	
 	
 }

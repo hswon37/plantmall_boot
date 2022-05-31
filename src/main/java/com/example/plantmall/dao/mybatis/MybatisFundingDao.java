@@ -36,5 +36,17 @@ public class MybatisFundingDao implements FundingDao{
 		return fundingMapper.getMyAllProductListByUserEmail(email);
 	}
 
+	@Override
+	public void updateFunding(Funding funding) {
+		fundingMapper.updateFunding(funding);
+		
+	}
+
+	@Override
+	public void deleteFunding(String id) {
+		fundingMapper.deleteFunding(id);
+		
+	}
+
 
 }
