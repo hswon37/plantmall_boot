@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
 
 import com.example.plantmall.domain.Cart;
 import com.example.plantmall.domain.CartItem;
@@ -48,7 +46,7 @@ public class CartController {
 	}
 	
 	@RequestMapping("/list")
-	public ModelAndView getCartItems(HttpServletRequest request, HttpSession session, ModelAndView mav) throws Exception {
+	public ModelAndView getCartItems(HttpSession session, ModelAndView mav) throws Exception {
 		Cart cart = (Cart) session.getAttribute("sessionCart");
 
 		Map<String, CartItem> cartItemMap = new HashMap<String, CartItem>();

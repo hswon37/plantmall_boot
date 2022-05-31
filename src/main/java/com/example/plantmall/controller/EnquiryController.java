@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.LineItem;
 import com.example.plantmall.domain.Product;
-import com.example.plantmall.domain.Review;
 import com.example.plantmall.domain.User;
 import com.example.plantmall.service.EnquiryService;
 import com.example.plantmall.service.ProductService;
@@ -32,7 +32,7 @@ public class EnquiryController {
 	private EnquiryService enqService;
 	@Autowired
 	private ProductService productService;
-	
+
 	@ModelAttribute("enqForm")
 	public EnquiryForm createEnquiryForm() {
 		System.out.println("@ModelAttribute(enqForm) work\n");
@@ -40,9 +40,9 @@ public class EnquiryController {
 	}
 	
 	@RequestMapping("/newEnquiry")
-	public ModelAndView preNewEnquiry(@RequestParam("productId") String productId, 
-			@ModelAttribute("enqForm") EnquiryForm enqForm, ModelAndView mav, HttpSession session) throws ModelAndViewDefiningException
-	{
+	public ModelAndView preNewEnquiry(@RequestParam("productId") String productId,
+			@ModelAttribute("enqForm") EnquiryForm enqForm, ModelAndView mav, HttpSession session)
+			throws ModelAndViewDefiningException {
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		if (userSession == null) {
 			return new ModelAndView("auth/loginForm");
@@ -55,8 +55,7 @@ public class EnquiryController {
 	}
 	
 	@RequestMapping("newEnquirySubmitted")
-	public String newReviewSubmitted(@Valid @ModelAttribute("enquiryForm") EnquiryForm enqForm, BindingResult result, SessionStatus status,
-			ModelAndView mav) {
+	public String newEnquirySubmitted(@Valid @ModelAttribute("enquiryForm") EnquiryForm enqForm, BindingResult result, SessionStatus status) {
 		System.out.println("\n /newEnquirySubmitted");
 		if (result.hasErrors()) {
 			System.out.println("hasErrore()\n");
@@ -67,10 +66,26 @@ public class EnquiryController {
 		Product product = productService.getProduct(enqForm.getEnquiry().getProductId());
 		product.setEnquiryList(list);
 		
-		mav.setViewName("product/productDetail");
 		status.setComplete();
 
 		return "product/productDetail?productId="+product.getProductId();
 	}
 	
+	@RequestMapping("/updateEnquiryForm")
+	public String updateEnquiry(@ModelAttribute("enquiryForm") EnquiryForm enqForm, @RequestParam("enquiryId") int enquiryId) {
+		enqForm.getEnquiry().initEnq(enqService.getEnquiryByEnquiryId(enquiryId));
+		return "/Enquiry/UpdateEnquiry";
+	}
+	
+	@RequestMapping("/updateEnquirySubmitted")
+	public String updateEnquirySubmitted(@ModelAttribute("enquiryForm") EnquiryForm enqForm) {
+		enqService.updateEnquiry(enqForm.getEnquiry());
+		return "product/productDetail?productId="+enqForm.getEnquiry().getProductId();
+	}
+	
+	@RequestMapping("/deleteEnquiry")
+	public String deleteEnquiry(@RequestParam("enquiryId") int enqId, @RequestParam("productId") String productId) {
+		enqService.deleteEnquiry(enqId);
+		return "product/productDetail?productId="+productId;
+	}
 }

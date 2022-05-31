@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @AllArgsConstructor
-public class EnquiryComment {
+public class EnqComm {
 	private int enquiryCommId;
 	private int enquiryId;
 	private String userId;

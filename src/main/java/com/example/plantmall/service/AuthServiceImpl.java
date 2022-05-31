@@ -36,4 +36,9 @@ public class AuthServiceImpl implements AuthService{
 		userDao.deleteUser(id);
 		
 	}
+	
+	@Override
+	public User getUserById(String id) {
+		return userDao.getUserById(id);
+	}
 }
