@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+</head>
+<body>
+<div th:insert="~{header :: #top}"></div>
+<form th:action="@{/funding/create}" th:object="${fundingForm}" method="post">
+	<table style="border-collapse: collapse; width: 100%; height: 126px;" border="1">
+	<tbody>
+	
+	<tr style="height: 18px;">
+	<td style="width: 54.0168%; height: 126px; text-align: center;" rowspan="7">&nbsp;</td>
+	<td style="width: 12.6498%; height: 18px; text-align: center;">제품명</td>
+	<td style="width: 33.3333%; height: 18px; text-align: center;">
+	<input type="text" id="funding.title" th:text="*{funding.title}"/>
+	</td>
+	</tr>
+	
+	<tr style="height: 18px;">
+	<td style="width: 12.6498%; height: 18px; text-align: center;">제품 설명</td>
+	<td style="width: 33.3333%; height: 18px; text-align: center;">
+	<input type="text" id="funding.productInformation" th:text="*{funding.productInformation}"/>
+	</td>
+	</tr>
+	
+	<tr style="height: 18px;">
+	<td style="width: 12.6498%; height: 18px; text-align: center;">일정</td>
+	<td style="width: 33.3333%; height: 18px; text-align: center;">
+	<input type="date" id="funding.calendar" th:text="*{funding.calendar}"/>
+	~
+	<input type="date" id="funding.calendar" th:text="*{funding.calendar}"/>
+	</td>
+	</tr>
+	
+	<tr style="height: 18px;">
+	<td style="width: 12.6498%; height: 18px; text-align: center;">제품선택하기</td>
+	<td style="width: 33.3333%; height: 18px; text-align: center;">
+		<select th:name="selectedProduct">
+			<option th:each="ty:${productList}"
+			th:value="${ty.p_name}"
+			th:utext="${ty.p_name}"></option>
+		</select>
+		
+	</td>
+	</tr>
+	
+	<tr style="height: 18px;">
+	<td style="width: 12.6498%; height: 18px; text-align: center;">이미지 선택</td>
+	<td style="width: 33.3333%; height: 18px; text-align: center;">
+	<input type="file" accept="image/*,.txt" multiple/>
+	</td>
+	</tr>	
+
+
+	<tr style="height: 18px;">
+	<td colspan="2" style="width: 33.3333%; height: 18px; text-align: right;">
+		<input type="submit" value="등록"/>
+	</td>
+	</tr>
+
+	</tbody>
+	</table>
+</form>
+</body>
+</html>
