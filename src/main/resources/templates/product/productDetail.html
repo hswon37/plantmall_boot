@@ -66,7 +66,7 @@
 				<ul>
 					<li class="detailTable"><a class="detailTable" href="" th:href="@{/product/detail?productId=}+${product.productId}">제품 설명</a></li>			
 					<li class="detailTable">|</li>
-					<li class="detailTable"><a class="detailTable" href="" th:href="@{/}">리뷰</a></li>
+					<li class="detailTable"><a class="detailTable" th:onclick="getReview()">리뷰</a></li>
 					<li class="detailTable">|</li>
 					<li class="detailTable"><a class="detailTable" href="" th:href="@{/}">문의</a></li>
 				</ul>
@@ -153,6 +153,10 @@
 	    			}
 	    		}
 	   		})
+		}
+		
+		function getReview() {
+			
 		}
 	</script>
 </body>

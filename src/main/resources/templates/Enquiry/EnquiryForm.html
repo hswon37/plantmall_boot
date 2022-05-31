@@ -13,8 +13,8 @@
 </head>
 <body onload="MoveFocus();">
 	<div class="enquiryForm">
-		<form name="rForm" action="#" th:action="@{targetUrl}" th:object="${EnquiryForm}" method="post">
-			<span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span>
+		<form name="rForm" action="#" th:action="@{/enquiry/newEnquirySubmitted}" th:object="${enqForm}" method="post">
+			<!-- <span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span> -->
 			<div class="formWrap">
 				<div class="write_area">
 					<div class="rFormCol reviewBody">
@@ -22,6 +22,7 @@
 					</div>
 				</div>
 				<div>
+					<a th:href="@{/product/productDetail(productId=${productId})">문의 작성 취소</a>
 					<a href="#" class="button" th:href="@{/review/ReviewForm}">문의 작성</a>
 				</div>
 			</div>

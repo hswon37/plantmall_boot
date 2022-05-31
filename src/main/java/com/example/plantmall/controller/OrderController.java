@@ -53,9 +53,10 @@ public class OrderController {
 	
 	@RequestMapping("/newOrder")
 	public ModelAndView initNewOrder(@RequestParam(value="chkbox") String productIdArray,
-			@ModelAttribute("sessionCart") Cart cart,  @ModelAttribute("orderForm") OrderForm orderForm, ModelAndView mav) throws ModelAndViewDefiningException {
-//		User user = (User) request.getSession().getAttribute("user");
-		User user = new User("admin", "admin", "admin", "admin@naver.com", "010-0000-0000", "00000", "경기도");
+			@ModelAttribute("sessionCart") Cart cart,  @ModelAttribute("orderForm") OrderForm orderForm, ModelAndView mav, HttpSession session) throws ModelAndViewDefiningException {
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		User user = userSession.getUser();
+		//User user = new User("admin", "admin", "admin", "admin@naver.com", "010-0000-0000", "00000", "경기도");
 		String[] productId = productIdArray.split(",");
 		
 		if (orderForm.getOrder().getLineItems().size() == 0) {
@@ -100,8 +101,9 @@ public class OrderController {
 
 	@RequestMapping("/list")
 	public ModelAndView orderList(HttpSession session) throws Exception {
-		//User user = (User) session.getAttribute("user");
-		List<Order> orderList = orderService.getOrdersByUserId("admin");
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		User user = userSession.getUser();
+		List<Order> orderList = orderService.getOrdersByUserId(user.getUserId());
 		for (Order o : orderList) {
 			Order o2 = orderService.getOrder(o.getOrderId());
 			o.setLineItems(o2.getLineItems());
