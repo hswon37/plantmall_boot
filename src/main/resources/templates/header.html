@@ -9,11 +9,12 @@
 	<div id="top">
 		<ul>
 			<li id="logo"><a href="" th:href="@{/}"><img th:src="@{/images/logoTemp.svg}" width="10%">식몰</a></li>
-			<div th:if="${userSession}">
-				<li id="info"><a href="" th:href="@{/auth}">마이페이지</a></li>	
-				<li id="info"><a href="" th:href="@{/signoff}">로그아웃</a></li>	
+			
+			<div th:if="${session.userSession}">
+				<li id="info"><a href="" th:href="@{/auth}">마이페이지</a></li>
+				<li id="info"><a href="" th:href="@{/signoff}">로그아웃</a></li>
 			</div>
-			<div th:unless="${userSession}">	
+			<div th:unless="${session.userSession}">	
 				<li id="info"><a href="" th:href="@{/login}">로그인</a></li>
 				<li id="info"><a href="" th:href="@{/signup}">회원가입</a></li>
 			</div>

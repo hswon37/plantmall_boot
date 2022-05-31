@@ -13,6 +13,9 @@
     	(userId,userName,password,email,phone,zipcode,address)
     	VALUES
     	(#{userId},#{userName},#{password},#{email},#{phone},#{zipcode},#{address})
+    	<selectKey keyProperty="userId" resultType="String" order="BEFORE">
+			SELECT USER_TABLE_SEQ.NEXTVAL AS userId FROM DUAL
+		</selectKey>
     </insert>
 
     <select id="getUserByEmailAndPassword" resultType="User">

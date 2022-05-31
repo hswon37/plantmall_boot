@@ -35,6 +35,9 @@
 	    	UPDATE_AT)
     	VALUES
     	(#{fundingId},#{categoryId},#{productId},#{calendar},#{productInformation},#{title},#{createAt},#{updateAt})
+    	<selectKey keyProperty="fundingId" resultType="String" order="BEFORE">
+			SELECT FUNDING_SEQ.NEXTVAL AS fundingId FROM DUAL
+		</selectKey>
     </insert>
 
     <select id="getFundingById" resultType="Funding">
