@@ -21,10 +21,10 @@
 							<div class="miniTab">
 								<span th:text="${enquiry.userName}">서가람</span>
 								<span th:text="${#dates.format(enquiry.enquiryDate, 'yyyy.MM.dd HH:mm')}">2022-04-15</span>
-								<div class="updateReview" th:if="${#strings.equals(enquiry.userId,'test')} and ${enquiry.enqComm} == null">
+								<div class="updateReview" th:if="${#strings.equals(enquiry.userId, sessionUserId)} and ${enquiry.enqComm} == null">
 									<a href="#" class="updateEnq" th:href="@{/enquiry/updateEnquiryForm(enquiryId=${enquiry.enquiryId})}">수정</a>
 								</div>
-								<div class="updateReview" th:if="${#strings.equals(seller,'admin')} and ${enquiry.enqComm} == null">
+								<div class="updateReview" th:if="${#strings.equals(seller, sessionUserId)} and ${enquiry.enqComm} == null">
 									<a href="javascript:void(0)" class="updateEnq enqCommentBtn" th:onclick="commentFunction([[${enquiry.enquiryId}]], [[${seller}]])">답변 달기</a>
 								</div>
 							</div>

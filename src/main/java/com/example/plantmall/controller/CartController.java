@@ -57,15 +57,14 @@ public class CartController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		// session에 저장된 userId
-
-//		UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
+		// session에 저장된 user
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
-		System.out.println(userSession);
-		User user = userSession.getUser();
-		if (user == null) {
+		
+		if (userSession == null) {
 			return new ModelAndView("auth/loginForm");
 		}
+		User user = userSession.getUser();
+
 
 		String userId = user.getUserId();	
 
@@ -111,14 +110,15 @@ public class CartController {
 	
 	@RequestMapping(value="/addItemToCart", method= {RequestMethod.POST})
 	@ResponseBody
-	public int addItemToCart(@RequestParam("productId") String productId, @RequestParam("quantity") int quantity,
+	public String addItemToCart(@RequestParam("productId") String productId, @RequestParam("quantity") int quantity,
 			@ModelAttribute("sessionCart") Cart cart, HttpSession session) throws Exception {
 		
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
-		User user = userSession.getUser();
-		if (user == null) {
-			return -1;
+		if (userSession == null) {
+			return "redirect:/auth/loginForm";
 		}
+		User user = userSession.getUser();
+
 		
 		String userId= user.getUserId();
 		System.out.println("\n addItemToCart");
@@ -128,14 +128,14 @@ public class CartController {
 		
 		if (cart.containsProductId(productId)) {
 			System.out.println("containsProduct");
-			return 0;
+			return "0";
 		}
 		else {
 			System.out.println("cartItem: " + cartItem);
 			cart.addProduct(cartItem);
 			cartService.insertCartItem(cartItem);
 		}
-		return 1;
+		return "1";
 	}
 	
 	@RequestMapping("/deleteCartItem")
