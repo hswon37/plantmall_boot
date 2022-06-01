@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Product;
+import com.example.plantmall.domain.User;
 import com.example.plantmall.service.EnquiryService;
 import com.example.plantmall.service.ProductService;
 
@@ -40,14 +41,13 @@ public class EnquiryController {
 	public ModelAndView preNewEnquiry(@RequestParam("productId") String productId,
 			@ModelAttribute("enqForm") EnquiryForm enqForm, ModelAndView mav, HttpSession session)
 			throws ModelAndViewDefiningException {
-//		UserSession userSession = (UserSession) session.getAttribute("userSession");
-//		if (userSession == null) {
-//			return new ModelAndView("auth/loginForm");
-//		}
-//		User user = userSession.getUser();
-//
-//		enqForm.getEnquiry().initEnq(productId, user.getUserId());
-		enqForm.getEnquiry().initEnq(productId, "test");
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		if (userSession == null) {
+			return new ModelAndView("auth/loginForm");
+		}
+		User user = userSession.getUser();
+		enqForm.getEnquiry().initEnq(productId, user.getUserId());
+//		enqForm.getEnquiry().initEnq(productId, "test");
 		System.out.println(enqForm.getEnquiry());
 		return new ModelAndView("enquiry/EnquiryForm");
 	}

@@ -1,6 +1,9 @@
 package com.example.plantmall.controller;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.ArrayList;
 //import java.util.Date;
 
@@ -100,7 +103,7 @@ public class ViewProductController {
 	//제품 상세 페이지
 	@RequestMapping("/product/detail")
 	public String showProductDetail(@RequestParam(value="productId", required=false) String productId, 
-			ModelMap model) throws Exception {
+			ModelMap model, HttpSession session) throws Exception {
 		Product product = this.productService.getProduct(productId);
 		//String userName = this.~.getUserName(p.userId);	//예상 사용자명 가져오기 코드
 		String seller = "admin";	//임시 userName
@@ -127,11 +130,20 @@ public class ViewProductController {
 			}
 		}
 
+		//문의를 수정, 답변할때 필요한 유저 확인용도로 보내야됨 (현재 세션에 있는 유저가 문의를 남긴 유저와 같으면 수정 버튼뜨거나 판매하는 유저이면 답변달기 버튼을 보여줘야됨)
+		String sessionUserId = "noUser";
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+
+		if (userSession != null) {
+			sessionUserId = userSession.getUser().getUserId();
+		}
+		
 		model.put("product",  product);
 		model.put("seller", seller);
 		model.put("orderDate", orderDate);
 		model.addAttribute("reviewList", product.getReviews());
 		model.addAttribute("enquiryList", product.getEnquiryList());
+		model.addAttribute("sessionUserId", sessionUserId);
 		
 		System.out.println(product.getP_name()+" 제품 상세 model -> view 전달");
 		
