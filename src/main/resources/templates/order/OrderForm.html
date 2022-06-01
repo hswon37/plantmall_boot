@@ -37,7 +37,7 @@
 			</tr>
 		</table>
 		<form action="#" th:action="@{/order/newOrderSubmitted(chkbox=${productIdArray},status=1)}" method="post" th:object="${orderForm}">
-			<!-- <span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span> -->
+			<span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span>
 			<div class= "division">
 				<div class="left">
 					<div class="formWrap">
@@ -46,18 +46,21 @@
 							<div class="formCol head">이름</div>
 							<div class="formCol body">
 								<input type="text" class="input default" th:field="*{order.userName}" />
+								<span th:each="err:${#fields.errors('order.userName')}" th:text="${err}"></span>
 							</div>
 						</div>
 						<div class="formRow">
 							<div class="formCol head">휴대폰</div>
 							<div class="formCol body">
 								<input type="text" class="input default" th:field="*{order.phoneNumber}" />
+								<span th:each="err:${#fields.errors('order.phoneNumber')}" th:text="${err}"></span>
 							</div>
 						</div>
 						<div class="formRow">
 							<div class="formCol head">주소</div>
 							<div class="formCol body">
 								<input type="text" class="input default" th:field="*{order.shipAddress}" />
+								<span th:each="err:${#fields.errors('order.shipAddress')}" th:text="${err}"></span>
 							</div>
 						</div>
 					</div>
@@ -78,6 +81,7 @@
 							<div class="formCol body">
 								<!-- <span th:each="err:${#fields.errors('orderForm.order.creditCard')}" th:text="${err}"></span> -->
 								<input type="text" class="input default" th:field="*{order.creditCard}" placeholder="9999-9999-9999-9999" />
+								<span th:each="err:${#fields.errors('order.creditCard')}" th:text="${err}"></span>
 							</div>
 						</div>
 						<div class="formRow">
@@ -85,6 +89,7 @@
 							<div class="formCol body">
 								<!-- <span th:each="err:${#fields.errors('orderForm.order.expiryDate')}" th:text="${err}"></span> -->
 								<input type="text" class="input default" th:field="*{order.expiryDate}" placeholder="11/24" />
+								<span th:each="err:${#fields.errors('order.expiryDate')}" th:text="${err}"></span>
 							</div>
 						</div>
 					</div>

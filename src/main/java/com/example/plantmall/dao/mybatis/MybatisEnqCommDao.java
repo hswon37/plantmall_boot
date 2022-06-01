@@ -1,10 +1,9 @@
 package com.example.plantmall.dao.mybatis;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.plantmall.dao.EnqCommDao;
 import com.example.plantmall.dao.mybatis.mapper.EnqCommMapper;

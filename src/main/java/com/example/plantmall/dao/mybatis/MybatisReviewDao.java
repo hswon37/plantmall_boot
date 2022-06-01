@@ -40,11 +40,7 @@ public class MybatisReviewDao implements ReviewDao {
 	@Transactional
 	public void insertReview(Review review) throws DataAccessException {
 		// TODO Auto-generated method stub
-		System.out.println("before reviewId: " + review.getReviewId());
 		reviewMapper.insertReview(review);
-		int id = review.getReviewId();
-		System.out.println("after reveiwdId: " + id);
-		
 	}
 
 	@Override

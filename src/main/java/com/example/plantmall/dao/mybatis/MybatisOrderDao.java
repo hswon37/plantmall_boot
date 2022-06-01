@@ -2,11 +2,10 @@ package com.example.plantmall.dao.mybatis;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.plantmall.dao.OrderDao;
 import com.example.plantmall.dao.mybatis.mapper.LineItemMapper;
@@ -30,13 +29,7 @@ public class MybatisOrderDao implements OrderDao {
 	@Override
 	public Order getOrder(int orderId) throws DataAccessException {
 		// TODO Auto-generated method stub
-//		Order order = orderMapper.getOrder(orderId);
-//		if (order != null) {
-//			order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
-//		}
-//		return order;
 		Order order = orderMapper.getOrderAndLineItems(orderId);
-		System.out.println("MybatisOrderDao - getOrder: " + order.getLineItems().size());
 		return order;
 	}
 

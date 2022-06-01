@@ -72,14 +72,12 @@ public class EnquiryServiceImpl implements EnquiryService {
 	@Override
 	public void insertEnqComm(EnqComm enqComm) {
 		// TODO Auto-generated method stub
-		System.out.println("EnquiryServiceImpl: insertEnqComm");
 		enqCommDao.insertEnqComm(enqComm);
 	}
 
 	@Override
 	public void updateEnqComm(EnqComm enqComm) {
 		// TODO Auto-generated method stub
-		System.out.println("EnquiryServiceImpl: updateEnqComm");
 		enqCommDao.updateEnqComm(enqComm);
 	}
 

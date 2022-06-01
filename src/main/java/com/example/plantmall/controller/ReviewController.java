@@ -43,7 +43,7 @@ public class ReviewController {
 		reviewForm.getReview().initReview(lineItem.getProductId(), userId, orderId, lineItem);
 		
 		Review review = reviewService.getReview(reviewForm.getReview());
-		System.out.println(review);
+
 		if (review == null) {
 			mav.setViewName("review/ReviewForm");
 		}
@@ -57,18 +57,11 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/newReviewSubmitted")
-	public ModelAndView newReviewSubmitted(@Valid @ModelAttribute("reviewForm") ReviewForm reviewForm, BindingResult result, SessionStatus status,
-			ModelAndView mav) {
-		System.out.println("\n /newReviewSubmitted");
-		if (result.hasErrors()) {
-			System.out.println("hasErrore()\n");
-			mav.setViewName("review/ReviewForm");
-			return mav;
-		}
+	public ModelAndView newReviewSubmitted(@ModelAttribute("reviewForm") ReviewForm reviewForm,SessionStatus status,
+			ModelAndView mav) {	
 		reviewService.insertReview(reviewForm.getReview());
 		
 		Review review = reviewForm.getReview();
-		System.out.println(review);
 		
 		LineItem lineItem = orderService.getLineItem(review.getOrderId(), review.getLineNumber());
 		
@@ -94,14 +87,8 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/updateReviewSumitted")
-	public ModelAndView updateReviewSumitted(@Valid @ModelAttribute("reviewForm") ReviewForm reviewForm, ModelAndView mav,
-			BindingResult result, SessionStatus status) throws ModelAndViewDefiningException {
-		System.out.println("\n /UpdateReviewSubmitted");
-		if (result.hasErrors()) {
-			System.out.println("hasErrore()\n");
-			mav.setViewName("review/reviewForm");
-			return mav;
-		}
+	public ModelAndView updateReviewSumitted(@ModelAttribute("reviewForm") ReviewForm reviewForm, ModelAndView mav,
+			SessionStatus status) throws ModelAndViewDefiningException {
 		Review review = reviewService.updateReview(reviewForm.getReview());
 		review.setLineItem(orderService.getLineItem(review.getOrderId(),review.getLineNumber()));
 		status.setComplete();

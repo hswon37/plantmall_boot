@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,14 +17,17 @@ import lombok.ToString;
 public class Order implements Serializable{
 	private int orderId;
 	private String userId;
+	@NotEmpty
 	private String userName;
+	@Pattern(regexp="^01[01679]\\d{3,4}\\d{4}", message="01*********")
 	private String phoneNumber;
 	private Date orderDate;
+	@NotEmpty
 	private String shipAddress;
 	private int totalPrice;
-	@NotEmpty
+	@Pattern(regexp="\\d{4}-\\d{4}-\\d{4}-\\d{4}", message="****-****-****-****")
 	private String creditCard;
-	@NotEmpty
+	@Pattern(regexp="\\d{2}/\\d{2}", message="**/**")
 	private String expiryDate;
 	@NotEmpty
 	private String cardType;
