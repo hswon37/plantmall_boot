@@ -189,26 +189,64 @@
 			}
 		}
 		
-		function commentFunction(enqId, seller) {
-			$(".enqCommentText").each(function() {
-				if ($(this).attr(data-enqNum) == enqId) {
-					var text = $(this).val();
-					alert(text);
-					$.ajax({
-						type: "post",
-						url: "/enquiry/insertComment",
-						data: {
-							enquiryId: enqId,
-							comment: text,
-							seller: seller
-						},
-						success: function() {
-							alert("success");
-							location.reload();
-						}
-					})
-				}
-			});
+		function showTextarea(status) {
+			if (status == 0) {
+				$(".sellerCommentTextarea").show();
+			}
+			if (status == 1) {
+				$(".sellerReCommentTextarea").show();
+			}
+		}
+		
+		function commentFunction(enqId, seller, status) {
+			// 답변 달기
+			if (status == 0) {
+				$(".enqCommentText").each(function() {
+					if ($(this).attr("data-enqNum") == enqId) {
+						var text = $(this).val();
+						$.ajax({
+							type: "post",
+							url: "/enquiry/insertComment",
+							data: {
+								enquiryId: enqId,
+								comment: text,
+								seller: seller
+							},
+							success: function(result) {
+								alert("success");
+								$("sellerCommentTextarea").hide();
+								location.reload();
+								getBottom("enquiry");
+							}
+						})
+					}
+				});
+			}
+			// 답변 수정, enqId로 enquiryCommentId가 넘어옴
+			if (status == 1) {
+				$(".enqReCommentText").each(function() {
+					if ($(this).attr("data-enqCommNum") == enqId) {
+						var text = $(this).val();
+						alert(text);
+						$.ajax({
+							type: "post",
+							url: "/enquiry/updateComment",
+							data: {
+								enquiryCommId: enqId,
+								comment: text,
+								seller: seller
+							},
+							success: function(result) {
+								alert("success");
+								$("sellerReCommentTextarea").hide();
+								location.reload();
+								getBottom("enquiry");
+							}
+						})
+					}
+				});
+			}
+			
 		}
 	</script>
 </body>

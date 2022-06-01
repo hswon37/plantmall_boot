@@ -2,6 +2,8 @@ package com.example.plantmall.dao.mybatis;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -35,12 +37,14 @@ public class MybatisEnquiryDao implements EnquiryDao{
 	}
 
 	@Override
+	@Transactional
 	public void insertEnquiry(Enquiry enq) throws DataAccessException {
 		// TODO Auto-generated method stub
 		enqMapper.insertEnquiry(enq);
 	}
 
 	@Override
+	@Transactional
 	public void updateEnquiry(Enquiry enq) throws DataAccessException {
 		// TODO Auto-generated method stub
 		enqMapper.updateEnquiry(enq);

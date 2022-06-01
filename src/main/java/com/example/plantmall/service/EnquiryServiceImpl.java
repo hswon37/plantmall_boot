@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.plantmall.dao.EnqCommDao;
 import com.example.plantmall.dao.EnquiryDao;
+import com.example.plantmall.domain.EnqComm;
 import com.example.plantmall.domain.Enquiry;
 
 @Service
@@ -13,6 +15,8 @@ public class EnquiryServiceImpl implements EnquiryService {
 
 	@Autowired
 	private EnquiryDao enqDao;
+	@Autowired
+	private EnqCommDao enqCommDao;
 	
 	@Override
 	public List<Enquiry> getEnquiryListByProductId(String productId) {
@@ -48,6 +52,35 @@ public class EnquiryServiceImpl implements EnquiryService {
 	public void deleteEnquiry(int enq) {
 		// TODO Auto-generated method stub
 		enqDao.deleteEnquiry(enq);
+	}
+
+	
+	
+	/* Enquiry Comment 관련 서비스 */
+	@Override
+	public EnqComm getEnqCommByEuquiryId(int enquiryid) {
+		// TODO Auto-generated method stub
+		return enqCommDao.getEnqCommByEuquiryId(enquiryid);
+	}
+
+	@Override
+	public EnqComm getEnqCommByEnquiryCommId(int enqCommId) {
+		// TODO Auto-generated method stub
+		return enqCommDao.getEnqCommByEnquiryCommId(enqCommId);
+	}
+
+	@Override
+	public void insertEnqComm(EnqComm enqComm) {
+		// TODO Auto-generated method stub
+		System.out.println("EnquiryServiceImpl: insertEnqComm");
+		enqCommDao.insertEnqComm(enqComm);
+	}
+
+	@Override
+	public void updateEnqComm(EnqComm enqComm) {
+		// TODO Auto-generated method stub
+		System.out.println("EnquiryServiceImpl: updateEnqComm");
+		enqCommDao.updateEnqComm(enqComm);
 	}
 
 }

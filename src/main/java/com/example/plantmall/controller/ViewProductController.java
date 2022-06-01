@@ -17,6 +17,7 @@ import com.example.plantmall.service.AuthService;
 import com.example.plantmall.service.EnquiryService;
 import com.example.plantmall.service.ProductService;
 import com.example.plantmall.service.ReviewService;
+import com.example.plantmall.domain.EnqComm;
 import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Product;
 import com.example.plantmall.domain.Review;
@@ -127,6 +128,8 @@ public class ViewProductController {
 			for (int i = 0; i < enquiryList.size(); i++) {
 				String enquiryUserName = authService.getUserById(enquiryList.get(i).getUserId()).getUserName();
 				product.getEnquiryList().get(i).setUserName(enquiryUserName);
+				EnqComm enqComm = enquiryService.getEnqCommByEuquiryId(enquiryList.get(i).getEnquiryId());
+				product.getEnquiryList().get(i).setEnqComm(enqComm);
 			}
 		}
 
