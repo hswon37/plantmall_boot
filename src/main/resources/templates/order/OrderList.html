@@ -21,7 +21,7 @@
 							<div class="orderInfo">
 								<b><span th:text="${#dates.format(order.orderDate, 'yyyy.MM.dd HH:mm')}">2022.04.09</span></b>
 								<span class="orderDetailPage">
-									<a href="#" th:href="@{/order/orderDetail(orderId=${order.orderId})}">주문 상세보기</a>
+									<a href="#" th:href="@{/order/orderDetail(orderId=${order.orderId},status=0)}">주문 상세보기</a>
 								</span>
 							</div>
 							<div class="orderContents" th:each="lineItem,index : ${order.lineItems}" th:if="${index.first}">

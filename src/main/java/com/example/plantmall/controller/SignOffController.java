@@ -9,6 +9,11 @@ public class SignOffController {
 	@RequestMapping("/signoff")
 	public String handleRequest(HttpSession session) throws Exception {
 		session.removeAttribute("userSession");
+		session.removeAttribute("sessionCart");
+		session.removeAttribute("enqForm");
+		session.removeAttribute("reviewForm");
+		session.removeAttribute("orderForm");
+		System.out.println(session.getAttribute("sessionCart"));
 		session.invalidate();
 		return "main";
 	}

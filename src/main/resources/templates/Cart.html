@@ -27,6 +27,7 @@
 		        }
 				if (amount > 0) {
 					fee = 3000;
+					sum += 3000;
 				}
 		        $("#total_sum").html(sum);
 		        $("#deliveryFee").html(fee);
@@ -49,7 +50,7 @@
 		   		})
 		   	}
 			
-			function deleteByProductId(pId) {
+			function deleteByProductId(pId, uId) {
 				var confirm_val = confirm("정말 삭제하시겠습니까?");
 				 
 				 if(confirm_val) {
@@ -60,6 +61,9 @@
 			   				userId : uId },
 			    		success : function(result){
 			    			location.reload();
+			    		},
+			    		fail : function(result) {
+			    			alert('실패');
 			    		}
 			   		});
 			 	}

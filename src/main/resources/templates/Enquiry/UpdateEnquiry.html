@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>식몰</title>
 <link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}">
 <script>
 	function MoveFocus() {
 		document.rForm.rtitle.focus();
@@ -12,6 +13,7 @@
 </script>
 </head>
 <body onload="MoveFocus();">
+<div th:insert="~{header :: #top}"></div>
 	<div class="enquiryForm">
 		<form name="rForm" action="#" th:action="@{/enquiry/updateEnquirySubmitted}" th:object="${enqForm}" method="post">
 			<!-- <span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span> -->

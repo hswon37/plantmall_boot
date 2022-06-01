@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <title>식몰</title>
 <link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}">
 </head>
 <body>
+<div th:insert="~{header :: #top}"></div>
 	<div class="reviewForm">
 		<div class="ReviewOrderElement">
 			<div class="ReviewImgBox">
@@ -33,7 +35,7 @@
 			</div>
 			<div>
 				<a href="#" class="button" th:href="@{/review/UpdateReview(reviewId=${review.reviewId})}">리뷰 수정</a>
-				<a href="#" class="button" th:href="@{/order/orderDetail(orderId=${review.orderId})}">확인</a>
+				<a href="#" class="button" th:href="@{/order/orderDetail(orderId=${review.orderId},status=0)}">확인</a>
 			</div>
 		</div>
 	</div>

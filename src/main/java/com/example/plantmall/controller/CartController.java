@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.plantmall.domain.Cart;
@@ -46,7 +47,7 @@ public class CartController {
 	}
 	
 	@RequestMapping("/list")
-	public ModelAndView getCartItems(HttpSession session, ModelAndView mav) throws Exception {
+	public ModelAndView getCartItems(HttpSession session, ModelAndView mav, SessionStatus status) throws Exception {
 		Cart cart = (Cart) session.getAttribute("sessionCart");
 
 		Map<String, CartItem> cartItemMap = new HashMap<String, CartItem>();
@@ -61,6 +62,8 @@ public class CartController {
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
 		if (userSession == null) {
+			session.removeAttribute("sessionCart");
+			status.setComplete();
 			return new ModelAndView("auth/loginForm");
 		}
 		User user = userSession.getUser();
@@ -90,8 +93,6 @@ public class CartController {
 			cartItem = cartList.get(i);
 			product = productService.getProduct(cartItem.getProductId());
 			cartItem.setProduct(product);
-			System.out.println("\n cartItem.getProductId() :" + cartItem.getProductId());
-			System.out.println("cartItem.product.getP_name() :" + cartItem.getProduct().getP_name() + "\n");
 			cartItemMap.put(cartItem.getProductId(), cartItem);	
 		}
 		
@@ -110,15 +111,17 @@ public class CartController {
 	
 	@RequestMapping(value="/addItemToCart", method= {RequestMethod.POST})
 	@ResponseBody
-	public String addItemToCart(@RequestParam("productId") String productId, @RequestParam("quantity") int quantity,
-			@ModelAttribute("sessionCart") Cart cart, HttpSession session) throws Exception {
+	public int addItemToCart(@RequestParam("productId") String productId, @RequestParam("quantity") int quantity,
+			@ModelAttribute("sessionCart") Cart cart, HttpSession session, SessionStatus status) throws Exception {
 		
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		if (userSession == null) {
-			return "redirect:/auth/loginForm";
+			session.removeAttribute("sessionCart");
+			status.setComplete();
+			return -1;
 		}
 		User user = userSession.getUser();
-
+		System.out.println(user);
 		
 		String userId= user.getUserId();
 		System.out.println("\n addItemToCart");
@@ -128,14 +131,14 @@ public class CartController {
 		
 		if (cart.containsProductId(productId)) {
 			System.out.println("containsProduct");
-			return "0";
+			return 0;
 		}
 		else {
 			System.out.println("cartItem: " + cartItem);
 			cart.addProduct(cartItem);
 			cartService.insertCartItem(cartItem);
 		}
-		return "1";
+		return 1;
 	}
 	
 	@RequestMapping("/deleteCartItem")

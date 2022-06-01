@@ -43,6 +43,7 @@ public class CartServiceImpl implements CartService {
 	public void updateCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub
 		cartItemDao.updateCartItem(cartItem);
+		System.out.println(cartItem.getQuantity());
 	}
 
 	@Override
