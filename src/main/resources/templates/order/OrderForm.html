@@ -36,7 +36,7 @@
 				</td>
 			</tr>
 		</table>
-		<form action="#" th:action="@{/order/newOrderSubmitted(chkbox=${productIdArray})}" method="post" th:object="${orderForm}">
+		<form action="#" th:action="@{/order/newOrderSubmitted(chkbox=${productIdArray},status=1)}" method="post" th:object="${orderForm}">
 			<!-- <span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span> -->
 			<div class= "division">
 				<div class="left">

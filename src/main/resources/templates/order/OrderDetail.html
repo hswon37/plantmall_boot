@@ -34,7 +34,7 @@
 									</div>
 								</div>
 								<div>
-									<a href="#" th:href="@{/review/check(userId=${order.userId}, orderId=${order.orderId}, lineNumber=${lineItem.lineNumber})}" class="button">
+									<a href="#" th:if="${status != 1}" th:href="@{/review/check(userId=${order.userId}, orderId=${order.orderId}, lineNumber=${lineItem.lineNumber})}" class="button">
 										리뷰
 									</a>
 								</div>

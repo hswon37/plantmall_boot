@@ -64,7 +64,9 @@ public class OrderController {
 		String[] productId = productIdArray.split(",");
 		
 		if (orderForm.getOrder().getLineItems().size() == 0) {
+			System.out.println("in");
 			for (int i = 0; i < productId.length; i++) {
+				System.out.println(cart.getItemMap().get(productId[i]));
 				orderForm.getOrder().addLineItem(cart.getItemMap().get(productId[i].trim()));
 			}
 			orderForm.getOrder().initOrder(user, orderForm.getOrder().getLineItems());
@@ -76,14 +78,16 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/orderReset")
-	public String resetOrder(@ModelAttribute("orderForm") OrderForm orderForm, SessionStatus status) throws ModelAndViewDefiningException {
+	public String resetOrder(@ModelAttribute("orderForm") OrderForm orderForm, SessionStatus status, HttpSession session) throws ModelAndViewDefiningException {
+		session.removeAttribute("orderForm");
 		status.setComplete();
 		return "redirect:/cart/list";
 	}
 	
 	@RequestMapping("/newOrderSubmitted")
 	public ModelAndView newOrderSubmitted (@Valid @ModelAttribute("orderForm") OrderForm orderForm, 
-			@RequestParam(value="chkbox") String productIdArray, BindingResult result, SessionStatus status) {
+			@RequestParam(value="chkbox") String productIdArray, @RequestParam(value="status") int status, BindingResult result,
+			SessionStatus sessionStatus, HttpSession session) {
 		System.out.println("\n /newOrderSubmitted");
 		if (result.hasErrors()) {
 			System.out.println("hasErrore()\n");
@@ -93,12 +97,13 @@ public class OrderController {
 		orderService.insertOrder(orderForm.getOrder());
 		ModelAndView mav = new ModelAndView("order/OrderDetail");
 		mav.addObject("order", orderForm.getOrder());
-		
+		mav.addObject("status", status);
 		String[] productId = productIdArray.split(",");
 		for (int i = 0; i < productId.length; i++) {
 			cartService.deleteCartItem(orderForm.getOrder().getUserId(), productId[i].trim());
 		}
-		status.setComplete();
+		session.removeAttribute("orderForm");
+		sessionStatus.setComplete();
 		return mav;
 	}
 	
@@ -125,14 +130,17 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/orderDetail")
-	public ModelAndView orderDetail(@RequestParam("orderId") int orderId) throws Exception {
+	public ModelAndView orderDetail(@RequestParam("orderId") int orderId, @RequestParam("status") int status) throws Exception {
 		Order order = orderService.getOrder(orderId);
 		for (LineItem item : order.getLineItems()) {
 			item.setProduct(productService.getProduct(item.getProductId()));
 		}
 		order.setTotalPrice(order.setTotalPriceUsingLineItems(order.getLineItems()));
 		System.out.println(order);
-		return new ModelAndView("order/OrderDetail", "order", order);
+		ModelAndView mav = new ModelAndView("order/OrderDetail");
+		mav.addObject("order", order);
+		mav.addObject("status", status);
+		return mav;
 	}
 
 }

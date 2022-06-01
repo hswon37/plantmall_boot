@@ -63,8 +63,9 @@ public class Cart implements Serializable {
 //	}
 
 	public void setQuantityByProductId(String productId, int quantity) {
-	    CartItem cartItem = itemMap.get(productId);
-	    cartItem.setQuantity(quantity);
+//	    CartItem cartItem = itemMap.get(productId);
+//	    cartItem.setQuantity(quantity);
+		itemMap.get(productId).setQuantity(quantity);
 	}
 
 	public int getSubTotal() {
