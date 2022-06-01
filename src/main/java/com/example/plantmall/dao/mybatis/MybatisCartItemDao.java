@@ -2,6 +2,8 @@ package com.example.plantmall.dao.mybatis;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -28,17 +30,20 @@ public class MybatisCartItemDao implements CartItemDao {
 	}
 	
 	@Override
+	@Transactional
 	public void insertCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub
 		cartMapper.insertCartItem(cartItem);
 	}
 
 	@Override
+	@Transactional
 	public void deleteCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub
 		cartMapper.deleteCartItem(cartItem);
 	}
 	@Override
+	@Transactional
 	public void updateCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub
 		cartMapper.updateCartItem(cartItem);
@@ -51,6 +56,7 @@ public class MybatisCartItemDao implements CartItemDao {
 	}
 
 	@Override
+	@Transactional
 	public void deleteCartItem(String userId, String productId) {
 		// TODO Auto-generated method stub
 		cartMapper.deleteCartItem(userId, productId);

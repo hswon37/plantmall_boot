@@ -11,11 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
+import com.example.plantmall.domain.EnqComm;
 import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Product;
 import com.example.plantmall.domain.User;
@@ -89,8 +91,25 @@ public class EnquiryController {
 		return "redirect:/product/detail?productId="+productId;
 	}
 	
-//	@RequestMapping("/insertComment")
-//	public String insertComment(@RequestParam("enquiryId") int enqId, @RequestParam("seller") String userId) {
-//		
-//	}
+	@RequestMapping("/insertComment")
+	@ResponseBody
+	public int insertComment(@RequestParam("enquiryId") int enqId, @RequestParam("seller") String userId, @RequestParam("comment") String comment) {
+		System.out.println("insertComment");
+		EnqComm enqComm = new EnqComm();
+		enqComm.initEnqComm(enqId, userId, comment);
+		enqService.insertEnqComm(enqComm);
+		return 1;
+	}
+	
+	@RequestMapping("/updateComment")
+	@ResponseBody
+	public int updateComment(@RequestParam("enquiryCommId") int enquiryCommId, @RequestParam("seller") String userId, @RequestParam("comment") String comment) {
+		System.out.println("update");
+		EnqComm enqComm = enqService.getEnqCommByEnquiryCommId(enquiryCommId);
+		System.out.println(enqComm);
+		enqComm.setEnqComm(comment);
+		enqService.updateEnqComm(enqComm);
+		System.out.println("update후: " + enqComm);
+		return 1;
+	}
 }
