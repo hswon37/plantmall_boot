@@ -112,6 +112,7 @@
 			sell_price = document.form.sell_price.value;
 			amount = document.form.amount.value;
 			document.form.sum.value = sell_price;
+			document.getElementById('result_quantity').innerHTML = amount;
 			change();
 		}
 		
@@ -122,6 +123,8 @@
 				hm.value ++ ;
 		
 				sum.value = parseInt(hm.value) * sell_price;
+
+				document.getElementById('result_quantity').innerHTML = hm.value;
 			}
 		}
 		
@@ -131,6 +134,8 @@
 				if (hm.value > 1) {
 					hm.value -- ;
 					sum.value = parseInt(hm.value) * sell_price;
+
+					document.getElementById('result_quantity').innerHTML = hm.value;
 				}
 		}
 		
