@@ -16,7 +16,6 @@
 <div th:insert="~{header :: #top}"></div>
 	<div class="enquiryForm">
 		<form name="rForm" action="#" th:action="@{/enquiry/updateEnquirySubmitted}" th:object="${enqForm}" method="post">
-			<!-- <span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span> -->
 			<div class="formWrap">
 				<div class="write_area">
 					<div class="rFormCol reviewBody">

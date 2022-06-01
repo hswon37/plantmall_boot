@@ -35,7 +35,6 @@ public class EnquiryController {
 	
 	@ModelAttribute("enqForm")
 	public EnquiryForm createEnquiryForm() {
-		System.out.println("@ModelAttribute(enqForm) work\n");
 		return new EnquiryForm();
 	}
 	
@@ -49,19 +48,11 @@ public class EnquiryController {
 		}
 		User user = userSession.getUser();
 		enqForm.getEnquiry().initEnq(productId, user.getUserId());
-//		enqForm.getEnquiry().initEnq(productId, "test");
-		System.out.println(enqForm.getEnquiry());
 		return new ModelAndView("enquiry/EnquiryForm");
 	}
 	
 	@RequestMapping("newEnquirySubmitted")
-	public String newEnquirySubmitted(@Valid @ModelAttribute("enqForm") EnquiryForm enqForm, BindingResult result, SessionStatus status) {
-		System.out.println("\n /newEnquirySubmitted");
-		if (result.hasErrors()) {
-			System.out.println("hasErrore()\n");
-			return "enquiry/EnquiryForm";
-		}
-		System.out.println(enqForm.getEnquiry());
+	public String newEnquirySubmitted(@Valid @ModelAttribute("enqForm") EnquiryForm enqForm, SessionStatus status) {
 		enqService.insertEnquiry(enqForm.getEnquiry());
 		List<Enquiry> list = enqService.getEnquiryListByProductId(enqForm.getEnquiry().getProductId());
 		Product product = productService.getProduct(enqForm.getEnquiry().getProductId());
@@ -73,7 +64,7 @@ public class EnquiryController {
 	}
 	
 	@RequestMapping("/updateEnquiryForm")
-	public String updateEnquiry(@ModelAttribute("enqForm") EnquiryForm enqForm, @RequestParam("enquiryId") int enquiryId) {
+	public String updateEnquiry(@ModelAttribute("enqForm") EnquiryForm enqForm, BindingResult result, @RequestParam("enquiryId") int enquiryId) {
 		enqForm.getEnquiry().initEnq(enqService.getEnquiryByEnquiryId(enquiryId));
 		return "Enquiry/UpdateEnquiry";
 	}
@@ -94,7 +85,6 @@ public class EnquiryController {
 	@RequestMapping("/insertComment")
 	@ResponseBody
 	public int insertComment(@RequestParam("enquiryId") int enqId, @RequestParam("seller") String userId, @RequestParam("comment") String comment) {
-		System.out.println("insertComment");
 		EnqComm enqComm = new EnqComm();
 		enqComm.initEnqComm(enqId, userId, comment);
 		enqService.insertEnqComm(enqComm);
@@ -104,12 +94,9 @@ public class EnquiryController {
 	@RequestMapping("/updateComment")
 	@ResponseBody
 	public int updateComment(@RequestParam("enquiryCommId") int enquiryCommId, @RequestParam("seller") String userId, @RequestParam("comment") String comment) {
-		System.out.println("update");
 		EnqComm enqComm = enqService.getEnqCommByEnquiryCommId(enquiryCommId);
-		System.out.println(enqComm);
 		enqComm.setEnqComm(comment);
 		enqService.updateEnqComm(enqComm);
-		System.out.println("update후: " + enqComm);
 		return 1;
 	}
 }

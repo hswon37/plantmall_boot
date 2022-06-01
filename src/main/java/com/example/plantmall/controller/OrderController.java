@@ -60,13 +60,10 @@ public class OrderController {
 			return new ModelAndView("auth/loginForm");
 		}
 		User user = userSession.getUser();
-//		User user = new User("admin", "admin", "admin", "admin@naver.com", "010-0000-0000", "00000", "경기도");
 		String[] productId = productIdArray.split(",");
 		
 		if (orderForm.getOrder().getLineItems().size() == 0) {
-			System.out.println("in");
 			for (int i = 0; i < productId.length; i++) {
-				System.out.println(cart.getItemMap().get(productId[i]));
 				orderForm.getOrder().addLineItem(cart.getItemMap().get(productId[i].trim()));
 			}
 			orderForm.getOrder().initOrder(user, orderForm.getOrder().getLineItems());
@@ -85,12 +82,10 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/newOrderSubmitted")
-	public ModelAndView newOrderSubmitted (@Valid @ModelAttribute("orderForm") OrderForm orderForm, 
-			@RequestParam(value="chkbox") String productIdArray, @RequestParam(value="status") int status, BindingResult result,
+	public ModelAndView newOrderSubmitted (@Valid @ModelAttribute("orderForm") OrderForm orderForm, BindingResult result, 
+			@RequestParam(value="chkbox") String productIdArray, @RequestParam(value="status") int status, 
 			SessionStatus sessionStatus, HttpSession session) {
-		System.out.println("\n /newOrderSubmitted");
 		if (result.hasErrors()) {
-			System.out.println("hasErrore()\n");
 			return new ModelAndView("order/OrderForm");
 		}
 		
@@ -116,7 +111,6 @@ public class OrderController {
 		}
 		User user = userSession.getUser();
 		List<Order> orderList = orderService.getOrdersByUserId(user.getUserId());
-//		List<Order> orderList = orderService.getOrdersByUserId("admin");
 		for (Order o : orderList) {
 			Order o2 = orderService.getOrder(o.getOrderId());
 			o.setLineItems(o2.getLineItems());
@@ -136,7 +130,6 @@ public class OrderController {
 			item.setProduct(productService.getProduct(item.getProductId()));
 		}
 		order.setTotalPrice(order.setTotalPriceUsingLineItems(order.getLineItems()));
-		System.out.println(order);
 		ModelAndView mav = new ModelAndView("order/OrderDetail");
 		mav.addObject("order", order);
 		mav.addObject("status", status);

@@ -29,7 +29,6 @@
 			</div>
 		</div>
 		<form name="rForm" action="#" th:action="@{/review/updateReviewSumitted}" th:object="${reviewForm}" method="post">
-			<span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span>
 			<div class="formWrap">
 				<div class="write_area">
 					<div class="rFormTitle">
