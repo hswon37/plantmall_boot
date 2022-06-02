@@ -60,7 +60,7 @@
 		</form>
 		<div align="right">
 			<input type="button" value="장바구니" th:onclick= "addItemToCart([[${product.productId}]])">
-			<input type="button" value="주문하기" th:onclick="'location.href=\''+ @{/} + '\''">
+			<input type="button" value="주문하기" th:onclick="immediatelyOrder([[${product.productId}]])">
 		</div>
 		<div>
 			<div align="center">
@@ -171,6 +171,11 @@
 	   		})
 		}
 		
+		function immediatelyOrder(pId) {
+			var quantity = $(".amount").val();
+			location.href= "/order/PDnewOrder?productId="+pId+"&quantity="+quantity;
+		}
+		
 		function getBottom(status) {
 			if (status == "description") {
 				$(".bottom_description").show();
@@ -213,7 +218,6 @@
 								seller: seller
 							},
 							success: function(result) {
-								alert("success");
 								$("sellerCommentTextarea").hide();
 								location.reload();
 								getBottom("enquiry");
@@ -227,7 +231,6 @@
 				$(".enqReCommentText").each(function() {
 					if ($(this).attr("data-enqCommNum") == enqId) {
 						var text = $(this).val();
-						alert(text);
 						$.ajax({
 							type: "post",
 							url: "/enquiry/updateComment",
@@ -237,7 +240,6 @@
 								seller: seller
 							},
 							success: function(result) {
-								alert("success");
 								$("sellerReCommentTextarea").hide();
 								location.reload();
 								getBottom("enquiry");

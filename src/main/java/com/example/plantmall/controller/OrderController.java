@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 import com.example.plantmall.domain.Cart;
 import com.example.plantmall.domain.LineItem;
 import com.example.plantmall.domain.Order;
+import com.example.plantmall.domain.Product;
 import com.example.plantmall.domain.User;
 import com.example.plantmall.service.CartService;
 import com.example.plantmall.service.OrderService;
@@ -69,7 +70,34 @@ public class OrderController {
 			orderForm.getOrder().initOrder(user, orderForm.getOrder().getLineItems());
 		}
 
+		mav.addObject("pdNewOrder", 0);	// 제품 상세 페이지에서 바로 주문한거인지 확인하기 위한 용도(폼에서 submit하면 newOrderSubmitted에서 확인함)
 		mav.addObject("productIdArray", productIdArray);
+		mav.setViewName("order/OrderForm");
+		return mav;
+	}
+	
+	// 제품 상세 페이지에서 바로 주문
+	@RequestMapping("/PDnewOrder")
+	public ModelAndView initNewOrder(@RequestParam("productId") String productId, @RequestParam("quantity") int quantity, 
+			@ModelAttribute("orderForm") OrderForm orderForm, ModelAndView mav, HttpSession session) throws ModelAndViewDefiningException {
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+
+		if (userSession == null) {
+			return new ModelAndView("auth/loginForm");
+		}
+		User user = userSession.getUser();
+		
+		if (orderForm.getOrder().getLineItems().size() == 0) {
+			Product product = productService.getProduct(productId);
+			LineItem lineItem = new LineItem(0, 0, quantity, product.getPrice(), product, productId);
+			System.out.println(lineItem);
+			orderForm.getOrder().addLineItem(lineItem);
+			orderForm.getOrder().initOrder(user, orderForm.getOrder().getLineItems());
+			System.out.println(orderForm.getOrder());
+		}
+
+		mav.addObject("pdNewOrder", 1);	// 제품 상세 페이지에서 바로 주문한거인지 확인하기 위한 용도(폼에서 submit하면 newOrderSubmitted에서 확인함)
+		mav.addObject("productIdArray", productId);
 		mav.setViewName("order/OrderForm");
 		return mav;
 	}
@@ -83,7 +111,7 @@ public class OrderController {
 	
 	@RequestMapping("/newOrderSubmitted")
 	public ModelAndView newOrderSubmitted (@Valid @ModelAttribute("orderForm") OrderForm orderForm, BindingResult result, 
-			@RequestParam(value="chkbox") String productIdArray, @RequestParam(value="status") int status, 
+			@RequestParam(value="chkbox") String productIdArray, @RequestParam(value="status") int status, @RequestParam(value="pd") int pd, 
 			SessionStatus sessionStatus, HttpSession session) {
 		if (result.hasErrors()) {
 			return new ModelAndView("order/OrderForm");
@@ -93,10 +121,15 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView("order/OrderDetail");
 		mav.addObject("order", orderForm.getOrder());
 		mav.addObject("status", status);
-		String[] productId = productIdArray.split(",");
-		for (int i = 0; i < productId.length; i++) {
-			cartService.deleteCartItem(orderForm.getOrder().getUserId(), productId[i].trim());
+		
+		// 카트에서 주문한거면 카트아이템에서 삭제해야됨
+		if (pd == 0) {
+			String[] productId = productIdArray.split(",");
+			for (int i = 0; i < productId.length; i++) {
+				cartService.deleteCartItem(orderForm.getOrder().getUserId(), productId[i].trim());
+			}
 		}
+		
 		session.removeAttribute("orderForm");
 		sessionStatus.setComplete();
 		return mav;
@@ -135,5 +168,4 @@ public class OrderController {
 		mav.addObject("status", status);
 		return mav;
 	}
-
 }
