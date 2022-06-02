@@ -1,26 +1,35 @@
 package com.example.plantmall.controller.Funding;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
 import org.springframework.web.util.WebUtils;
 
+import com.example.plantmall.controller.OrderForm;
 import com.example.plantmall.controller.UserForm;
 import com.example.plantmall.controller.UserSession;
 import com.example.plantmall.domain.Funding;
+import com.example.plantmall.domain.LineItem;
 import com.example.plantmall.domain.Product;
+import com.example.plantmall.domain.User;
+import com.example.plantmall.service.FundingRelationService;
 import com.example.plantmall.service.FundingService;
 import com.example.plantmall.service.ProductService;
 
@@ -37,10 +46,22 @@ public class FundingController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private FundingRelationService fundingRelationService;
+	
 	@ModelAttribute("fundingForm")
 	public FundingForm formBackingObject() throws Exception{
 		return new FundingForm();
 	}
+	
+	@ModelAttribute("creditCardTypes")
+	public List<String> referenceData() {
+		ArrayList<String> creditCardTypes = new ArrayList<String>();
+		creditCardTypes.add("Visa");
+		creditCardTypes.add("MasterCard");
+		return creditCardTypes;			
+	}
+	
 	@RequestMapping(path={"/create","/update"},method=RequestMethod.GET)
 	public ModelAndView showForm(@RequestParam(value="fundingId", required=false)String fundingId,HttpServletRequest request) {
 		UserSession userSession=
@@ -113,7 +134,9 @@ public class FundingController {
 		
 		Funding funding = fundingService.getFunding(fundingId);
 		Product product = productService.getProduct(funding.getProductId());
-		
+		System.out.println(funding);
+		System.out.println(product);
+		System.out.println(product);
 		mav.addObject("funding",funding);
 		mav.addObject("product", product);
 		
@@ -139,6 +162,50 @@ public class FundingController {
 		
 		return fundingMain();
 	}
+	
+	//바로 주문
+	@RequestMapping("/newOrder")
+	public ModelAndView initNewOrder(@RequestParam("fundingId") String fundingId, @RequestParam("quantity") int quantity, ModelAndView mav, HttpSession session) throws ModelAndViewDefiningException {
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+
+		if (userSession == null) {
+			return new ModelAndView("auth/loginForm");
+		}
+		User user = userSession.getUser();
+		
+		Funding funding = fundingService.getFunding(fundingId);
+		Product product = productService.getProduct(funding.getProductId());
+		
+		FundingOrderForm fundingOrderForm = new FundingOrderForm();
+
+		fundingOrderForm.getFundingOrder().initOrder(user, fundingId, quantity, product.getPrice(),fundingOrderForm.getFundingOrder().getCreditCard(),fundingOrderForm.getFundingOrder().getExpiryDate());
+		
+		mav.addObject("newOrder", 1);	// 제품 상세 페이지에서 바로 주문한거인지 확인하기 위한 용도(폼에서 submit하면 newOrderSubmitted에서 확인함)
+		mav.addObject("fundingOrderForm", fundingOrderForm);
+		mav.addObject("product", product);
+		mav.setViewName("funding/fundingOrderForm");
+		return mav;
+	}
+	
+	@RequestMapping("/newOrderSubmitted")
+	public ModelAndView newOrderSubmitted (@Valid @ModelAttribute("fundingOrderForm") FundingOrderForm fundingOrderForm, BindingResult result, SessionStatus sessionStatus, HttpSession session) {
+		if (result.hasErrors()) {
+			return new ModelAndView("order/OrderForm");
+		}
+
+		fundingRelationService.insertFundingOrder(fundingOrderForm.getFundingOrder());
+		String fundingId = fundingOrderForm.getFundingOrder().getFundingId();
+		String productId = fundingService.getFunding(fundingId).getProductId();
+		
+		Product product = productService.getProduct(productId);
+		
+		ModelAndView mav = new ModelAndView("funding/FundingOrderDetail");
+		mav.addObject("order", fundingOrderForm.getFundingOrder());
+		mav.addObject("product", product);
+		
+		return mav;
+	}
+	
 	
 	
 }

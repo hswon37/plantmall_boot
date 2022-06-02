@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.plantmall.dao.mybatis.mapper.FundingRelationMapper">
+<cache />
+
+	<select resultType="FundingOrder" id="getFundingOrder">
+		SELECT *
+		FROM FUNDINGRELATION WHERE FUNDINGRELATION.FUNDINGRELATIONID = #{param1}
+	</select>
+
+	<select resultType="FundingOrder" id="getAllFundingOrderListByUserId">
+		SELECT *
+		FROM FUNDINGRELATION WHERE FUNDINGRELATION.USERID = #{param1} ORDER BY ORDERDATE DESC
+	</select>
+
+	<insert id="insertFundingOrder" parameterType="FundingOrder">
+		INSERT INTO FUNDINGRELATION
+		(FUNDINGRELATIONID,
+		 STATUS,
+		 USERID,
+		 FUNDINGID,
+		 CREATE_AT,
+		 CREDITCARD,
+		 EXPIRYDATE,
+		 CARDTYPE,
+		 QUANTITY,
+		 TOTALPRICE)
+		VALUES (#{fundingRelationId},
+		'1',
+		#{userId},
+		#{fundingId},
+		SYSDATE,
+		#{creditCard},
+		#{expiryDate},
+		#{cardType},
+		#{quantity},
+		#{totalPrice})
+		<selectKey keyProperty="fundingRelationId" resultType="String" order="BEFORE">
+			SELECT FUNDINGRELATION_SEQ.NEXTVAL AS FUNDINGRELATIONID FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteFundingOrder">
+		DELETE FROM FUNDINGRELATION
+		WHERE FUNDINGRELATION.FUNDINGRELATIONID = #{param1}
+	</delete>
+	
+
+</mapper>
