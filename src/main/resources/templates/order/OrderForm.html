@@ -36,7 +36,7 @@
 				</td>
 			</tr>
 		</table>
-		<form action="#" th:action="@{/order/newOrderSubmitted(chkbox=${productIdArray},status=1)}" method="post" th:object="${orderForm}">
+		<form action="#" th:action="@{/order/newOrderSubmitted(chkbox=${productIdArray},status=1,pd=${pdNewOrder})}" method="post" th:object="${orderForm}">
 			<span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span>
 			<div class= "division">
 				<div class="left">
@@ -70,7 +70,6 @@
 						<div class="formRow">
 							<div class="formCol head">카드 타입</div>
 							<div class="formCol body">
-								<!-- <span th:each="err:${#fields.errors('orderForm.order.cardType')}" th:text="${err}"></span> -->
 								<select class="input default" th:field="*{order.cardType}">
 									<option th:each="ty:${creditCardTypes}" th:value="${ty}" th:text="${ty}">Visa</option>
 								</select>
@@ -79,7 +78,6 @@
 						<div class="formRow">
 							<div class="formCol head">카드 번호</div>
 							<div class="formCol body">
-								<!-- <span th:each="err:${#fields.errors('orderForm.order.creditCard')}" th:text="${err}"></span> -->
 								<input type="text" class="input default" th:field="*{order.creditCard}" placeholder="9999-9999-9999-9999" />
 								<span th:each="err:${#fields.errors('order.creditCard')}" th:text="${err}"></span>
 							</div>
@@ -87,7 +85,6 @@
 						<div class="formRow">
 							<div class="formCol head">유호기간 (MM/YY)</div>
 							<div class="formCol body">
-								<!-- <span th:each="err:${#fields.errors('orderForm.order.expiryDate')}" th:text="${err}"></span> -->
 								<input type="text" class="input default" th:field="*{order.expiryDate}" placeholder="11/24" />
 								<span th:each="err:${#fields.errors('order.expiryDate')}" th:text="${err}"></span>
 							</div>
@@ -101,12 +98,6 @@
 							<tr>
 								<th colspan="2">전체주문금액</th>
 							</tr>
-<!-- 							<tr>
-								<td> 주문 상품 수 </td>
-								<td class="txtRight">
-									<span class="quantity" id="quantity" th:text="${order.quantity}">1</span> 개
-								</td>
-							</tr> -->
 							<tr>
 								<td> 배송비 </td>
 								<td class="txtRight">

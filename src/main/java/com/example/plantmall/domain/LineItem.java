@@ -1,14 +1,18 @@
 package com.example.plantmall.domain;
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Getter @Setter 
 @NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("serial")
+@ToString
 public class LineItem implements Serializable {
 	
 	private int orderId;
@@ -25,7 +29,7 @@ public class LineItem implements Serializable {
 	    this.product = cartItem.getProduct();
 	    this.productId = cartItem.getProduct().getProductId();
 	}
-	
+
 	public int getTotalPrice() {
 		return this.unitPrice * this.quantity;
 	}
