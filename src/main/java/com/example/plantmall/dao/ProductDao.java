@@ -1,9 +1,11 @@
 package com.example.plantmall.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.plantmall.controller.ProductImg;
 import com.example.plantmall.controller.SearchValueCommand;
 import com.example.plantmall.domain.Product;
 
@@ -31,4 +33,9 @@ public interface ProductDao {
 
 	void deleteContentHaveProduct(Product product) throws DataAccessException;
 	
+	int saveProductImage(ProductImg productImg) throws DataAccessException;
+	
+	Map<String, Object> selectProductImage(String productImgIdx) throws DataAccessException;
+
+	List<Product> getBestProductList() throws DataAccessException;
 }

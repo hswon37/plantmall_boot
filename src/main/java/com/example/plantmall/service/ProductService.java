@@ -1,9 +1,11 @@
 package com.example.plantmall.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.plantmall.domain.Category;
 import com.example.plantmall.domain.Product;
+import com.example.plantmall.controller.ProductImg;
 import com.example.plantmall.controller.SearchValueCommand;
 
 public interface ProductService {
@@ -33,5 +35,13 @@ public interface ProductService {
 	public void deleteProduct(Product product);
 
 	public void deleteContentHaveProduct(Product product);
+	
+	public int saveProductImage(ProductImg productImg);
+	
+	public Map<String, Object> selectProductImage(String productImgIdx);
+
+	public String getUserName(String userId);
+
+	public List<Product> getBestProductList();
 
 }

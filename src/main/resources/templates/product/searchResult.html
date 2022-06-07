@@ -17,8 +17,8 @@
 			<tr th:each="miniProductList, iterStat : ${productList}">
 				<td th:each="product, miniIterStat : ${miniProductList}">
 					<a href="" th:href="@{/product/detail?productId=}+${product.productId}" name="productId" value="${product.productId}">				
-		 				<img th:src="@{/images/}+${product.productImg}" style="width:200px;height:200px" alt="제품사진">			<!-- 이미지도 jpetstore예제 보면 아예 img태그 자체가 db에 저장되어있음.jpetstore/src/main/resources/db/hsqldb/jpetstore.script -->	
-		 				<div th:text="${userNameList.get(iterStat.index).get(miniIterStat.index)}">판매자명</div>
+		 				<img alt="등록된 이미지가 없습니다" th:src="@{/getByteImage?p_name=}+${product.p_name}" style="width:200px; height:200px;" />
+						<div th:text="${userNameList.get(iterStat.index).get(miniIterStat.index)}">판매자명</div>
  						<div th:text="${product.p_name}">제품명</div>
 						<div th:text="${product.price}+원">가격</div>
 					</a>

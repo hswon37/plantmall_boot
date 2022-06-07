@@ -1,9 +1,11 @@
 package com.example.plantmall.dao.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.plantmall.controller.ProductImg;
 import com.example.plantmall.controller.SearchValueCommand;
 import com.example.plantmall.domain.Product;
 
@@ -33,4 +35,11 @@ public interface ProductMapper {
 	void deleteContentHaveProduct(Product product);
 
 	List<Product> searchProductList(String keywords);
+	
+	int saveProductImage(ProductImg productImg);
+	
+	Map<String, Object> selectProductImage(String productImgIdx);
+
+	List<Product> getBestProductList();
+
 }

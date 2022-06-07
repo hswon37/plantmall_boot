@@ -10,6 +10,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	display: inline-block;
 }
 
 #main li {
@@ -106,23 +107,30 @@
 							<li><img th:src="@{/images/temp.jpg}" width="300px" alt=""></li>
 						</ul>
 						<p class="controller">
-
-							<!-- &lang: 왼쪽 방향 화살표
-					&rang: 오른쪽 방향 화살표 -->
+							<!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 -->
 							<span class="prev">&lang;</span> <span class="next">&rang;</span>
 						</p>
 					</div>
 				</td>
-				<td><img th:src="@{/images/temp.jpg}" width="100px"><a
-					href="" th:href="@{/product/list}">식물</a></td>
+				<td>
+					<a href="" th:href="@{/product/list}">
+						<img th:src="@{/images/temp.jpg}" width="100px" alt="식물">
+					</a>
+				</td>
 			</tr>
 			<tr>
-				<td><img th:src="@{/images/temp.jpg}" width="100px%"><a
-					href="" th:href="@{/product/list?categoryId=c7}">원예용품</a></td>
+				<td>
+					<a href="" th:href="@{/product/list?categoryId=c7}">
+						<img th:src="@{/images/temp.jpg}" width="100px%" alt="원예용품">
+					</a>
+				</td>
 			</tr>
 			<tr>
-				<td><img th:src="@{/images/temp.jpg}" width="100px"><a
-					href="" th:href="@{/}">펀딩</a></td>
+				<td>
+					<a href="" th:href="@{/funding}">
+						<img th:src="@{/images/temp.jpg}" width="100px" alt="펀딩">
+					</a>
+				</td>
 			</tr>
 		</table>
 	</div>

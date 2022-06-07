@@ -62,8 +62,8 @@ public class SearchProductController {
 				productList.add(miniProductList);
 				userNameList.add(miniUserNameList);
 				for (int j = 0; j < 4; j++) {
-			//		String userName = this.~.getUserName(p.userId); //현재 user명 가져오는 방법 없음..
-					String userName = "admin";	//임시 userName
+					String userName = this.productService.getUserName(itemList.get(i+j).getUserId());
+
 					miniProductList.add(itemList.get(i+j));
 					miniUserNameList.add(userName);
 				} 

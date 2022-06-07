@@ -4,8 +4,6 @@
 <mapper
 	namespace="com.example.plantmall.dao.mybatis.mapper.ProductMapper">
 
-	<cache />
-
 	<select id="getProduct" parameterType="String"
 		resultType="Product">
 		SELECT
@@ -145,4 +143,38 @@
 		and USERID = #{userId}
 	</delete>
 
+	<!-- 이미지 저장 -->
+	<insert id="saveProductImage">
+		<![CDATA[
+		insert into PRODUCTIMG_TABLE (PRODUCTIMGIDX, PRODUCTIMGVALUE)
+		values (#{productImgIdx}, #{productImgValue})
+		]]>
+	</insert>
+	<!-- 이미지 조회 -->
+	<select id="selectProductImage" resultType="java.util.Map">
+		<![CDATA[
+		select PRODUCTIMGVALUE
+		from PRODUCTIMG_TABLE
+		where PRODUCTIMGIDX = #{productImgIdx}
+		]]>
+	</select>
+	
+	<select id="getBestProductList" resultType="Product">
+		<![CDATA[
+		SELECT *
+		FROM  ( SELECT p.PRODUCTID,
+					CATEGORYID,
+					p.USERID,
+					PNAME as p_name,
+					DESCRIPTION,
+					PRICE,
+					PRODUCTIMG
+				FROM PRODUCT p, LINEITEM l, ORDER_TABLE o  
+				where p.productid = l.productid and l.orderid = o.orderid 
+				and o.orderdate BETWEEN TRUNC(ADD_MONTHS(sysdate,-2)+1) - TO_CHAR(sysdate,'DD') AND TRUNC(LAST_DAY(sysdate))+0.99999421 
+				order by count(*)
+				)
+		WHERE ROWNUM <= 3
+		]]>
+	</select>
 </mapper>

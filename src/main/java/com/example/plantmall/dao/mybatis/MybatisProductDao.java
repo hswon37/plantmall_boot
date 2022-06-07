@@ -2,12 +2,15 @@ package com.example.plantmall.dao.mybatis;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.plantmall.controller.ProductImg;
+import com.example.plantmall.controller.ProductWithImgCommand;
 import com.example.plantmall.controller.SearchValueCommand;
 import com.example.plantmall.dao.ProductDao;
 import com.example.plantmall.dao.mybatis.mapper.ProductMapper;
@@ -90,4 +93,20 @@ public class MybatisProductDao implements ProductDao {
 	public void deleteContentHaveProduct(Product product) throws DataAccessException{
 		productMapper.deleteContentHaveProduct(product);
 	}
+	
+	@Override
+	public int saveProductImage(ProductImg productImg) throws DataAccessException{
+		 return productMapper.saveProductImage(productImg);
+	}
+
+	@Override
+	public Map<String, Object> selectProductImage(String productImgIdx) throws DataAccessException{
+		return productMapper.selectProductImage(productImgIdx);
+	}
+	
+	@Override
+	public List<Product> getBestProductList() throws DataAccessException{
+		return productMapper.getBestProductList();
+	}
+
 }

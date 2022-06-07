@@ -1,21 +1,27 @@
 package com.example.plantmall.service;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.plantmall.dao.CategoryDao;
 import com.example.plantmall.dao.ProductDao;
+import com.example.plantmall.dao.UserDao;
 import com.example.plantmall.domain.Category;
 import com.example.plantmall.domain.Product;
+import com.example.plantmall.controller.ProductImg;
 import com.example.plantmall.controller.SearchValueCommand;
-//import com.example.plantmall.domain.User;
 
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
 	@Autowired   
-	private CategoryDao categoryDao;	
+	private CategoryDao categoryDao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Autowired  
 	private ProductDao productDao;
@@ -71,4 +77,21 @@ public class ProductServiceImpl implements ProductService {
 	public void deleteContentHaveProduct(Product product){
 		productDao.deleteContentHaveProduct(product);
 	}
+	
+	public int saveProductImage(ProductImg productImg) {
+		return productDao.saveProductImage(productImg);
+	}
+	
+	public Map<String, Object> selectProductImage(String productImgIdx){
+		return productDao.selectProductImage(productImgIdx);
+	}
+	
+	public String getUserName(String userId) {
+		return userDao.getUserById(userId).getUserName();
+	}
+	
+	public List<Product> getBestProductList(){
+		return productDao.getBestProductList();
+	}
+	
 }
