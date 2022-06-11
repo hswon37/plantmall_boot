@@ -1,4 +1,4 @@
-package com.example.plantmall.controller;
+package com.example.plantmall.controller.Product;
 
 import lombok.Data;
 

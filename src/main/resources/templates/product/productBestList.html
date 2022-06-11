@@ -8,7 +8,7 @@
 <body onload="init();">
 	<div th:insert="~{header :: #top}"></div>
 	<h2>BEST 제품 목록</h2>
-	<h3>최근 3개월간 주문량이 많은 제품입니다</h3>
+	<h3>최근 1개월간 주문량이 많은 제품입니다</h3>
 	<div align="center">
 		<table class="noLineTable">
 			<tr th:each="miniProductList, iterStat : ${productList}">

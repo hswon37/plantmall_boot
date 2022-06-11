@@ -49,7 +49,7 @@
 	</select>
 
 	<select id="searchProductList"
-		parameterType="com.example.plantmall.controller.SearchValueCommand"
+		parameterType="com.example.plantmall.controller.Product.SearchValueCommand"
 		resultType="Product">
 		SELECT
 		PRODUCTID,
@@ -161,20 +161,27 @@
 	
 	<select id="getBestProductList" resultType="Product">
 		<![CDATA[
-		SELECT *
+		SELECT PRODUCTID,
+			CATEGORYID,
+			USERID,
+			p_name,
+			DESCRIPTION,
+			PRICE,
+			PRODUCTIMG
 		FROM  ( SELECT p.PRODUCTID,
 					CATEGORYID,
 					p.USERID,
 					PNAME as p_name,
 					DESCRIPTION,
 					PRICE,
-					PRODUCTIMG
+					PRODUCTIMG,
+					ROW_NUMBER() OVER (PARTITION BY p.productid ORDER BY o.orderdate)  AS RN
 				FROM PRODUCT p, LINEITEM l, ORDER_TABLE o  
 				where p.productid = l.productid and l.orderid = o.orderid 
-				and o.orderdate BETWEEN TRUNC(ADD_MONTHS(sysdate,-2)+1) - TO_CHAR(sysdate,'DD') AND TRUNC(LAST_DAY(sysdate))+0.99999421 
+				and o.orderdate BETWEEN ADD_MONTHS(sysdate,-1) AND sysdate
 				order by count(*)
-				)
-		WHERE ROWNUM <= 3
+				) R
+		WHERE R.RN=1
 		]]>
 	</select>
 </mapper>

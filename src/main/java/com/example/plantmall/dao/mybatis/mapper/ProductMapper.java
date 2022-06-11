@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.plantmall.controller.ProductImg;
-import com.example.plantmall.controller.SearchValueCommand;
+import com.example.plantmall.controller.Product.ProductImg;
+import com.example.plantmall.controller.Product.SearchValueCommand;
 import com.example.plantmall.domain.Product;
 
 @Mapper

@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.example.plantmall.controller.ProductImg;
-import com.example.plantmall.controller.ProductWithImgCommand;
-import com.example.plantmall.controller.SearchValueCommand;
+import com.example.plantmall.controller.Product.ProductImg;
+import com.example.plantmall.controller.Product.ProductWithImgCommand;
+import com.example.plantmall.controller.Product.SearchValueCommand;
 import com.example.plantmall.dao.ProductDao;
 import com.example.plantmall.dao.mybatis.mapper.ProductMapper;
 import com.example.plantmall.domain.Product;

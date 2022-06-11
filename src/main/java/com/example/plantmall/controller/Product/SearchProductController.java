@@ -1,4 +1,4 @@
-package com.example.plantmall.controller;
+package com.example.plantmall.controller.Product;
 
 import java.util.ArrayList;
 import java.util.List;

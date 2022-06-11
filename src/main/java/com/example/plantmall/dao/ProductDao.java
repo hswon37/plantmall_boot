@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import com.example.plantmall.controller.ProductImg;
-import com.example.plantmall.controller.SearchValueCommand;
+import com.example.plantmall.controller.Product.ProductImg;
+import com.example.plantmall.controller.Product.SearchValueCommand;
 import com.example.plantmall.domain.Product;
 
 public interface ProductDao {

@@ -1,4 +1,4 @@
-package com.example.plantmall.controller;
+package com.example.plantmall.controller.Product;
 
 import java.io.BufferedInputStream;
 import java.sql.Blob;

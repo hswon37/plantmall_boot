@@ -3,10 +3,10 @@ package com.example.plantmall.service;
 import java.util.List;
 import java.util.Map;
 
+import com.example.plantmall.controller.Product.ProductImg;
+import com.example.plantmall.controller.Product.SearchValueCommand;
 import com.example.plantmall.domain.Category;
 import com.example.plantmall.domain.Product;
-import com.example.plantmall.controller.ProductImg;
-import com.example.plantmall.controller.SearchValueCommand;
 
 public interface ProductService {
 

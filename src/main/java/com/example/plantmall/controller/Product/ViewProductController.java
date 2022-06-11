@@ -1,4 +1,4 @@
-package com.example.plantmall.controller;
+package com.example.plantmall.controller.Product;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ import com.example.plantmall.service.AuthService;
 import com.example.plantmall.service.EnquiryService;
 import com.example.plantmall.service.ProductService;
 import com.example.plantmall.service.ReviewService;
+import com.example.plantmall.controller.UserSession;
 import com.example.plantmall.domain.EnqComm;
 import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Product;
@@ -28,6 +29,7 @@ import com.example.plantmall.domain.Review;
 @Controller
 public class ViewProductController {
 
+	@Autowired
 	private ProductService productService;
 	@Autowired
 	private AuthService authService;
