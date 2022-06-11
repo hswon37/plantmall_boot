@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>식몰</title>
+<link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+</head>
+<body>
+	<div th:insert="~{header :: #top}"></div>
+	<hr>
+	<div class="orderPage">
+		<div class="orderList">
+			<table class="orderElement">
+				<tbody>
+					<tr th:if="${#lists.size('orderList')} == 0">
+						<td style="text-align: center;" colspan="8"><b>주문 목록이 비어있습니다.</b></td>
+					</tr>
+					<tr th:each="order, status:${fundingOrderList}">
+						<td>
+							<div class="orderInfo">
+								<b><span th:text="${#dates.format(order.create_at, 'yyyy.MM.dd HH:mm')}">2022.04.09</span></b>
+								<span class="orderDetailPage">
+									<a href="#" th:href="@{/order/orderDetail(orderId=${order.orderId},status=0)}">주문 상세보기</a>
+								</span>
+							</div>
+
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

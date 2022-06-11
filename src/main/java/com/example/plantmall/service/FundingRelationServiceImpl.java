@@ -14,9 +14,9 @@ public class FundingRelationServiceImpl implements FundingRelationService{
 	FundingRelationDao fundingRelationDao;
 
 	@Override
-	public List<FundingOrder> getAllFundingOrderList(String id) {
+	public List<FundingOrder> getAllFundingOrderListByBuyerId(String id) {
 		// TODO Auto-generated method stub
-		return fundingRelationDao.getAllFundingOrderListByUserId(id);
+		return fundingRelationDao.getAllFundingOrderListByBuyerId(id);
 	}
 
 	@Override

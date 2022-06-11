@@ -1,6 +1,7 @@
 package com.example.plantmall.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -8,8 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @SuppressWarnings("serial")
-@Getter @Setter
-@ToString
+@Getter @Setter @ToString
 public class Product implements Serializable {
 	private String productId;
 	private String categoryId;

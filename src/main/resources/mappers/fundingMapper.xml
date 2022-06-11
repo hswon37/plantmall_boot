@@ -1,13 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.plantmall.dao.mybatis.mapper.FundingMapper">
- 
+
     <!-- Funding 전체 목록 -->
     <select id="getAllFundingList" resultType="Funding">
-    	SELECT F.*, P.PRODUCTIMG
+    	SELECT 
+    		F.*,P.*
     	FROM FUNDING F, PRODUCT P
     	WHERE F.PRODUCTID=P.PRODUCTID
     </select>
+   
     
     <select id="getMyAllProductListByUserEmail" parameterType="String" resultType="Product">
 	    SELECT 
@@ -34,10 +36,11 @@
 	    	OPENDATE,
 	    	CLOSEDATE,
 	    	TARGETQUANTITY,
-	    	DELIVERYDATE
+	    	DELIVERYDATE,
+	    	SELLERID
 	    	)
     	VALUES
-    	(#{fundingId},#{productId},#{productInformation},#{title},#{openDate},#{closeDate},#{targetQuantity},#{deliveryDate})
+    	(#{fundingId},#{productId},#{productInformation},#{title},#{openDate},#{closeDate},#{targetQuantity},#{deliveryDate},#{sellerId})
     	<selectKey keyProperty="fundingId" resultType="String" order="BEFORE">
 			SELECT FUNDING_SEQ.NEXTVAL AS fundingId FROM DUAL
 		</selectKey>
@@ -59,16 +62,15 @@
   
   <update id="updateFunding" parameterType="Funding">
   	UPDATE FUNDING SET
-  			FUNDINGID=#{fundingId},
-	    	PRODUCTID=#{productId},
-	    	PRODUCTINFORMATION=#{productInformation},
-	    	TITLE=#{title},
-	    	OPENDATE=#{openDate},
-	    	CLOSEDATE=#{closeDate},
-	    	UPDATE_AT=SYSDATE,
-	    	TARGETQUANTITY=#{targetQuantity},
-	    	DELIVERYDATE=#{deliveryDate}
-   WHERE FUNDINGID=#{fundingId}
+	    	PRODUCTID =#{productId},
+	    	PRODUCTINFORMATION =#{productInformation},
+	    	TITLE =#{title},
+	    	OPENDATE =#{openDate},
+	    	CLOSEDATE =#{closeDate},
+	    	UPDATE_AT =SYSDATE,
+	    	TARGETQUANTITY =#{targetQuantity},
+	    	DELIVERYDATE =#{deliveryDate}
+   WHERE FUNDING.FUNDINGID =#{fundingId}
   	
   </update>
   
@@ -77,5 +79,4 @@
   	WHERE FUNDINGID = #{param1}
   </delete>
   
-
 </mapper>

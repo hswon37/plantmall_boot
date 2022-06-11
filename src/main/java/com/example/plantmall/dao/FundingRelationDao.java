@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.plantmall.domain.FundingOrder;
 
 public interface FundingRelationDao {
-	List<FundingOrder> getAllFundingOrderListByUserId(String id);
+	List<FundingOrder> getAllFundingOrderListByBuyerId(String id);
 	FundingOrder getFundingOrder(String id);
 	
 	void insertFundingOrder(FundingOrder fundingOrder);

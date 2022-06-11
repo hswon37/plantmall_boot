@@ -9,23 +9,26 @@
 		FROM FUNDINGRELATION WHERE FUNDINGRELATION.FUNDINGRELATIONID = #{param1}
 	</select>
 
-	<select resultType="FundingOrder" id="getAllFundingOrderListByUserId">
+	<select resultType="FundingOrder" id="getAllFundingOrderListByBuyerId">
 		SELECT *
-		FROM FUNDINGRELATION WHERE FUNDINGRELATION.USERID = #{param1} ORDER BY ORDERDATE DESC
+		FROM FUNDINGRELATION WHERE FUNDINGRELATION.BUYERID = #{param1} ORDER BY create_at DESC
 	</select>
 
 	<insert id="insertFundingOrder" parameterType="FundingOrder">
 		INSERT INTO FUNDINGRELATION
 		(FUNDINGRELATIONID,
 		 STATUS,
-		 USERID,
+		 BUYERID,
 		 FUNDINGID,
 		 CREATE_AT,
 		 CREDITCARD,
 		 EXPIRYDATE,
 		 CARDTYPE,
 		 QUANTITY,
-		 TOTALPRICE)
+		 TOTALPRICE,
+		 USERNAME,
+		 PHONENUMBER,
+		 SHIPADDRESS)
 		VALUES (#{fundingRelationId},
 		'1',
 		#{userId},
@@ -35,7 +38,10 @@
 		#{expiryDate},
 		#{cardType},
 		#{quantity},
-		#{totalPrice})
+		#{totalPrice},
+		#{userName},
+		#{phoneNumber},
+		#{shipAddress})
 		<selectKey keyProperty="fundingRelationId" resultType="String" order="BEFORE">
 			SELECT FUNDINGRELATION_SEQ.NEXTVAL AS FUNDINGRELATIONID FROM DUAL
 		</selectKey>
