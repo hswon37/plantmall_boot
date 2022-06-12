@@ -15,6 +15,6 @@ public class SignOffController {
 		session.removeAttribute("orderForm");
 		System.out.println(session.getAttribute("sessionCart"));
 		session.invalidate();
-		return "main";
+		return "redirect:/";
 	}
 }

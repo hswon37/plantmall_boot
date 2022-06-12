@@ -16,6 +16,8 @@ public interface ProductMapper {
 	
 	List<Product> getProductHaveLineItem(String productId);
 	
+	List<Product> getProductHaveCartItem(String productId);
+	
 	List<Product> getProductListByCategory(String categoryId);
 	
 	List<Product> searchProductList(SearchValueCommand svc);
@@ -35,8 +37,12 @@ public interface ProductMapper {
 	void deleteContentHaveProduct(Product product);
 
 	List<Product> searchProductList(String keywords);
-	
+
 	int saveProductImage(ProductImg productImg);
+	
+	int updateProductImage(ProductImg productImg);
+
+	int deleteProductImage(String productImgIdx);
 	
 	Map<String, Object> selectProductImage(String productImgIdx);
 

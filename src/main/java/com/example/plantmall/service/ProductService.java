@@ -11,8 +11,10 @@ import com.example.plantmall.domain.Product;
 public interface ProductService {
 
 	public Product getProduct(String productId);
-	
+
 	public List<Product> getProductHaveLineItem(String productId);
+	
+	public List<Product> getProductHaveCartItem(String productId);
 	
 	public Category getCategory(String categoryId);
 	
@@ -35,8 +37,12 @@ public interface ProductService {
 	public void deleteProduct(Product product);
 
 	public void deleteContentHaveProduct(Product product);
-	
+
 	public int saveProductImage(ProductImg productImg);
+	
+	public int updateProductImage(ProductImg productImg);
+	
+	public int deleteProductImage(String productImgIdx);
 	
 	public Map<String, Object> selectProductImage(String productImgIdx);
 

@@ -33,6 +33,22 @@
 		p.PRODUCTID = l.PRODUCTID
 		and p.PRODUCTID = #{productId}
 	</select>
+	
+	<select id="getProductHaveCartItem" parameterType="String"
+		resultType="Product">
+		SELECT
+		p.PRODUCTID,
+		CATEGORYID,
+		p.USERID,
+		PNAME as p_name,
+		DESCRIPTION,
+		PRICE,
+		PRODUCTIMG
+		FROM PRODUCT p, CartItem c
+		WHERE
+		p.PRODUCTID = c.PRODUCTID
+		and p.PRODUCTID = #{productId}
+	</select>
 
 	<select id="getProductListByCategory" parameterType="String"
 		resultType="Product">
@@ -150,6 +166,24 @@
 		values (#{productImgIdx}, #{productImgValue})
 		]]>
 	</insert>
+	<!-- 이미지 수정 -->
+	<update id="updateProductImage">
+		<![CDATA[
+		update PRODUCTIMG_TABLE
+		set 
+		PRODUCTIMGIDX = #{productImgIdx}, 
+		PRODUCTIMGVALUE = #{productImgValue}
+		where PRODUCTIMGIDX = #{productImgIdx}
+		]]>
+	</update>
+	<!-- 이미지 삭제 -->
+	<delete id="deleteProductImage">
+		<![CDATA[
+		delete
+		from PRODUCTIMG_TABLE
+		where PRODUCTIMGIDX = #{productImgIdx}
+		]]>
+	</delete>	
 	<!-- 이미지 조회 -->
 	<select id="selectProductImage" resultType="java.util.Map">
 		<![CDATA[
