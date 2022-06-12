@@ -14,4 +14,6 @@ public interface FundingMapper {
 	List<Product> getMyAllProductListByUserEmail(String email);
 	void updateFunding(Funding funding);
 	void deleteFunding(String id);
+	
+	List<Funding> getAllMyFundingList(String id);
 }

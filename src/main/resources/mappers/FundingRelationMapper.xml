@@ -13,8 +13,9 @@
 		SELECT *
 		FROM FUNDINGRELATION WHERE FUNDINGRELATION.BUYERID = #{param1} ORDER BY create_at DESC
 	</select>
-
+	
 	<insert id="insertFundingOrder" parameterType="FundingOrder">
+	BEGIN
 		INSERT INTO FUNDINGRELATION
 		(FUNDINGRELATIONID,
 		 STATUS,
@@ -41,16 +42,23 @@
 		#{totalPrice},
 		#{userName},
 		#{phoneNumber},
-		#{shipAddress})
+		#{shipAddress});
 		<selectKey keyProperty="fundingRelationId" resultType="String" order="BEFORE">
 			SELECT FUNDINGRELATION_SEQ.NEXTVAL AS FUNDINGRELATIONID FROM DUAL
 		</selectKey>
+		
+		UPDATE FUNDING
+		SET ORDERNUM = ORDERNUM+1
+		WHERE FUNDINGID = #{fundingId};
+		END;
 	</insert>
 	
-	<delete id="deleteFundingOrder">
-		DELETE FROM FUNDINGRELATION
+	
+	<update id="deleteFundingOrder">
+		UPDATE FUNDINGRELATION
+		SET STATUS=0
 		WHERE FUNDINGRELATION.FUNDINGRELATIONID = #{param1}
-	</delete>
+	</update>
 	
 
 </mapper>

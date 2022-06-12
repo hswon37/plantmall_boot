@@ -5,12 +5,24 @@
     <!-- Funding 전체 목록 -->
     <select id="getAllFundingList" resultType="Funding">
     	SELECT 
-    		F.*,P.*
+    		F.*,
+    		P.PNAME AS p_name
     	FROM FUNDING F, PRODUCT P
     	WHERE F.PRODUCTID=P.PRODUCTID
     </select>
-   
     
+   	<select resultType="Funding" id="getAllMyFundingList">
+		SELECT 
+			FUNDINGID,
+			CREATE_AT AS createAt,
+			TITLE,
+			TARGETQUANTITY,
+			ORDERNUM,
+			SELLERID
+		FROM FUNDING 
+		WHERE SELLERID=#{param1}
+	</select>
+	
     <select id="getMyAllProductListByUserEmail" parameterType="String" resultType="Product">
 	    SELECT 
 	    	PRODUCTID,
@@ -21,9 +33,10 @@
 	    	PRODUCTIMG,
 	    	USERID,
 	    	TARGETQUANTITY,
+	    	ORDERNUM,
 	    	DELIVERYDATE
 	      FROM PRODUCT
-	      WHERE PRODUCT.USERID =#{param1}
+	      WHERE PRODUCT.SELLERID =#{param1}
 	      
     </select>
     
@@ -36,6 +49,7 @@
 	    	OPENDATE,
 	    	CLOSEDATE,
 	    	TARGETQUANTITY,
+	    	ORDERNUM,
 	    	DELIVERYDATE,
 	    	SELLERID
 	    	)
@@ -55,6 +69,7 @@
 	    	OPENDATE,
 	    	CLOSEDATE,
  		    TARGETQUANTITY,
+ 		    ORDERNUM,
 	    	DELIVERYDATE
 	    FROM FUNDING
 	    WHERE FUNDING.FUNDINGID = #{param1}

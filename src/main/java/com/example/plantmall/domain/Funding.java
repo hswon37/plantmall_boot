@@ -26,7 +26,7 @@ public class Funding implements Serializable{
 	private Date createAt;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
-	private String productImg;
+	private String p_name;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date openDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -34,6 +34,7 @@ public class Funding implements Serializable{
 	private int targetQuantity;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date deliveryDate;
+	private int orderNum;
 	
 	
 }

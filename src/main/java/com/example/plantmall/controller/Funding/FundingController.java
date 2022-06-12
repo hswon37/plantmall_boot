@@ -210,7 +210,7 @@ public class FundingController {
 	}
 
 	
-	@RequestMapping("/orders")
+	@RequestMapping("/order")
 	public ModelAndView viewFundingOrderList(HttpServletRequest request) {
 		UserSession userSession=
 				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
@@ -219,8 +219,10 @@ public class FundingController {
 		mav.setViewName("funding/fundingOrderList");
 		
 		List<FundingOrder> fundingOrderList = fundingRelationService.getAllFundingOrderListByBuyerId(userSession.getUser().getUserId());
+		List<Funding> myFundingList = fundingService.getAllMyFundingList(userSession.getUser().getUserId());
 		
 		mav.addObject("fundingOrderList",fundingOrderList);
+		mav.addObject("myFundingList", myFundingList);
 		return mav;
 	}	
 
@@ -240,5 +242,6 @@ public class FundingController {
 		mav.addObject("product",product);
 		return mav;
 	}	
+	
 	
 }
