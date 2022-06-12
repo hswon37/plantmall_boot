@@ -143,10 +143,11 @@ public class ManageProductController {
 
 		this.productService.updateProduct(product);
 
-		// 제품 이미지 테이블 저장
-		ProductImg productImg = new ProductImg(productImgIdx, productWithImgCommand.getProductImgValue().getBytes());
-		productService.saveProductImage(productImg);
-
+		// 제품 이미지 테이블 수정
+		if (!productWithImgCommand.getProductImgValue().isEmpty()) {	//새로 전달된 값이 있으면 수정, 아니면 유지
+			ProductImg productImg = new ProductImg(productImgIdx, productWithImgCommand.getProductImgValue().getBytes());
+			productService.updateProductImage(productImg);
+		}
 		System.out.println(product.getP_name() + " 제품 수정 완료");
 		System.out.println(product);
 		rttr.addFlashAttribute(product.getP_name() + " 제품이 수정되었습니다.");
@@ -177,13 +178,18 @@ public class ManageProductController {
 	public String productDelete(Product product, RedirectAttributes rttr) throws Exception {
 
 		List<Product> checkProductinLineItem = this.productService.getProductHaveLineItem(product.getProductId());
+		List<Product> checkProductinCartItem = this.productService.getProductHaveCartItem(product.getProductId());
 		String resultmsg = "";
 
-		if (checkProductinLineItem.size() > 0) { // lineItem에 담긴 제품은 삭제 불가
+		if (checkProductinLineItem.size() > 0 || checkProductinCartItem.size() > 0 ) { // LineItem, CartItem에 담긴 제품은 삭제 불가
 			System.out.println(product.getP_name() + " 제품을 삭제할 수 없음");
 			resultmsg = "<script>alert('해당 제품을 삭제할 수 없음');location.href='/product/manage?userId=" + product.getUserId()
 					+ "'</script>";
 		} else {
+			// 제품 이미지 테이블 삭제
+			String productImgIdx = "img_" + product.getP_name();
+			productService.deleteProductImage(productImgIdx);
+
 			this.productService.deleteContentHaveProduct(product); // 해당 제품 관련 피드 있으면 먼저 삭제
 			this.productService.deleteProduct(product); // 그다음 제품 삭제
 

@@ -32,6 +32,11 @@ public class MybatisProductDao implements ProductDao {
 	}
 	
 	@Override
+	public List<Product> getProductHaveCartItem(String productId) throws DataAccessException {
+	    return productMapper.getProductHaveCartItem(productId);
+	}	
+
+	@Override
 	public List<Product> getProductListByCategory(String categoryId) 
 			throws DataAccessException {
 	    return productMapper.getProductListByCategory(categoryId);
@@ -98,7 +103,17 @@ public class MybatisProductDao implements ProductDao {
 	public int saveProductImage(ProductImg productImg) throws DataAccessException{
 		 return productMapper.saveProductImage(productImg);
 	}
-
+	
+	@Override
+	public int updateProductImage(ProductImg productImg) throws DataAccessException{
+		return productMapper.updateProductImage(productImg);
+	}
+	
+	@Override
+	public int deleteProductImage(String productImgIdx) throws DataAccessException{
+		return productMapper.deleteProductImage(productImgIdx);
+	}
+	
 	@Override
 	public Map<String, Object> selectProductImage(String productImgIdx) throws DataAccessException{
 		return productMapper.selectProductImage(productImgIdx);

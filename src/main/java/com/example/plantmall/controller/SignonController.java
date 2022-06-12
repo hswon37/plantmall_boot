@@ -55,7 +55,7 @@ public class SignonController {
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 
-				return new ModelAndView("main");
+				return new ModelAndView("redirect:/");
 		}
 	}
 	

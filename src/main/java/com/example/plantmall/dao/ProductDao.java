@@ -15,6 +15,8 @@ public interface ProductDao {
 
 	List<Product> getProductHaveLineItem(String productId) throws DataAccessException;
 
+	List<Product> getProductHaveCartItem(String productId) throws DataAccessException;
+
 	List<Product> getProductListByCategory(String categoryId) throws DataAccessException;
 
 	List<Product> searchProductList(SearchValueCommand svc) throws DataAccessException;
@@ -34,6 +36,10 @@ public interface ProductDao {
 	void deleteContentHaveProduct(Product product) throws DataAccessException;
 	
 	int saveProductImage(ProductImg productImg) throws DataAccessException;
+	
+	int updateProductImage(ProductImg productImg) throws DataAccessException;
+	
+	int deleteProductImage(String productImgIdx) throws DataAccessException;
 	
 	Map<String, Object> selectProductImage(String productImgIdx) throws DataAccessException;
 

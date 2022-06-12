@@ -34,6 +34,10 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getProductHaveLineItem(String productId) {
 		return productDao.getProductHaveLineItem(productId);
 	}
+
+	public List<Product> getProductHaveCartItem(String productId) {
+		return productDao.getProductHaveCartItem(productId);
+	}
 	
 	public Category getCategory(String categoryId) {
 		return categoryDao.getCategory(categoryId);
@@ -78,9 +82,17 @@ public class ProductServiceImpl implements ProductService {
 	public void deleteContentHaveProduct(Product product){
 		productDao.deleteContentHaveProduct(product);
 	}
-	
+
 	public int saveProductImage(ProductImg productImg) {
 		return productDao.saveProductImage(productImg);
+	}
+	
+	public int updateProductImage(ProductImg productImg) {
+		return productDao.updateProductImage(productImg);
+	}
+
+	public int deleteProductImage(String productImgIdx) {
+		return productDao.deleteProductImage(productImgIdx);
 	}
 	
 	public Map<String, Object> selectProductImage(String productImgIdx){
