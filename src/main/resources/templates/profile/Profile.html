@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>식몰</title>
+<link rel="stylesheet" href="../../static/style/user.css" type="text/css" >
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}">
+</head>
+<body>
+<div th:insert="~{header :: #top}"></div>
+		<!-- 유저 프로필 -->
+		<div class="profileGroup">
+			<!-- 유저 이미지 -->
+			<a th:href="@{/profile/update}" class="profileImage"></a>
+			
+			<!-- 유저 이름,팔로우/언팔로우버튼 -->
+			<div class="rower">
+				<div class="name"><h2 th:text="${profile.nickName}" ></h2></div>
+<!--				<button th:if="!*${userId}==${#session.getAttribute('userId')} and !${user.userProfile.isFollowed}" th:onclick="|clickFollow(${user.userProfile.user.userId}, this)|">팔로우</button>
+				<button th:if="!${user.userProfile.isloginUser} and ${user.userProfile.isFollowed}" th:onclick="|clickFollow(${user.userProfile.user.userId}, this)|">언팔로우</button>
+			--></div>
+			
+			<!-- 유저 게시물수, 팔로우수, 팔로잉수 -->
+			<div class="rower">
+				<div>
+					게시물<span th:text="${profile.feedCnt}" ></span>
+				</div>
+				<div>
+					<a class="followText" th:onclick=""><span th:text="|팔로워 ${profile.FollowerCnt}|" ></span> </a>
+				</div>
+				<div>
+					<a class="followText" th:onclick=""><span th:text="|팔로잉 ${profile.FollowingCnt}|" ></span></a>
+				</div>
+			</div>
+			
+			<!-- 유저 소개 -->
+			<div class="rower2"><h3 th:text="${profile.introduce}" ></h3></div>
+			<!-- 제품관리페이지이동버튼, 피드업로드버튼 -->
+			<div>
+				<button class="goProjectPagebtn" th:if="${#strings.equals(profile.userId, sessionUserId)}" onclick="location.href='/product/manage'">제품관리</button>
+				<button class="uploadbtn">피드 업로드</button>
+			</div>
+	
+		</div>
+		<!-- 유저 프로필 끝 -->
+		<!-- 업로드 피드 리스트(구현 중) -->
+
+		<hr />
+
+		<div class="photo">
+
+			<!-- content List 
+			<div class="photo1">
+				<th:if var="item" items="${profile.contentList}">
+					<div class="feedRow">
+						<a href="userPage/feed"><img class="feedImage" src="${item.feed}">1</a>
+						
+					</div>
+					<div class="feedRow">
+						<a href="userPage/feed"><img class="feedImage" src="${item.feed}">2</a>
+					</div>
+					<div class="feedRow">
+						<a href="userPage/feed"><img class="feedImage" src="${item.feed}">3</a>
+					</div>
+				</c:forEach>
+			</div>-->
+
+		</div>
+
+	</div>
+	
+	<!--피드 종류 선택창 -->
+	<div id="modal" class="selectContentCategory">
+      <div class="modal-window">
+            <div class="modal-title"><br />업로드 할 피드 종류 선택</div>
+            <div class="modal-close">X</div>
+            <div class="modal-btn snsContent" th:href="@{/content/uploadSnsContent}">
+                     일상피드
+            </div>
+            <div class="modal-btn saleContent" th:href="@{/content/uploadSaleContent}">
+                     판매피드
+            </div>
+      </div>
+ 
+    </div> -->
+    
+    <script type="text/javascript">
+        
+        const modal = document.querySelector(".selectContentCategory");
+        const openModal = document.querySelector(".uploadbtn");
+        const closeModal = document.querySelector(".modal-close");
+        const snsContent = document.querySelector("snsContent");
+        const saleContent = document.querySelector("saleContent");
+        
+       	openModal.addEventListener("click", function(){
+       		modal.style.display ="flex";
+       	})
+       	
+       	closeModal.addEventListener("click", function(){
+       		modal.style.display ="none";
+       	})
+        
+      </script>
+</body>
+</html>
