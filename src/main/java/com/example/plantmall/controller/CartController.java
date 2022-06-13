@@ -145,8 +145,8 @@ public class CartController {
 	public String deleteCartItem(HttpSession session, @RequestParam("productId") String productId, @RequestParam("userId") String userId, 
 			@ModelAttribute("sessionCart") Cart cart) throws Exception {
 		System.out.println("\n\n deleteCartItem \n\n");
-
 		cartService.deleteCartItem(cart.getItemMap().get(productId));
+		cart.getItemMap().remove(productId);
 		return "redirect:/cart/list";
 	}
 	
