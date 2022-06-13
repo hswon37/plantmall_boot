@@ -115,7 +115,7 @@
 									<div class="cartItemBox" th:object="${cartItem.product}">
 										<div class="imgBox">
 											<a href="#" th:href="@{/product/detail(productId=${cartItem.productId})}">
-											<img th:src="@{/static/images/} + ${cartItem.product.productImg}" /></a>
+											<img th:src="@{/getByteImage?p_name=} + ${cartItem.product.p_name}" /></a>
 										</div>
 										<div class="content">
 											<p>
