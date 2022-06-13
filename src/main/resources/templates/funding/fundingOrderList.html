@@ -9,12 +9,14 @@
 <body>
 	<div th:insert="~{header :: #top}"></div>
 	<hr>
+	
+	
 	<div class="orderPage">
 	<h2>펀딩 주문 내역</h2>
-		<div class="orderList">
+		<div class="orderList"  th:if="${fundingOrderList}">
 			<table class="orderElement">
 				<tbody>
-					<tr th:if="${#lists.size('orderList')} == 0">
+					<tr th:if="${#lists.size('fundingOrderList')} == 0">
 						<td style="text-align: center;" colspan="8"><b>주문 목록이 비어있습니다.</b></td>
 					</tr>
 					<tr>
@@ -41,10 +43,10 @@
 			</table>
 		</div>
 	<h2>내 펀딩</h2>
-			<div class="orderList">
+			<div class="orderList" th:if="${myFundingList}">
 			<table class="orderElement">
 				<tbody>
-					<tr th:if="${#lists.size('orderList')} == 0">
+					<tr th:if="${#lists.size('myFundingList')} == 0">
 						<td style="text-align: center;" colspan="8"><b>주문 목록이 비어있습니다.</b></td>
 					</tr>
 					<tr>
@@ -63,13 +65,40 @@
 						<td><span th:text="|${funding.orderNum}/${funding.targetQuantity}|">12/50</span></td>
 						<td>
 							<span class="orderDetailPage">
-								<a href="#" th:href="@{/funding/order/{fundingId}(fundingId=${funding.fundingId})}">주문 상세보기</a>
+								<a id="btn_click" th:value="|/funding/buyerList/${funding.fundingId}|" th:href="@{/funding/buyerList/{fundingId}(fundingId=${funding.fundingId})}">주문 상세보기</a>
 							</span>
 						</td>
 
 				</tbody>
 			</table>
 		</div>
+		
+				<div th:if="${orderList}"  class="orderList">
+			<table class="orderElement">
+				<tbody>
+					<tr th:if="${#lists.size('orderList')} == 0">
+						<td style="text-align: center;" colspan="8"><b>주문 목록이 비어있습니다.</b></td>
+					</tr>
+					<tr>
+						<td><span>주문번호</span></td>
+						<td><span>주문상태</span></td>
+						<td><span>주문자아이디</span></td>
+						<td></td>
+					</tr>
+					<tr th:each="order, status:${orderList}">
+						<td>
+							<b><span th:text="|${#dates.format(order.create_at, 'yyyyMMdd')}${order.fundingRelationId}|">2022061271</span></b>
+						</td>
+						<td><span th:text="${order.status}">주문취소</span></td>
+						<td>
+							<b><span th:text="${order.userId}">다육이펀딩</span></b>
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
+
 </body>
 </html>

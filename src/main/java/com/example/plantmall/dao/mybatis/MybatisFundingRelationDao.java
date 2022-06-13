@@ -34,5 +34,10 @@ public class MybatisFundingRelationDao implements FundingRelationDao{
 		
 	}
 
+	@Override
+	public List<FundingOrder> getAllMyFundingOrderList(String fundingId) {
+		return fundingRelationMapper.getAllMyFundingOrderList(fundingId);
+	}
+
 
 }

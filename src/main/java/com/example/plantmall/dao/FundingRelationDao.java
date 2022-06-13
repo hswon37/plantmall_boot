@@ -11,4 +11,5 @@ public interface FundingRelationDao {
 	void insertFundingOrder(FundingOrder fundingOrder);
 	void deleteFundingOrder(String id);
 	
+	List<FundingOrder> getAllMyFundingOrderList(String fundingId);
 }

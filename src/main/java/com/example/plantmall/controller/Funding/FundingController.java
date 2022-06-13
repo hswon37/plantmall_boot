@@ -244,4 +244,18 @@ public class FundingController {
 	}	
 	
 	
+	@RequestMapping("/buyerList/{fundingId}")
+	public ModelAndView viewMyFundingOrderDetail(@PathVariable String fundingId, HttpServletRequest request) {
+		UserSession userSession=
+				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("funding/fundingOrderList");
+		
+		List<FundingOrder> orderList = fundingRelationService.getAllMyFundingOrderList(fundingId); 
+		
+		mav.addObject("orderList", orderList);
+		return mav;
+	}	
+	
 }

@@ -36,4 +36,10 @@ public class FundingRelationServiceImpl implements FundingRelationService{
 		// TODO Auto-generated method stub
 		fundingRelationDao.deleteFundingOrder(id);
 	}
+
+	@Override
+	public List<FundingOrder> getAllMyFundingOrderList(String fundingId) {
+		// TODO Auto-generated method stub
+		return fundingRelationDao.getAllMyFundingOrderList(fundingId);
+	}
 }

@@ -14,4 +14,6 @@ public interface FundingRelationMapper {
 	void insertFundingOrder(FundingOrder fundingOrder);
 	void deleteFundingOrder(String id);
 	
+	List<FundingOrder> getAllMyFundingOrderList(String fundingId);
+	
 }
