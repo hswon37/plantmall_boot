@@ -27,7 +27,7 @@
 							<div class="orderContents" th:each="lineItem,index : ${order.lineItems}" th:if="${index.first}">
 								<div class="imgBox" th:if="${index.index} < 1">
 									<a href="#" th:href="@{/product(productId=${lineItem.productId})}">
-										<img th:src="@{/static/images/} + ${lineItem.product.productImg}" />
+										<img th:src="@{/getByteImage?p_name=} + ${lineItem.product.p_name}" />
 									</a>
 								</div>
 								<div>

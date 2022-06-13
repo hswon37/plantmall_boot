@@ -22,7 +22,7 @@
 		<table class="orderElement">
 			<tr th:each="lineItem:${orderForm.order.lineItems}">
 				<td class="imgBox">
-					<img th:src="@{/static/images/} + ${lineItem.product.productImg}" />
+					<img th:src="@{/getByteImage?p_name=} + ${lineItem.product.p_name}" />
 				</td>
 				<td class="content">
 					<dl>

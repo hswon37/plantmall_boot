@@ -21,7 +21,7 @@
 							<td>
 								<div class=ReviewContent>
 									<div class="ReviewImgBox">
-										<img th:src="@{/static/images/} + ${lineItem.product.productImg}" />
+										<img th:src="@{/getByteImage?p_name=} + ${lineItem.product.p_name}" />
 									</div>
 									<div class="content">
 										<span th:text="${lineItem.product.p_name}">제품 이름</span>
