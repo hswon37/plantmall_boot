@@ -14,9 +14,9 @@ public class FundingRelationServiceImpl implements FundingRelationService{
 	FundingRelationDao fundingRelationDao;
 
 	@Override
-	public List<FundingOrder> getAllFundingOrderList(String id) {
+	public List<FundingOrder> getAllFundingOrderListByBuyerId(String id) {
 		// TODO Auto-generated method stub
-		return fundingRelationDao.getAllFundingOrderListByUserId(id);
+		return fundingRelationDao.getAllFundingOrderListByBuyerId(id);
 	}
 
 	@Override
@@ -35,5 +35,11 @@ public class FundingRelationServiceImpl implements FundingRelationService{
 	public void deleteFundingOrder(String id) {
 		// TODO Auto-generated method stub
 		fundingRelationDao.deleteFundingOrder(id);
+	}
+
+	@Override
+	public List<FundingOrder> getAllMyFundingOrderList(String fundingId) {
+		// TODO Auto-generated method stub
+		return fundingRelationDao.getAllMyFundingOrderList(fundingId);
 	}
 }

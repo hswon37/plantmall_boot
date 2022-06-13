@@ -11,5 +11,5 @@ public interface FundingDao {
 	List<Product> getMyAllProductList(String email);
 	void updateFunding(Funding funding);
 	void deleteFunding(String id);
-	
+	List<Funding> getAllMyFundingList(String id);
 }

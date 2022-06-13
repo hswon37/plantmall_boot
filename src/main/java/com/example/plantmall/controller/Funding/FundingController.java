@@ -26,6 +26,7 @@ import com.example.plantmall.controller.OrderForm;
 import com.example.plantmall.controller.UserForm;
 import com.example.plantmall.controller.UserSession;
 import com.example.plantmall.domain.Funding;
+import com.example.plantmall.domain.FundingOrder;
 import com.example.plantmall.domain.LineItem;
 import com.example.plantmall.domain.Product;
 import com.example.plantmall.domain.User;
@@ -99,6 +100,7 @@ public class FundingController {
 				System.out.println("funding 수정");
 				
 			}else {
+				fundingForm.getFunding().setSellerId(userSession.getUser().getUserId());
 				fundingService.insertFunding(fundingForm.getFunding());
 				System.out.println("funding 생성");
 			}
@@ -193,6 +195,7 @@ public class FundingController {
 			return new ModelAndView("order/OrderForm");
 		}
 
+		System.out.println(fundingOrderForm.getFundingOrder());
 		fundingRelationService.insertFundingOrder(fundingOrderForm.getFundingOrder());
 		String fundingId = fundingOrderForm.getFundingOrder().getFundingId();
 		String productId = fundingService.getFunding(fundingId).getProductId();
@@ -205,7 +208,54 @@ public class FundingController {
 		
 		return mav;
 	}
+
+	
+	@RequestMapping("/order")
+	public ModelAndView viewFundingOrderList(HttpServletRequest request) {
+		UserSession userSession=
+				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("funding/fundingOrderList");
+		
+		List<FundingOrder> fundingOrderList = fundingRelationService.getAllFundingOrderListByBuyerId(userSession.getUser().getUserId());
+		List<Funding> myFundingList = fundingService.getAllMyFundingList(userSession.getUser().getUserId());
+		
+		mav.addObject("fundingOrderList",fundingOrderList);
+		mav.addObject("myFundingList", myFundingList);
+		return mav;
+	}	
+
+	@RequestMapping("/order/{fundingRelationId}")
+	public ModelAndView viewFundingOrderDetail(@PathVariable String fundingRelationId, HttpServletRequest request) {
+		UserSession userSession=
+				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("funding/FundingOrderDetail");
+		
+		FundingOrder fundingOrder = fundingRelationService.getFundingOrder(fundingRelationId);
+		Funding funding = fundingService.getFunding(fundingOrder.getFundingId());
+		Product product = productService.getProduct(funding.getProductId());
+		
+		mav.addObject("order", fundingOrder);
+		mav.addObject("product",product);
+		return mav;
+	}	
 	
 	
+	@RequestMapping("/buyerList/{fundingId}")
+	public ModelAndView viewMyFundingOrderDetail(@PathVariable String fundingId, HttpServletRequest request) {
+		UserSession userSession=
+				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("funding/fundingOrderList");
+		
+		List<FundingOrder> orderList = fundingRelationService.getAllMyFundingOrderList(fundingId); 
+		
+		mav.addObject("orderList", orderList);
+		return mav;
+	}	
 	
 }
