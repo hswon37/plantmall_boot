@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>식몰</title>
+<link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+</head>
+<body>
+	<div th:insert="~{header :: #top}"></div>
+	<hr>
+	
+	
+	<div class="orderPage">
+	<h2>펀딩 주문 내역</h2>
+		<div class="orderList"  th:if="${fundingOrderList}">
+			<table class="orderElement">
+				<tbody>
+					<tr th:if="${#lists.size('fundingOrderList')} == 0">
+						<td style="text-align: center;" colspan="8"><b>주문 목록이 비어있습니다.</b></td>
+					</tr>
+					<tr>
+						<td><span>주문번호</span></td>
+						<td><span>펀딩제목</span></td>
+						<td><span>주문상태</span></td>
+						<td></td>
+					</tr>
+					<tr th:each="order, status:${fundingOrderList}">
+						<td>
+							<b><span th:text="|${#dates.format(order.create_at, 'yyyyMMdd')}${order.fundingRelationId}|">2022061271</span></b>
+						</td>
+						<td>
+							<b><span th:text="${order.fundingId}">다육이펀딩</span></b>
+						</td>
+						<td><span th:text="${order.status}">주문취소</span></td>
+						<td>
+							<span class="orderDetailPage">
+								<a href="#" th:href="@{/funding/order/{fundingRelationId}(fundingRelationId=${order.fundingRelationId})}">주문 상세보기</a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<h2>내 펀딩</h2>
+			<div class="orderList" th:if="${myFundingList}">
+			<table class="orderElement">
+				<tbody>
+					<tr th:if="${#lists.size('myFundingList')} == 0">
+						<td style="text-align: center;" colspan="8"><b>주문 목록이 비어있습니다.</b></td>
+					</tr>
+					<tr>
+						<td><span>주문번호</span></td>
+						<td><span>펀딩제목</span></td>
+						<td><span>달성률</span></td>
+						<td></td>
+					</tr>
+					<tr th:each="funding, status:${myFundingList}">
+						<td>
+							<b><span th:text="|${#dates.format(funding.createAt, 'yyyyMMdd')}${funding.fundingId}|">2022061271</span></b>
+						</td>
+						<td>
+							<b><span th:text="${funding.title}">다육이펀딩</span></b>
+						</td>
+						<td><span th:text="|${funding.orderNum}/${funding.targetQuantity}|">12/50</span></td>
+						<td>
+							<span class="orderDetailPage">
+								<a id="btn_click" th:value="|/funding/buyerList/${funding.fundingId}|" th:href="@{/funding/buyerList/{fundingId}(fundingId=${funding.fundingId})}">주문 상세보기</a>
+							</span>
+						</td>
+
+				</tbody>
+			</table>
+		</div>
+		
+				<div th:if="${orderList}"  class="orderList">
+			<table class="orderElement">
+				<tbody>
+					<tr th:if="${#lists.size('orderList')} == 0">
+						<td style="text-align: center;" colspan="8"><b>주문 목록이 비어있습니다.</b></td>
+					</tr>
+					<tr>
+						<td><span>주문번호</span></td>
+						<td><span>주문상태</span></td>
+						<td><span>주문자아이디</span></td>
+						<td></td>
+					</tr>
+					<tr th:each="order, status:${orderList}">
+						<td>
+							<b><span th:text="|${#dates.format(order.create_at, 'yyyyMMdd')}${order.fundingRelationId}|">2022061271</span></b>
+						</td>
+						<td><span th:text="${order.status}">주문취소</span></td>
+						<td>
+							<b><span th:text="${order.userId}">다육이펀딩</span></b>
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>

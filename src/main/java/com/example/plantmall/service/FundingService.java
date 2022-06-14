@@ -12,5 +12,6 @@ public interface FundingService {
 	List<Product> getMyAllProductList(String email);
 	void updateFunding(Funding funding);
 	void deleteFunding(String id);
+	List<Funding> getAllMyFundingList(String id);
 
 }

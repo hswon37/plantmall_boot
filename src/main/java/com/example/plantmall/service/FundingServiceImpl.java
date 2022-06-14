@@ -46,4 +46,9 @@ public class FundingServiceImpl implements FundingService{
 		
 	}
 
+	@Override
+	public List<Funding> getAllMyFundingList(String id) {
+		return fundingDao.getAllMyFundingList(id);
+	}
+
 }
