@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+
+<!-- Vendor CSS Files -->
+<link href="../static/style/bootstrap.min.css"
+	rel="stylesheet" type="text/css"
+	th:href="@{../static/style/bootstrap.min.css}" />
+<!-- Template Main CSS File -->
+<link href="../static/style/style.css" rel="stylesheet" type="text/css"
+	th:href="@{../static/style/style.css}" />
 </head>
 <body>
 <div th:insert="~{header :: #top}"></div>
@@ -17,6 +25,9 @@
 		</li>
 		<li>
 			<a th:href="@{/funding/order}">펀딩 관리</a>
+		</li>
+		<li>
+			<a href="" th:href="@{/profile}">프로필</a>
 		</li>
 	</ul>
 </div>
