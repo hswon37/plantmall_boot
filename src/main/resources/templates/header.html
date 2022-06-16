@@ -1,44 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8">
-	<title>식몰</title>
-	<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}">
+<meta charset="utf-8">
+<title>식몰</title>
 </head>
 <body>
 	<div id="top">
-		<ul>
-			<li id="logo"><a href="" th:href="@{/}"><img th:src="@{/images/logoTemp.svg}" width="10%">식몰</a></li>
-			
-			<div th:if="${session.userSession}">
-				<li id="info"><a href="" th:href="@{/auth}">마이페이지</a></li>
-				<li id="info"><a href="" th:href="@{/signoff}">로그아웃</a></li>
-			</div>
-			<div th:unless="${session.userSession}">	
-				<li id="info"><a href="" th:href="@{/login}">로그인</a></li>
-				<li id="info"><a href="" th:href="@{/signup}">회원가입</a></li>
-			</div>
-
-		</ul>
-		<ul id="nav">
-			<li><a href="" th:href="@{/product/best}">BEST</a></li>
-			<li>CATEGORY
-				<ul>
-					<li><a href="" th:href="@{/product/list}">전체</a></li>
-					<li><a href="" th:href="@{/product/list?categoryId=c1}">꽃</a></li>
-					<li><a href="" th:href="@{/product/list?categoryId=c2}">야생화</a></li>
-					<li><a href="" th:href="@{/product/list?categoryId=c3}">허브</a></li>
-					<li><a href="" th:href="@{/product/list?categoryId=c4}">다육</a></li>
-					<li><a href="" th:href="@{/product/list?categoryId=c5}">나무</a></li>
-					<li><a href="" th:href="@{/product/list?categoryId=c6}">해조</a></li>
-					<li><a href="" th:href="@{/product/list?categoryId=c7}">원예용품</a></li>
+		<div id="header" class="d-flex align-items-center">
+			<div class="container d-flex align-items-center navbar">
+				<ul class="logo align-items-center">
+					<li><a href="/"><img th:src="@{/images/logoTemp.svg}"
+							alt="로고" class=""> 식몰 
+					</a></li>
 				</ul>
-			</li>
-			<li><a href="" th:href="@{/cart/list}">CART</a></li>
-			<li><a href="" th:href="@{/order/list}">ORDER</a></li>
-			<li><a href="" th:href="@{/funding}">FUNDING</a></li>
-			<li><a href="" th:href="@{/product/search}">SEARCH</a></li>
-		</ul>	
+				<nav id="navbar" class="navbar">
+					<ul th:if="${session.userSession}">
+						<li><a class="getstarted scrollto" href="" th:href="@{/auth}">MYPAGE</a></li>
+						<li><a class="getstarted scrollto" href=""
+							th:href="@{/signoff}">LOGOUT</a></li>
+
+					</ul>
+					<ul th:unless="${session.userSession}">
+						<li><a class="getstarted scrollto" href=""
+							th:href="@{/login}">LOGIN</a></li>
+						<li><a class="getstarted scrollto" href=""
+							th:href="@{/signup}">SIGN UP</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<div id="header" class="d-flex align-items-center">
+			<div class="container d-flex align-items-center">
+
+				<nav id="navbar" class="navbar">
+					<ul>
+						<li><a class="nav-link scrollto" href=""
+							th:href="@{/product/best}">BEST</a></li>
+						<li class="dropdown"><a href="#"><span>CATEGORY</span> <i
+								class="bi bi-chevron-down"></i></a>
+							<ul>
+								<li><a href="" th:href="@{/product/list}">전체</a></li>
+								<li><a href="" th:href="@{/product/list?categoryId=c1}">꽃</a></li>
+								<li><a href="" th:href="@{/product/list?categoryId=c2}">야생화</a></li>
+								<li><a href="" th:href="@{/product/list?categoryId=c3}">허브</a></li>
+								<li><a href="" th:href="@{/product/list?categoryId=c4}">다육</a></li>
+								<li><a href="" th:href="@{/product/list?categoryId=c5}">나무</a></li>
+								<li><a href="" th:href="@{/product/list?categoryId=c6}">해조</a></li>
+								<li><a href="" th:href="@{/product/list?categoryId=c7}">원예용품</a></li>
+
+							</ul></li>
+						<li><a class="nav-link scrollto" href=""
+							th:href="@{/cart/list}">CART</a></li>
+						<li><a class="nav-link scrollto" href=""
+							th:href="@{/order/list}">ORDER</a></li>
+						<li><a class="nav-link scrollto" href=""
+							th:href="@{/funding}">FUNDING</a></li>
+						<li><a class="nav-link scrollto" href=""
+							th:href="@{/product/search}">SEARCH</a></li>
+					</ul>
+				</nav>
+				<!-- .navbar -->
+
+			</div>
+		</div>
+		<!-- End Header -->
 	</div>
 </body>
 </html>
