@@ -3,15 +3,53 @@
 
 <mapper namespace="com.example.plantmall.dao.mybatis.mapper.FundingRelationMapper">
 <cache />
+<sql id="fRBaseColumns">
+		FR.fundingRelationId,
+		FR.BUYERID,
+		FR.status,
+		FR.fundingId,
+		FR.create_at,
+		FR.creditCard,
+		FR.expiryDate,
+		FR.cardType,
+		FR.quantity,
+		FR.totalPrice,
+		FR.userName,
+		FR.phoneNumber,
+		FR.shipAddress,
+		F.FUNDINGID,
+    	F.PRODUCTID,
+    	F.TITLE
+</sql>
+<resultMap id="fundingRelationMap" type="FundingOrder">
+	<id column="fundingRelationId" property="fundingRelationId"/>
+	<result column="BUYERID" property="userId"/>
+	<result column="status" property="status"/>
+	<result column="fundingId" property="fundingId"/>
+	<result column="create_at" property="create_at"/>
+	<result column="creditCard" property="creditCard"/>
+	<result column="expiryDate" property="expiryDate"/>
+	<result column="cardType" property="cardType"/>
+	<result column="quantity" property="quantity"/>
+	<result column="totalPrice" property="totalPrice"/>
+	<result column="userName" property="userName"/>
+	<result column="phoneNumber" property="phoneNumber"/>
+	<result column="shipAddress" property="shipAddress"/>	
+	<association property="funding" column="FUNDINGID" javaType="Funding">
+		<id property="fundingId" column="fundingId"/>
+		<result property="title" column="title"/>
+	</association>
+</resultMap>
 
 	<select resultType="FundingOrder" id="getFundingOrder">
 		SELECT *
 		FROM FUNDINGRELATION WHERE FUNDINGRELATION.FUNDINGRELATIONID = #{param1}
 	</select>
 
-	<select resultType="FundingOrder" id="getAllFundingOrderListByBuyerId">
-		SELECT *
-		FROM FUNDINGRELATION WHERE FUNDINGRELATION.BUYERID = #{param1} ORDER BY create_at DESC
+	<select resultMap="fundingRelationMap" id="getAllFundingOrderListByBuyerId">
+		SELECT <include refid="fRBaseColumns"/>
+		FROM FUNDINGRELATION FR, FUNDING F
+		WHERE FR.BUYERID = #{param1} AND FR.FUNDINGID=F.FUNDINGID ORDER BY create_at DESC
 	</select>
 	
 	<select resultType="FundingOrder" id="getAllMyFundingOrderList">

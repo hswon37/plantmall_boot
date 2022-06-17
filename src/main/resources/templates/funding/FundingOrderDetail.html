@@ -13,9 +13,50 @@
 <!-- Template Main CSS File -->
 <link href="../static/style/style.css" rel="stylesheet" type="text/css"
 	th:href="@{../static/style/style.css}" />
+
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+	<script>
+	
+	function postJson3(fundingRelationId) {
+
+		alert("/funding/order/delete?fundingRelationId="+fundingRelationId);
+	 	$.ajax({			/* Ajax 호출을 위해  JQuery 이용 */
+			type: "POST",
+			url: "/funding/order/delete?fundingRelationId="+fundingRelationId,
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			processData: false,
+			success: printResult,		
+			error: function(jqXHR, textStatus, errorThrown) {
+				var message = jqXHR.getResponseHeader("Status");
+				if ((message == null) || (message.length <= 0)) {
+					alert("Error! Request status is " + jqXHR.status);
+				} else {
+					alert(message);	
+				}
+			}
+		});
+	}
+	
+	function printResult(responseJson) {	// responseJson: JS object parsed from JSON text			
+		alert("메시지가 등록되었습니다.");
+		$("#result").html("Response Body: <div><div>");
+		$("#result > div").text(JSON.stringify(responseJson));
+	   	var content = "<br>응답 데이터 이용:<br>";
+	    $(responseJson.messages).each(function(i, message){	        	
+	       	content += "ID: "+ message.id + "<br>" +  
+	    				"Content: " + message.content + "<br>" +  
+	               		"Creation Time: " + new Date(message.creationTime) + "<br><br>";		
+	    });
+	    content += "<br>";
+		$("#result").append(content);
+	}
+		
+	</script>
 </head>
 <body>
-<div th:insert="~{header :: #top}"></div>
+<hr>
+	<div th:insert="~{header :: #top}"></div>
 	
 	<div class="orderPage">
 		<div class="pageTitle">
@@ -101,7 +142,8 @@
 			</div>
 		</div>
 		<div>
-			<a href="#" class="button" th:href="@{/order/list}">확인</a>
+			<a href="#" class="button" th:onclick="javascript:postJson3([[${order.fundingRelationId}]])">취소하기</a>
+			<a href="#" class="button" th:href="@{/}">홈으로</a>
 		</div>
 	</div>
 </body>

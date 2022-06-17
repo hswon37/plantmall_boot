@@ -38,12 +38,15 @@
 							<b><span th:text="|${#dates.format(order.create_at, 'yyyyMMdd')}${order.fundingRelationId}|">2022061271</span></b>
 						</td>
 						<td>
-							<b><span th:text="${order.fundingId}">다육이펀딩</span></b>
+							<b><span th:text="${order.funding.title}">다육이펀딩</span></b>
 						</td>
-						<td><span th:text="${order.status}">주문취소</span></td>
+						<td>
+							<span th:if="${order.status}==0">주문취소</span>
+							<span th:if="${order.status}==1">주문완료</span>
+						</td>
 						<td>
 							<span class="orderDetailPage">
-								<a href="#" th:href="@{/funding/order/{fundingRelationId}(fundingRelationId=${order.fundingRelationId})}">주문 상세보기</a>
+								<a href="#" th:href="@{/funding/order/{fundingRelationId}(fundingRelationId=${order.fundingRelationId})}">상세보기</a>
 							</span>
 						</td>
 					</tr>

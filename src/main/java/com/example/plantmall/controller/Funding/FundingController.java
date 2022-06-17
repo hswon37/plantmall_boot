@@ -14,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
@@ -25,14 +27,20 @@ import org.springframework.web.util.WebUtils;
 import com.example.plantmall.controller.OrderForm;
 import com.example.plantmall.controller.UserForm;
 import com.example.plantmall.controller.UserSession;
+import com.example.plantmall.domain.EnqComm;
+import com.example.plantmall.domain.Enquiry;
 import com.example.plantmall.domain.Funding;
 import com.example.plantmall.domain.FundingOrder;
 import com.example.plantmall.domain.LineItem;
 import com.example.plantmall.domain.Product;
+import com.example.plantmall.domain.Review;
 import com.example.plantmall.domain.User;
+import com.example.plantmall.service.AuthService;
+import com.example.plantmall.service.EnquiryService;
 import com.example.plantmall.service.FundingRelationService;
 import com.example.plantmall.service.FundingService;
 import com.example.plantmall.service.ProductService;
+import com.example.plantmall.service.ReviewService;
 
 @Controller
 @RequestMapping("/funding")
@@ -49,6 +57,14 @@ public class FundingController {
 	
 	@Autowired
 	private FundingRelationService fundingRelationService;
+	
+	@Autowired
+	private AuthService authService;
+	
+	@Autowired
+	private ReviewService reviewService;
+	@Autowired
+	private EnquiryService enquiryService;
 	
 	@ModelAttribute("fundingForm")
 	public FundingForm formBackingObject() throws Exception{
@@ -132,11 +148,10 @@ public class FundingController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("funding/funding");
+		mav.setViewName("funding/funding2");
 		
 		Funding funding = fundingService.getFunding(fundingId);
-		System.out.println(funding);
-		System.out.println(funding.getProduct());
+
 		mav.addObject("funding",funding);
 		mav.addObject("product", funding.getProduct());
 		
@@ -146,6 +161,31 @@ public class FundingController {
 				return mav;
 			}
 		}
+		
+		Product product = funding.getProduct();
+		// productDetail에서 보일 리뷰 리스트
+		List<Review> list = reviewService.getReviewsByProductId(product.getProductId());
+		if (list != null) {
+			product.setReviews(list);
+			for (int i = 0; i < list.size(); i++) {
+				String reviewUserName = authService.getUserById(list.get(i).getUserId()).getUserName();
+				product.getReviews().get(i).setUserName(reviewUserName);
+			}
+		}
+
+		// productDetail에서 보일 문의 리스트
+		List<Enquiry> enquiryList = enquiryService.getEnquiryListByProductId(product.getProductId());
+		if (enquiryList != null) {
+			product.setEnquiryList(enquiryList);
+			for (int i = 0; i < enquiryList.size(); i++) {
+				String enquiryUserName = authService.getUserById(enquiryList.get(i).getUserId()).getUserName();
+				product.getEnquiryList().get(i).setUserName(enquiryUserName);
+				EnqComm enqComm = enquiryService.getEnqCommByEuquiryId(enquiryList.get(i).getEnquiryId());
+				product.getEnquiryList().get(i).setEnqComm(enqComm);
+			}
+		}
+		mav.addObject("reviewList", product.getReviews());
+		mav.addObject("enquiryList", product.getEnquiryList());
 		mav.addObject("isSeller", false);
 		return mav;
 	}
@@ -154,8 +194,7 @@ public class FundingController {
 	public ModelAndView deleteFunding(@RequestParam(value="fundingId", required=false) String fundingId, HttpSession session) {
 		UserSession userSession=
 				(UserSession)session.getAttribute("userSession");
-		
-		
+
 		if(fundingId !=null) {
 			fundingService.deleteFunding(fundingId);
 		}
@@ -193,12 +232,11 @@ public class FundingController {
 			return new ModelAndView("order/OrderForm");
 		}
 
-		System.out.println(fundingOrderForm.getFundingOrder());
 		fundingRelationService.insertFundingOrder(fundingOrderForm.getFundingOrder());
 		
 		String fundingId = fundingOrderForm.getFundingOrder().getFundingId();
 		Funding funding = fundingService.getFunding(fundingId);
-		
+
 		
 		ModelAndView mav = new ModelAndView("funding/FundingOrderDetail");
 		mav.addObject("order", fundingOrderForm.getFundingOrder());
@@ -234,12 +272,24 @@ public class FundingController {
 		
 		FundingOrder fundingOrder = fundingRelationService.getFundingOrder(fundingRelationId);
 		Funding funding = fundingService.getFunding(fundingOrder.getFundingId());
-		Product product = funding.getProduct();
 		
+		System.out.println(funding);
 		mav.addObject("order", fundingOrder);
-		mav.addObject("product",product);
+		mav.addObject("funding",funding);
 		return mav;
+	}
+	
+	@PostMapping("/order/delete")
+	@ResponseBody
+	public Boolean deleteFundingOrder(@RequestParam String fundingRelationId, HttpServletRequest request) {
+		UserSession userSession=
+				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
+		System.out.println("ㅗㅑㅗㅑㅗㅑㅗㅑ");
+		fundingRelationService.deleteFundingOrder(fundingRelationId);
+		
+		return true;
 	}	
+	
 	
 	
 	@RequestMapping("/buyerList/{fundingId}")
