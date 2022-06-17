@@ -46,7 +46,7 @@
 			<!-- 제품관리페이지이동버튼, 피드업로드버튼 -->
 			<div>
 				<div th:if="${profile.userId}==${session.userSession.User.userId}">
-					<button class="goProjectPagebtn" th:href="@{/product/registration?userId=}+${profile.userId}">제품관리</button>
+					<a th:href="@{/product/manage?userId=}+${profile.userId}"><button class="goProjectPagebtn">제품관리</button></a>
 				</div>
 				<button class="uploadbtn">피드 업로드</button>
 				<!--피드 종류 선택창 -->
