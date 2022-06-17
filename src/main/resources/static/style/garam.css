@@ -7,6 +7,7 @@
 }
 * {
   font-family:'NanumSquareRound' !important;
+  box-sizing: content-box;
 }
 a.button {    
     width: 100%;
@@ -80,6 +81,7 @@ p {
 }
 .listContents {
 	padding-top: 6px;
+	padding-left: 10px;
 }
 .orderDateText {
 	text-align: left;
@@ -158,8 +160,8 @@ table.orderDetailElement tr{
 	font-size: 16px;
 }
 .imgBox {
-	width: 120px;
-	height: 120px;
+/* 	width: 120px;
+	height: 120px; */
 	padding-left: 10px;
 	padding-right: 20px;
 	padding-top: 8px;
@@ -175,11 +177,13 @@ table.orderDetailElement tr{
 	width: 650px;
 	/*font-size: 20px;*/
 	padding-top: 10px;
+	padding-right: 20px;
 }
 /* orderDetail에서 제품 목록 컨텐트*/
 .DetailElementsContent {
 	width: 685px;
 	padding-top: 10px;
+	padding-bottom: 10px;
 }
 .productName {
 	font-size: 18px;
@@ -188,9 +192,10 @@ table.orderDetailElement tr{
 .itemPrice {
 	font-size: 20px;
 	float: right;
+	padding-right: 5px;
 }
 .priceSum {
-	padding: 5px 0 5px 0;
+	padding-top: 15px;
 	font-size: 20px;
 	text-align: center;
 }
@@ -203,7 +208,7 @@ dd {
 	margin-left: 0px;
 }
 .quantityPrice {
-	display: inline; 
+	/* display: inline;  */
 	font-size: 16px;
 }
 .division {
@@ -256,6 +261,7 @@ table.cartPriceTable {
 table.cartPriceTable tr th {
 	padding: 5px;
 	font-size: 21px;
+	text-align: center;
 	border: solid 1px;
 	border-color: gray;
 	height: 40px;
@@ -269,6 +275,7 @@ table.cartPriceTable tr td {
 table.priceTable tr th {
 	padding: 5px;
 	font-size: 21px;
+	text-align: center;
 	border: solid 1px;
 	border-color: gray;
 	height: 40px;
@@ -402,10 +409,6 @@ table.cartElement tr {
 	width: 4%;
 	cursor: pointer;
 }
-.itemPrice {
-	float: right;
-	padding-right: 5px;
-}
 .quantityBtn {
 	float: left;
 }
@@ -431,8 +434,6 @@ table.cartElement tr {
  	padding-bottom: 10px;
 }
 .ReviewImgBox {
-	width: 120px;
-    height: 120px;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 10px;
