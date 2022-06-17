@@ -9,12 +9,16 @@
 	th:href="@{../static/style/sewon.css}">
 <link rel="stylesheet"
 	href="https://unpkg.com/swiper/swiper-bundle.min.css">
+		
+<!-- Vendor CSS Files -->
+<link href="../static/style/bootstrap.min.css"
+	rel="stylesheet" type="text/css"
+	th:href="@{../static/style/bootstrap.min.css}" />
+<!-- Template Main CSS File -->
+<link href="../static/style/style.css" rel="stylesheet" type="text/css"
+	th:href="@{../static/style/style.css}" />
 </head>
 <style>
-#nav {
-	position: relative;
-	z-index: 10;
-}
 .main {
   display: flex;
   flex-direction: row;
@@ -22,8 +26,8 @@
 }
 .swiper-container{
 	margin: 10px;
-	width: 650px;
-	height: 650px;
+	width: 680px;
+	height: 680px;
 	overflow: hidden;
 }
 .hovertext{
@@ -36,8 +40,8 @@
 	color:#ffffff;
 }
 .swiper-slide img {
-	width: 650px;
-	height: 650px;
+	width: 680px;
+	height: 680px;
 }
 .colMain {
 	margin: 10px;
@@ -102,6 +106,6 @@
 			loop : true
 		//반복 재생 여부
 		});
-	</script>
+	</script>	
 </body>
 </html>
