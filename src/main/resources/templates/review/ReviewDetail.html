@@ -27,7 +27,7 @@
 				<span class="quantity" th:text="|제품 가격: ${lineItem.unitPrice}원|">16000</span>
 				<br>
 				<span class="quantity" th:text="|수량: ${lineItem.quantity}개|">1</span>
-				<span class="itemPrice" th:text="|전체 금액: ${totalPrice}원|">16000</span>
+				<span class="itemPrice" th:text="|전체 금액: ${lineItem.unitPrice * lineItem.quantity}원|">16000</span>
 			</div>
 		</div>
 			<!-- <span th:each="err:${#fields.globalErrors()}" th:text="${err}"></span> -->
