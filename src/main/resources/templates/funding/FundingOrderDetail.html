@@ -29,13 +29,15 @@
 							<td>
 								<div class=ReviewContent>
 									<div class="ReviewImgBox">
-										<img th:src="@{/static/images/} + ${product.productImg}" />
+										<img alt="등록된 이미지가 없습니다" th:src="@{/getByteImage?p_name=}+${funding.product.p_name}" style="width:100%; height:100%;" />
 									</div>
 									<div class="content">
-										<span th:text="${product.p_name}">제품 이름</span>
+										<span th:text="${funding.title}">펀딩 이름</span>
+										<br>
+										<span th:text="${funding.product.p_name}">제품 이름</span>
 										<br><br>
 										<br>
-										<span class="quantity" th:text="|제품 가격: ${product.price}원|">16000</span>
+										<span class="quantity" th:text="|제품 가격: ${funding.product.price}원|">16000</span>
 										<br>
 										<span class="quantity" th:text="|수량: ${order.quantity}개|">1</span>
 										<span class="itemPrice" th:text="|${order.totalPrice}원|">16000</span>

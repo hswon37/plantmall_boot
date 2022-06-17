@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+<link rel="stylesheet" href="../static/style/sh.css" type="text/css" th:href="@{../static/style/sh.css}"> 
 	
 <!-- Vendor CSS Files -->
 <link href="../static/style/bootstrap.min.css"
@@ -22,17 +23,6 @@
 	      <input th:if="${signonForwardAction}" type="hidden" name="forwardAction"
 	        th:value="${signonForwardAction}"/>
              <fieldset>
-                 <legend class="ir_su">로그인 및 관련 설정</legend>
-                 <div class="login_header">
-                     <h5 class="ir_su">로그인 보안</h5>
-                     <div class="lh_check">
-                         <input type="checkbox" id="infor_check" class="input_check">
-                         <label for="infor_check">로그인 상태 유지</label>
-                     </div>
-                     <div class="lh_ip">
-                         IP보안 <em>ON</em>
-                     </div>
-                 </div>
                  <div class="login_content">
                      <h5 class="ir_su">로그인 영역</h5>
                      <div class="lc_text">
@@ -43,13 +33,76 @@
                      </div>
                      <input type="submit" value="로그인"/>
                  </div>
-                 <div class="login_footer">
-                     <h5 class="ir_su">로그인 문제해결</h5>
-                     <ul>
-                         <li><a href=""><strong>회원가입</strong></a> / </li>
-                         <li><a href="">아이디</a>&middot;<a href="">비밀번호 찾기</a></li>
-                     </ul>
-                 </div>
+                 
+
+<div class="form-style form-style-four">
+   <div class="row">
+      <div class="col-lg">
+         <div class="form-input mt-5">
+            <form action="#">
+               <label>Enter userid</label>
+               <div class="input-items default">
+                  <input type="text" placeholder="Default" />
+                  <i class="lni lni-user"></i>
+               </div>
+            </form>
+         </div>
+         <!-- form input -->
+      </div>
+      <div class="col-lg">
+         <div class="form-input mt-5">
+            <form action="#">
+               <label>Enter userid</label>
+               <div class="input-items active">
+                  <input type="text" placeholder="Active" />
+                  <i class="lni lni-user"></i>
+               </div>
+            </form>
+         </div>
+         <!-- form input -->
+      </div>
+      <div class="col-lg">
+         <div class="form-input mt-5 form-group">
+            <form action="#" data-toggle="validator">
+               <label>Enter userid</label>
+               <div class="input-items error">
+                  <input type="text" placeholder="Error!" data-error="Please enter your userid" required />
+                  <i class="lni lni-user"></i>
+               </div>
+               <div class="help-block with-errors"></div>
+            </form>
+         </div>
+         <!-- form input -->
+      </div>
+      <div class="col-lg">
+         <div class="form-input mt-5">
+            <form action="#">
+               <label>Enter userid</label>
+               <div class="input-items success">
+                  <input type="text" placeholder="Success" />
+                  <i class="lni lni-user"></i>
+               </div>
+            </form>
+         </div>
+         <!-- form input -->
+      </div>
+      <div class="col-lg">
+         <div class="form-input mt-5">
+            <form action="#">
+               <label>Enter userid</label>
+               <div class="input-items disabled">
+                  <input type="text" placeholder="Disabled" disabled />
+                  <i class="lni lni-user"></i>
+               </div>
+            </form>
+         </div>
+         <!-- form input -->
+      </div>
+   </div>
+   <!-- row -->
+</div>
+<!-- form-style -->
+
              </fieldset>
          </form>
      </div>

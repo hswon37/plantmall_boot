@@ -18,23 +18,25 @@ import lombok.ToString;
 public class Funding implements Serializable{
 
 	private String fundingId;
-	private String productInformation;
 	private String productId;
+	private String productInformation;
 	private String sellerId;
 	private String title;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date createAt;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date updateAt;
-	private String p_name;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date openDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date closeDate;
 	private int targetQuantity;
+	private int orderNum;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date deliveryDate;
-	private int orderNum;
+	private int status;
+	private Product product;
 	
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createAt;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date updateAt;
 	
 }

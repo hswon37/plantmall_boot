@@ -42,7 +42,7 @@ public class FundingController {
 	private String formViewName;
 	
 	@Autowired
-	private FundingService fundingService;
+	private FundingService fundingService;	
 	
 	@Autowired
 	private ProductService productService;
@@ -119,7 +119,7 @@ public class FundingController {
 		
 		List<Funding> list = fundingService.getAllFundingList();
 		
-		mav.setViewName("funding/fundingList");
+		mav.setViewName("funding/fundingList2");
 		mav.addObject("fundingList",list);
 		return mav;
 		
@@ -135,15 +135,13 @@ public class FundingController {
 		mav.setViewName("funding/funding");
 		
 		Funding funding = fundingService.getFunding(fundingId);
-		Product product = productService.getProduct(funding.getProductId());
 		System.out.println(funding);
-		System.out.println(product);
-		System.out.println(product);
+		System.out.println(funding.getProduct());
 		mav.addObject("funding",funding);
-		mav.addObject("product", product);
+		mav.addObject("product", funding.getProduct());
 		
 		if(userSession!=null) {
-			if(product.getUserId().equals(userSession.getUser().getUserId())) {
+			if(funding.getSellerId().equals(userSession.getUser().getUserId())) {
 				mav.addObject("isSeller", true);
 				return mav;
 			}
@@ -176,7 +174,7 @@ public class FundingController {
 		User user = userSession.getUser();
 		
 		Funding funding = fundingService.getFunding(fundingId);
-		Product product = productService.getProduct(funding.getProductId());
+		Product product = funding.getProduct();
 		
 		FundingOrderForm fundingOrderForm = new FundingOrderForm();
 
@@ -197,14 +195,14 @@ public class FundingController {
 
 		System.out.println(fundingOrderForm.getFundingOrder());
 		fundingRelationService.insertFundingOrder(fundingOrderForm.getFundingOrder());
-		String fundingId = fundingOrderForm.getFundingOrder().getFundingId();
-		String productId = fundingService.getFunding(fundingId).getProductId();
 		
-		Product product = productService.getProduct(productId);
+		String fundingId = fundingOrderForm.getFundingOrder().getFundingId();
+		Funding funding = fundingService.getFunding(fundingId);
+		
 		
 		ModelAndView mav = new ModelAndView("funding/FundingOrderDetail");
 		mav.addObject("order", fundingOrderForm.getFundingOrder());
-		mav.addObject("product", product);
+		mav.addObject("funding", funding);
 		
 		return mav;
 	}
@@ -236,7 +234,7 @@ public class FundingController {
 		
 		FundingOrder fundingOrder = fundingRelationService.getFundingOrder(fundingRelationId);
 		Funding funding = fundingService.getFunding(fundingOrder.getFundingId());
-		Product product = productService.getProduct(funding.getProductId());
+		Product product = funding.getProduct();
 		
 		mav.addObject("order", fundingOrder);
 		mav.addObject("product",product);

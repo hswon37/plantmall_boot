@@ -1,5 +1,6 @@
 package com.example.plantmall.dao.mybatis.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -16,4 +17,6 @@ public interface FundingMapper {
 	void deleteFunding(String id);
 	
 	List<Funding> getAllMyFundingList(String id);
+	
+	void closeFunding(Date curTime);
 }

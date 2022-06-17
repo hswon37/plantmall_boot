@@ -2,7 +2,10 @@ package com.example.plantmall;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -32,5 +35,14 @@ public class MvcConfig implements WebMvcConfigurer {
 //		registry.addInterceptor(interceptor)
 //				.addPathPatterns("");		
 //	}
+	
+    @Bean
+    public TaskScheduler threadPoolTaskScheduler(){
+    	final ThreadPoolTaskScheduler scheduler
+          = new ThreadPoolTaskScheduler();
+    	scheduler.setPoolSize(10);
+    	scheduler.setThreadNamePrefix("taskScheduler");
+        return scheduler;
+    }
 	
 }
