@@ -15,16 +15,22 @@
 		</div>	
 		<div class="orderDetail">
 			<div class="orderList">
-				<table class="orderElement">
+				<table class="orderDetailElement">
 					<tbody>
 						<tr th:each="lineItem: ${order.lineItems}">
 							<td>
 								<div class=ReviewContent>
 									<div class="ReviewImgBox">
-										<img th:src="@{/getByteImage?p_name=} + ${lineItem.product.p_name}" />
+										<a href="#" th:href="@{/product/detail(productId=${lineItem.product.productId})}">
+										<img th:src="@{/getByteImage?p_name=} + ${lineItem.product.p_name}" /></a>
 									</div>
-									<div class="content">
+									<div class="DetailElementsContent">
 										<span th:text="${lineItem.product.p_name}">제품 이름</span>
+										<span>
+											<a href="#" th:if="${status != 1}" th:href="@{/review/check(userId=${order.userId}, orderId=${order.orderId}, lineNumber=${lineItem.lineNumber})}" class="reviewBtn">
+											리뷰</a>
+										</span>
+
 										<br><br>
 										<br>
 										<span class="quantity" th:text="|제품 가격: ${lineItem.unitPrice}원|">16000</span>
@@ -34,15 +40,13 @@
 									</div>
 								</div>
 								<div>
-									<a href="#" th:if="${status != 1}" th:href="@{/review/check(userId=${order.userId}, orderId=${order.orderId}, lineNumber=${lineItem.lineNumber})}" class="button">
-										리뷰
-									</a>
+									
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="priceSum">
-								<p>총 결제 금액: <span th:text="${order.totalPrice + 3000}">16000</span>원</p>
+								<p>총 결제 금액 <span th:text="${order.totalPrice + 3000}">16000</span>원</p>
 							</td>
 						</tr>
 					</tbody>

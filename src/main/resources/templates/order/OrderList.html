@@ -11,11 +11,11 @@
 	<hr>
 	<div class="orderPage">
 		<div class="orderList">
-			<table class="orderElement">
+			<div style="text-align: center;">
+				<b><span th:if="${#lists.size('orderList')} == 0" style="font-size: 20px;">주문 목록이 비어있습니다.</span></b>
+			</div>
+			<table class="orderDetailElement" th:if="${#lists.size('orderList')} != 0" >
 				<tbody>
-					<tr th:if="${#lists.size('orderList')} == 0">
-						<td style="text-align: center;" colspan="8"><b>주문 목록이 비어있습니다.</b></td>
-					</tr>
 					<tr th:each="order, status:${orderList}">
 						<td>
 							<div class="orderInfo">
@@ -30,7 +30,7 @@
 										<img th:src="@{/getByteImage?p_name=} + ${lineItem.product.p_name}" />
 									</a>
 								</div>
-								<div>
+								<div class="listContents">
 									<p th:if="${index.size} &gt 1" th:text="|${lineItem.product.p_name} 외 ${index.size - 1}개|">첫번째 상품</p>
 									<p th:if="${index.size} == 1"  th:text="|${lineItem.product.p_name}|">첫번째 상품</p>
 									<br><br><br>

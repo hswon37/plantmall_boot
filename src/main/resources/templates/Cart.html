@@ -84,21 +84,18 @@
 	                }
 	            });
 			</script></span>
-			<span>전체 선택</span>
-			<span th:text="${cart.numberOfItems}">0</span>개
-			
+			<b><span>전체 선택</span></b>		
 		</div>
 		<div class="cartList">
 			<div class="left">
 				<table class="cartElement">
 					<tbody>
-						<tr th:if="${cart.numberOfItems} == 0">
-							<td style="text-align:center; " colspan="8"><b>장바구니가 비어있습니다.</b></td>
+						<tr th:if="${cart.numberOfItems} == 0" style="border: none; width: 85%">
+							<td style="text-align:center;" colspan="8"><b>장바구니가 비어있습니다.</b></td>
 						</tr>
 							<tr th:each="cartItem: ${cart.cartItemList}">
 								<td>
 									<span class="selectItemBox">
-										<label for="selectItem"></label>
 										<input type="checkbox" class="chkbox" id="chkbox" th:attr="data-cartNum=${cartItem.productId}" name="selectItem" 
 										th:value="${cartItem.listPrice}" onClick="itemSum()">
 										<script>
@@ -123,7 +120,6 @@
 												<br><br><br>
 												<ul class="quantityPrice">
 													<li>
-														수량변경: 
 														<input type="button" th:if="${cartItem.quantity} &gt; 1" value="-" th:onclick="updateByProductId([[${cartItem.productId}]], [[${cartItem.quantity}]], '-')" />
 														<span th:text=${cartItem.quantity}>1</span>개
 														<input type="button" value="+" th:onclick="updateByProductId([[${cartItem.productId}]], [[${cartItem.quantity}]], '+')" />
@@ -142,7 +138,7 @@
 			</div>
 			<!-- left 끝남 -->
 			<div class="right">
-				<table class="priceTable">
+				<table class="cartPriceTable">
 					<tbody>
 						<tr>
 							<th colspan="2">전체주문금액</th>

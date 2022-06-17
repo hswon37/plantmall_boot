@@ -62,9 +62,10 @@ public class OrderController {
 		}
 		User user = userSession.getUser();
 		String[] productId = productIdArray.split(",");
-		
+
 		if (orderForm.getOrder().getLineItems().size() == 0) {
 			for (int i = 0; i < productId.length; i++) {
+
 				orderForm.getOrder().addLineItem(cart.getItemMap().get(productId[i].trim()));
 			}
 			orderForm.getOrder().initOrder(user, orderForm.getOrder().getLineItems());
