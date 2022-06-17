@@ -24,7 +24,7 @@
 			<tr>
 				<td>프로필 사진</td>
 				<td>				
-					<div class="selectedImg"><img src="*{profile.profileImg}" th:attr="src=@{images/logoTemp.svg}" style="width:150px; height:150px"/></div>
+					<div class="selectedImg"><img src="@{/getImage/?imageId=}+*{profile.profileImg}" th:attr="src=@{images/logoTemp.svg}" style="width:150px; height:150px"/></div>
 					<input type="file" id="imgFile" name="fileUrl"/>
 					
 				</td>
