@@ -433,10 +433,15 @@ table.cartElement tr {
  	padding-top: 10px;
  	padding-bottom: 10px;
 }
+.orderDetailElement .ReviewImgBox {
+	padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    float: left;
+}
 .ReviewImgBox {
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 10px;
     float: left;
 }
 
