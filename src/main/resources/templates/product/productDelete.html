@@ -16,7 +16,35 @@
 </head>
 <body>
 	<div th:insert="~{header :: #top}"></div>
-	<h2>제품 삭제</h2>
+	
+	<div th:unless="${session.userSession}">
+		<div>해당 페이지에 접근하려면, 로그인 하세요</div>
+	</div>
+	<div
+		th:if="${session.userSession} and ${session.userSession.User.userId} != ${userId}">
+		<div>제품 관리는 자신의 제품만 관리 가능합니다.</div>
+	</div>
+	<div
+		th:if="${session.userSession} and ${session.userSession.User.userId} == ${userId}">
+		<h2>제품 삭제</h2>
+	<div id="modal1">
+		<div class="modal_content">
+			<h2>Alert</h2>
+			<p>해당 제품을 수정하시겠습니까?</p>
+			<input type="submit" value="OK" id="modal_ok_editBtn"> <input
+				type="button" value="Cancel" id="modal_cancel_editBtn">
+		</div>
+		<div class="modal_layer"></div>
+	</div>
+	<div id="modal2">
+		<div class="modal_content">
+			<h2>Alert</h2>
+			<p>해당 제품을 삭제하시겠습니까?</p>
+			<input type="submit" value="OK" id="modal_ok_deleteBtn"> <input
+				type="button" value="Cancel" id="modal_cancel_deleteBtn">
+		</div>
+		<div class="modal_layer"></div>
+	</div>
 	<div>
 		<form id="deleteForm" enctype="multipart/form-data" method="post">
 			<input type="hidden" name="productId" th:value="${product.productId}">
@@ -64,23 +92,6 @@
 			</table>
 		</form>
 	</div>
-	<div id="modal1">
-		<div class="modal_content">
-			<h2>Alert</h2>
-			<p>해당 제품을 수정하시겠습니까?</p>
-			<input type="submit" value="OK" id="modal_ok_editBtn"> <input
-				type="button" value="Cancel" id="modal_cancel_editBtn">
-		</div>
-		<div class="modal_layer"></div>
-	</div>
-	<div id="modal2">
-		<div class="modal_content">
-			<h2>Alert</h2>
-			<p>해당 제품을 삭제하시겠습니까?</p>
-			<input type="submit" value="OK" id="modal_ok_deleteBtn"> <input
-				type="button" value="Cancel" id="modal_cancel_deleteBtn">
-		</div>
-		<div class="modal_layer"></div>
 	</div>
 	<script th:inline="javascript">
         document.getElementById("modal1").style.display="none";

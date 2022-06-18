@@ -93,29 +93,35 @@ public class ViewProductController {
 	public String showProductDetail(@RequestParam(value = "productId", required = false) String productId,
 			ModelMap model, HttpSession session) throws Exception {
 		Product product = this.productService.getProduct(productId);
-		String userName = this.productService.getUserName(product.getUserId());
-		String seller = "admin"; // 임시 userName
-
+		String seller = this.productService.getUserName(product.getUserId());
+		
 		// 배송예정일(현재 시각으로 부터 3일 뒤)
 		LocalDate after3days = LocalDate.now().plusDays(3);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM월 dd일 ");
 		DayOfWeek dayOfWeek = after3days.getDayOfWeek();
-		String dayOfWeekKor = null;
+		String dayOfWeekKor = "";
 		switch (dayOfWeek.getValue()) {
 		case 1:
 			dayOfWeekKor = "(월) ";
+			break;
 		case 2:
 			dayOfWeekKor = "(화) ";
+			break;
 		case 3:
 			dayOfWeekKor = "(수) ";
+			break;
 		case 4:
 			dayOfWeekKor = "(목) ";
+			break;
 		case 5:
 			dayOfWeekKor = "(금) ";
+			break;
 		case 6:
 			dayOfWeekKor = "(토) ";
+			break;
 		case 7:
 			dayOfWeekKor = "(일) ";
+			break;
 		}
 		String orderDate = after3days.format(formatter) + dayOfWeekKor;
 

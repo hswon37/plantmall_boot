@@ -33,7 +33,7 @@
 	height: 200px;
 	position: relative;
 }
-.uploadbtn {
+.uploadbtn .goProjectPagebtn {
 	margin-top: 20px;
 }
 .name {

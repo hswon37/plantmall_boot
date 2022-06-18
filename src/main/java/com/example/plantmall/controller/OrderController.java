@@ -62,9 +62,10 @@ public class OrderController {
 		}
 		User user = userSession.getUser();
 		String[] productId = productIdArray.split(",");
-		
+
 		if (orderForm.getOrder().getLineItems().size() == 0) {
 			for (int i = 0; i < productId.length; i++) {
+
 				orderForm.getOrder().addLineItem(cart.getItemMap().get(productId[i].trim()));
 			}
 			orderForm.getOrder().initOrder(user, orderForm.getOrder().getLineItems());
@@ -114,7 +115,11 @@ public class OrderController {
 			@RequestParam(value="chkbox") String productIdArray, @RequestParam(value="status") int status, @RequestParam(value="pd") int pd, 
 			SessionStatus sessionStatus, HttpSession session) {
 		if (result.hasErrors()) {
-			return new ModelAndView("order/OrderForm");
+			String[] productId = productIdArray.split(",");
+			ModelAndView mav = new ModelAndView("order/OrderForm");
+			mav.addObject("pdNewOrder", pd);
+			mav.addObject("productIdArray", productId);
+			return mav;
 		}
 		
 		orderService.insertOrder(orderForm.getOrder());

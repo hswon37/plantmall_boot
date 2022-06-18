@@ -19,7 +19,7 @@ public class Order implements Serializable{
 	private String userId;
 	@NotEmpty
 	private String userName;
-	@Pattern(regexp="^01[01679]\\d{3,4}\\d{4}", message="01*********")
+	@Pattern(regexp="^01[01679]-\\d{3,4}-\\d{4}", message="01*-****-****")
 	private String phoneNumber;
 	private Date orderDate;
 	@NotEmpty
