@@ -204,17 +204,24 @@ public class ManageProductController {
 	
 	// 제품 이미지 가져오기
 	@RequestMapping(value="/getByteImage")
-	public ResponseEntity<byte[]> getByteImage(@RequestParam(value = "p_name") String p_name) {
+	public ResponseEntity<byte[]> getByteImage(@RequestParam(value = "p_name", required = false) String p_name) {
 		Map<String, Object> productImgMap; 
-		String fileId = "img_"+p_name; 
+		byte[] imageContent;
+		final HttpHeaders headers;
+		
+		if (p_name != null) {
+			String fileId = "img_"+p_name; 
+				
+			System.out.println("==start to find image==");
 			
-		System.out.println("==start to find image==");
-		
-		productImgMap = productService.selectProductImage(fileId); 
-		byte[] imageContent = blobToBytes((Blob) productImgMap.get("PRODUCTIMGVALUE"));
-		final HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_PNG);
-		
+			productImgMap = productService.selectProductImage(fileId); 
+			imageContent = blobToBytes((Blob) productImgMap.get("PRODUCTIMGVALUE"));
+			headers = new HttpHeaders();
+			headers.setContentType(MediaType.IMAGE_PNG);
+		} else {
+			imageContent = null;
+			headers = new HttpHeaders();
+		}
 		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 		
