@@ -86,9 +86,7 @@
 		      <th scope="col">주문자아이디</th>
 		    </tr>
  				</thead>
-			<tbody>	
-				<tr id="result">
-				</tr>
+			<tbody id="result">	
 			</tbody>
 		</table>
 	</div>
@@ -104,8 +102,9 @@
 			},
 			success : function(result) {
 				$("#result").html("");
-				var content ="<th>";
+				var content ="";
 				$(result).each(function(i,data){
+					content +="<tr><th>";
 					content+=JSON.parse(data.fundingRelationId)+"</th>";
 					if(JSON.parse(data.status)==1){
 						content+="<td>주문 완료</td>";
@@ -115,7 +114,9 @@
 					content+="<td>"+JSON.stringify(data.userId)+"</td>";
 					content+="<td><a href=\"/funding/order/"+
 						JSON.parse(data.fundingRelationId)+"\""+">상세보기</a></td>";
+					content+="</tr>";	
 				});
+				
 				$("#result").append(content);
 			}
 		})
