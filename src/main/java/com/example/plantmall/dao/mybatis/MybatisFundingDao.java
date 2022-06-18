@@ -1,5 +1,6 @@
 package com.example.plantmall.dao.mybatis;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,12 @@ public class MybatisFundingDao implements FundingDao{
 	@Override
 	public List<Funding> getAllMyFundingList(String id) {
 		return fundingMapper.getAllMyFundingList(id);
+		
+	}
+
+	@Override
+	public void closeFunding(Date curTime) {
+		fundingMapper.closeFunding(curTime);
 		
 	}
 
