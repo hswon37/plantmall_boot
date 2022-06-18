@@ -40,18 +40,18 @@ public class MainController {
 		try {
 			plant = this.productService.getAllProduct().get(0);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("더 이상 제품을 찾을 수 없음");
+			System.out.println("모든 제품을 찾을 수 없음");
 		}
 		try {
 			gardeningSupplies = this.productService.getProductListByCategory("c7").get(0);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("더 이상 제품을 찾을 수 없음");
+			System.out.println("원예용품 카테고리 제품을 찾을 수 없음");
 		}
 		try {
 			funding = this.fundingService.getAllFundingList().get(0);
 			productHaveFunding = this.productService.getProduct(funding.getProductId());
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("더 이상 제품을 찾을 수 없음");
+			System.out.println("펀딩 제품을 찾을 수 없음");
 		}
 		try {
 			bestItemList = this.productService.getBestProductList();
