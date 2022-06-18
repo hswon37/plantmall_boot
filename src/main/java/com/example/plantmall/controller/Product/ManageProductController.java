@@ -183,8 +183,7 @@ public class ManageProductController {
 
 		if (checkProductinLineItem.size() > 0 || checkProductinCartItem.size() > 0 ) { // LineItem, CartItem에 담긴 제품은 삭제 불가
 			System.out.println(product.getP_name() + " 제품을 삭제할 수 없음");
-			resultmsg = "<script>alert('해당 제품을 삭제할 수 없음');location.href='/product/manage?userId=" + product.getUserId()
-					+ "'</script>";
+			resultmsg = "해당 제품을 삭제할 수 없음";
 		} else {
 			// 제품 이미지 테이블 삭제
 			String productImgIdx = "img_" + product.getP_name();
@@ -197,11 +196,10 @@ public class ManageProductController {
 			System.out.println(product);
 			rttr.addFlashAttribute(product.getP_name() + " 제품이 삭제되었습니다.");
 
-			resultmsg = "<script>alert('해당 제품이 삭제되었습니다');location.href='/product/manage?userId=" + product.getUserId()
-					+ "'</script>";
+			resultmsg = "해당 제품이 삭제되었습니다";
 		}
 
-		return resultmsg;
+		return "<script>alert('"+resultmsg+"');location.href='/product/manage?userId=" + product.getUserId()+ "'</script>";
 	}
 	
 	// 제품 이미지 가져오기

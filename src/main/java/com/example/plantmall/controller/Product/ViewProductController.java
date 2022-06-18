@@ -93,9 +93,8 @@ public class ViewProductController {
 	public String showProductDetail(@RequestParam(value = "productId", required = false) String productId,
 			ModelMap model, HttpSession session) throws Exception {
 		Product product = this.productService.getProduct(productId);
-		String userName = this.productService.getUserName(product.getUserId());
-		String seller = "admin"; // 임시 userName
-
+		String seller = this.productService.getUserName(product.getUserId());
+		
 		// 배송예정일(현재 시각으로 부터 3일 뒤)
 		LocalDate after3days = LocalDate.now().plusDays(3);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM월 dd일 ");

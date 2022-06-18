@@ -29,18 +29,31 @@
 			th:href="@{/product/list?categoryId=c7}">원예용품</a>
 		<table class="noLineTable">
 			<tr th:each="miniProductList, iterStat : ${productList}">
-				<td th:each="product, miniIterStat : ${miniProductList}"><a
-					href=""
-					th:href="@{/product/detail?productId=}+${product.productId}"
-					name="productId" value="${product.productId}"> <img
-						alt="등록된 이미지가 없습니다"
-						th:src="@{/getByteImage?p_name=}+${product.p_name}"
-						style="width: 200px; height: 200px;" />
-						<div
-							th:text="${userNameList.get(iterStat.index).get(miniIterStat.index)}">판매자명</div>
-						<div th:text="${product.p_name}">제품명</div>
-						<div th:text="${product.price}+원">가격</div>
-				</a></td>
+				<td th:each="product, miniIterStat : ${miniProductList}">
+					<div>
+						<a href=""
+							th:href="@{/product/detail?productId=}+${product.productId}">
+							<img alt="등록된 이미지가 없습니다"
+							th:src="@{/getByteImage?p_name=}+${product.p_name}"
+							style="width: 200px; height: 200px;" />
+						</a>
+						<div>
+							<a href=""
+								th:href="@{/product/detail?productId=}+${product.productId}"
+								th:text="${userNameList.get(iterStat.index).get(miniIterStat.index)}">판매자명</a>
+						</div>
+						<div>
+							<a href=""
+								th:href="@{/product/detail?productId=}+${product.productId}"
+								th:text="${product.p_name}">제품명</a>
+						</div>
+						<div>
+							<a href=""
+								th:href="@{/product/detail?productId=}+${product.productId}"
+								th:text="${product.price}+원">가격</a>
+						</div>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>
