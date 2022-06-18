@@ -4,60 +4,20 @@
 <meta charset="UTF-8">
 <title>식몰</title>
 <link rel="stylesheet" href="../../static/style/garam.css" type="text/css" >
-<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
+<link rel="stylesheet" href="../../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
 	
 <!-- Vendor CSS Files -->
-<link href="../static/style/bootstrap.min.css"
+<link href="../../static/style/bootstrap.min.css"
 	rel="stylesheet" type="text/css"
-	th:href="@{../static/style/bootstrap.min.css}" />
+	th:href="@{../../static/style/bootstrap.min.css}" />
 <!-- Template Main CSS File -->
-<link href="../static/style/style.css" rel="stylesheet" type="text/css"
-	th:href="@{../static/style/style.css}" />
-
-	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-	<script>
-	
-	function postJson3(fundingRelationId) {
-
-		alert("/funding/order/delete?fundingRelationId="+fundingRelationId);
-	 	$.ajax({			/* Ajax 호출을 위해  JQuery 이용 */
-			type: "POST",
-			url: "/funding/order/delete?fundingRelationId="+fundingRelationId,
-			dataType: "json",
-			contentType: "application/json; charset=utf-8",
-			processData: false,
-			success: printResult,		
-			error: function(jqXHR, textStatus, errorThrown) {
-				var message = jqXHR.getResponseHeader("Status");
-				if ((message == null) || (message.length <= 0)) {
-					alert("Error! Request status is " + jqXHR.status);
-				} else {
-					alert(message);	
-				}
-			}
-		});
-	}
-	
-	function printResult(responseJson) {	// responseJson: JS object parsed from JSON text			
-		alert("메시지가 등록되었습니다.");
-		$("#result").html("Response Body: <div><div>");
-		$("#result > div").text(JSON.stringify(responseJson));
-	   	var content = "<br>응답 데이터 이용:<br>";
-	    $(responseJson.messages).each(function(i, message){	        	
-	       	content += "ID: "+ message.id + "<br>" +  
-	    				"Content: " + message.content + "<br>" +  
-	               		"Creation Time: " + new Date(message.creationTime) + "<br><br>";		
-	    });
-	    content += "<br>";
-		$("#result").append(content);
-	}
-		
-	</script>
+<link href="../../static/style/style.css" rel="stylesheet" type="text/css"
+	th:href="@{../../static/style/style.css}" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
+<div th:insert="~{header :: #top}"></div>
 <hr>
-	<div th:insert="~{header :: #top}"></div>
-	
 	<div class="orderPage">
 		<div class="pageTitle">
 			<b><span th:text="${order.create_at}">2022.04.09</span> 주문 상세보기</b>
@@ -142,9 +102,33 @@
 			</div>
 		</div>
 		<div>
-			<a href="#" class="button" th:onclick="javascript:postJson3([[${order.fundingRelationId}]])">취소하기</a>
-			<a href="#" class="button" th:href="@{/}">홈으로</a>
+			<a id="#btn_click" class="button" th:onclick="postJson3([[${order.fundingRelationId}]])" th:if="${order.status}==1">취소하기</a>
+			<a class="button" th:href="@{/}">홈으로</a>
 		</div>
 	</div>
+	<script th:inline="javascript">
+	
+	function postJson3(fundingRelationId) {	
+		$.ajax({
+			url : "/funding/order/delete",
+			type : "post",
+			data : {
+				fundingRelationId : fundingRelationId,
+			},
+			success : function(result) {
+				if(result==1){
+					alert("주문이 취소되었습니다.");
+					window.location.href ="/funding/order";
+				}
+			}
+		})
+	}
+	
+		
+	$(document).ready(function(){
+		$("#btn_click").click(postJson3);
+	});
+
+	</script>
 </body>
 </html>

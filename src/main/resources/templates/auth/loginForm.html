@@ -18,24 +18,23 @@
 <div th:insert="~{header :: #top}"></div>
 
      <!-- 로그인 -->
-     <div class="login-wrap">
-         <form th:action="@{/login}" method="post">
-	      <input th:if="${signonForwardAction}" type="hidden" name="forwardAction"
-	        th:value="${signonForwardAction}"/>
-             <fieldset>
-                 <div class="login_content">
-                     <h5 class="ir_su">로그인 영역</h5>
-                     <div class="lc_text">
-                         <label for="uid" class="ir_su">아이디</label>
-                         <input type="text" name="email" size="20">
-                         <label for="upw" class="ir_su">비밀번호</label>
-                         <input type="password" name="password" size="20">
-                     </div>
-                     <input type="submit" value="로그인"/>
-                 </div>
-
-             </fieldset>
-         </form>
+     <div class="login-wrap" style="padding:5% 25%;">
+         <form  th:action="@{/login}" method="post" >
+         <input th:if="${signonForwardAction}" type="hidden" name="forwardAction"
+	     th:value="${signonForwardAction}"/>
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">아이디</label>
+            <input type="text" name="email" size="20" class="form-control" id="exampleInputEmail1">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">비밀번호</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" name="password" size="20">
+		  </div>
+		  <div class="form-group form-check">
+		    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+		  </div>
+		  <button type="submit" class="btn btn-success">Submit</button>
+		</form>
      </div>
      <!-- //로그인 -->
 </body>

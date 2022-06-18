@@ -48,6 +48,7 @@
     	SELECT <include refid="BaseColumns"/>
     	FROM FUNDING F, PRODUCT P
     	WHERE F.PRODUCTID=P.PRODUCTID
+    	ORDER BY F.CLOSEDATE DESC
     </select>
     
    	<select resultType="Funding" id="getAllMyFundingList" resultMap="associationResultMap">

@@ -36,12 +36,10 @@ public class SignonController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView handleRequest(HttpServletRequest request,HttpSession session,
-
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
 			Model model) throws Exception{
-		
 		User user = authService.getUser(email, password);
 		if(user ==null) {
 			ModelAndView mav = new ModelAndView();

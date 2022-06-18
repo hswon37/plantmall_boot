@@ -15,18 +15,18 @@
 </head>
 <body>
 <div th:insert="~{header :: #top}"></div>
-<div>
-	<ul>
-		<li>
+<div align="center">
+	<ul class="list-group" style="width:25%;">
+		<li class="list-group-item">
 			<a href="" th:href="@{/auth/update}">계정 수정</a>
 		</li>
-		<li>
+		<li class="list-group-item">
 			<a href="" th:href="@{/auth/delete}">계정 삭제</a>
 		</li>
-		<li>
+		<li class="list-group-item">
 			<a th:href="@{/funding/order}">펀딩 관리</a>
 		</li>
-		<li>
+		<li class="list-group-item">
 			<a href="" th:href="@{/profile}">프로필</a>
 		</li>
 	</ul>

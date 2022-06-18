@@ -62,7 +62,7 @@
                         <div class="product-info">
                             <span th:text="${funding.product.categoryId}" class="category">카테고리</span>
                             <h4 class="title">
-                                <a th:text="${funding.title}" href="product-grids.html">이름</a>
+                                <a th:text="${funding.title}" th:href="@{/funding/{fundingId}(fundingId=${funding.fundingId})}">이름</a>
                             </h4>
                             <div class="price">
                                 <span th:text="${funding.product.price}">가격</span>

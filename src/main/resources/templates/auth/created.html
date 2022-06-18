@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../static/style/sewon.css" type="text/css" th:href="@{../static/style/sewon.css}"> 
-	
+<link rel="stylesheet" href="../static/style/sewon.css" type="text/css"
+	th:href="@{../static/style/sewon.css}">
+
 <!-- Vendor CSS Files -->
 <link href="../static/style/bootstrap.min.css"
 	rel="stylesheet" type="text/css"
@@ -23,31 +24,31 @@
 	<h1 style="text-align: center;"><span style="background-color: #339966; color: #333333;">수정되었습니다.</span></h1>
 </div>
 
-<table style="border-collapse: collapse; width: 86.8707%; height: 204px; margin-left: auto; margin-right: auto;" border="1">
-<tbody>
-<tr style="height: 18px;">
-<td style="width: 25%; text-align: center; height: 18px;">ID</td>
-<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.userId}"></td>
+<table align="center">
+<tbody >
+<tr>
+<td>ID</td>
+<td  th:text="|>>${session.userSession.user.userId}"|></td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 25%; text-align: center; height: 18px;">NAME</td>
-<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.userName}"></td>
+<tr>
+<td>NAME</td>
+<td th:text="|>>${session.userSession.user.userName}|"></td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 25%; text-align: center; height: 18px;">EMAIL</td>
-<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.email}"></td>
+<tr >
+<td >EMAIL</td>
+<td  th:text="|>>${session.userSession.user.email}|"></td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 25%; text-align: center; height: 18px;">PHONE</td>
-<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.phone}"></td>
+<tr>
+<td >PHONE</td>
+<td  th:text="|>>${session.userSession.user.phone}|"></td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 25%; text-align: center; height: 18px;">ZIPCODE</td>
-<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.zipcode}"></td>
+<tr >
+<td >ZIPCODE</td>
+<td  th:text="|>>${session.userSession.user.zipcode}|"></td>
 </tr>
-<tr style="height: 18px;">
-<td style="width: 25%; text-align: center; height: 18px;">ADDRESS</td>
-<td style="width: 75%; text-align: center; height: 18px;" th:text="${session.userSession.user.address }"></td>
+<tr >
+<td >ADDRESS</td>
+<td  th:text="|>>${session.userSession.user.address}|"></td>
 </tr>
 </tbody>
 </table>

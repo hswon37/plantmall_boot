@@ -120,7 +120,7 @@ public class FundingController {
 				fundingService.insertFunding(fundingForm.getFunding());
 				System.out.println("funding 생성");
 			}
-			mav.setViewName("funding/fundingList");
+			mav.setViewName("redirect:"+"/funding");
 		}else {
 			mav.setViewName("/auth/error");
 			mav.addObject("errorMessage", "로그인을 해주세요.");
@@ -151,18 +151,12 @@ public class FundingController {
 		mav.setViewName("funding/funding2");
 		
 		Funding funding = fundingService.getFunding(fundingId);
-
-		mav.addObject("funding",funding);
-		mav.addObject("product", funding.getProduct());
-		
-		if(userSession!=null) {
-			if(funding.getSellerId().equals(userSession.getUser().getUserId())) {
-				mav.addObject("isSeller", true);
-				return mav;
-			}
-		}
-		
 		Product product = funding.getProduct();
+		
+		mav.addObject("funding",funding);
+		mav.addObject("product", product);
+		
+		
 		// productDetail에서 보일 리뷰 리스트
 		List<Review> list = reviewService.getReviewsByProductId(product.getProductId());
 		if (list != null) {
@@ -184,9 +178,18 @@ public class FundingController {
 				product.getEnquiryList().get(i).setEnqComm(enqComm);
 			}
 		}
+		System.out.println(product.getReviews());
+		System.out.println(product.getEnquiryList());
 		mav.addObject("reviewList", product.getReviews());
 		mav.addObject("enquiryList", product.getEnquiryList());
 		mav.addObject("isSeller", false);
+		
+		if(userSession!=null) {
+			if(funding.getSellerId().equals(userSession.getUser().getUserId())) {
+				mav.addObject("isSeller", true);
+				return mav;
+			}
+		}
 		return mav;
 	}
 	
@@ -279,31 +282,26 @@ public class FundingController {
 		return mav;
 	}
 	
-	@PostMapping("/order/delete")
+	@RequestMapping(value="/order/delete", method={RequestMethod.POST})
 	@ResponseBody
 	public Boolean deleteFundingOrder(@RequestParam String fundingRelationId, HttpServletRequest request) {
 		UserSession userSession=
 				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
-		System.out.println("ㅗㅑㅗㅑㅗㅑㅗㅑ");
 		fundingRelationService.deleteFundingOrder(fundingRelationId);
 		
 		return true;
 	}	
 	
 	
-	
-	@RequestMapping("/buyerList/{fundingId}")
-	public ModelAndView viewMyFundingOrderDetail(@PathVariable String fundingId, HttpServletRequest request) {
+	@RequestMapping(value="/buyerList", method= {RequestMethod.POST})
+	@ResponseBody
+	public List<FundingOrder> viewMyFundingOrderDetail(@RequestParam String fundingId, HttpServletRequest request) {
 		UserSession userSession=
 				(UserSession)WebUtils.getSessionAttribute(request, "userSession");
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("funding/fundingOrderList");
-		
 		List<FundingOrder> orderList = fundingRelationService.getAllMyFundingOrderList(fundingId); 
-		
-		mav.addObject("orderList", orderList);
-		return mav;
+		System.out.println(orderList);
+		return orderList;
 	}	
 	
 }

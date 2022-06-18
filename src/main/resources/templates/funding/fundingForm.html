@@ -16,13 +16,12 @@
 <body>
 <div th:insert="~{header :: #top}"></div>
 <form th:action="@{/funding/create}" th:object="${fundingForm}" method="post">
-	<table style="border-collapse: collapse; width: 100%; height: 126px;" border="1">
+	<table style="border-collapse: collapse; width: 50%; height: 126px;" border="1" align="center">
 	<tbody>
 		<input th:if="*{funding.sellerId}" type="hidden" id="funding.sellerId" th:field="*{funding.sellerId}"/>
 		<input th:if="*{funding.fundingId}" type="hidden" id="funding.fundingId" th:field="*{funding.fundingId}"/>
 
 	<tr style="height: 18px;">
-	<td style="width: 54.0168%; height: 126px; text-align: center;" rowspan="7">&nbsp;</td>
 	<td style="width: 12.6498%; height: 18px; text-align: center;">제품명</td>
 	<td style="width: 33.3333%; height: 18px; text-align: center;">
 	<input type="text" id="funding.title" th:field="*{funding.title}"/>
