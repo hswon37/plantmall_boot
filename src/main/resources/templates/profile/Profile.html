@@ -19,11 +19,11 @@
 		<!-- 유저 프로필 -->
 		<div class="profileGroup">
 			<!-- 유저 이미지 -->
-			<a th:href="@{/profile/update}" class="profileImage"></a>
+			<a th:href="@{/myProfile/update}"><img src="@{/getImage/?imageId=}+${profile.profileImg}" class="profileImage"/></a>
 			
 			<!-- 유저 이름,팔로우/언팔로우버튼 -->
 			<div class="rower">
-				<div class="name"><h2 th:text="${profile.nickName}" ></h2></div>
+				<div class="name"><h1 th:text="${profile.nickName}" ></h1></div>
 <!--				<button th:if="!*${userId}==${#session.getAttribute('userId')} and !${user.userProfile.isFollowed}" th:onclick="|clickFollow(${user.userProfile.user.userId}, this)|">팔로우</button>
 				<button th:if="!${user.userProfile.isloginUser} and ${user.userProfile.isFollowed}" th:onclick="|clickFollow(${user.userProfile.user.userId}, this)|">언팔로우</button>
 			--></div>
@@ -42,11 +42,27 @@
 			</div>
 			
 			<!-- 유저 소개 -->
-			<div class="rower2"><h3 th:text="${profile.introduce}" ></h3></div>
+			<div class="rower2"><h4 th:text="${profile.introduce}" ></h4></div>
 			<!-- 제품관리페이지이동버튼, 피드업로드버튼 -->
 			<div>
-				<button class="goProjectPagebtn" th:if="${#strings.equals(profile.userId, sessionUserId)}" onclick="location.href='/product/manage'">제품관리</button>
+				<div th:if="${profile.userId}==${session.userSession.User.userId}">
+					<a th:href="@{/product/manage?userId=}+${profile.userId}"><button class="goProjectPagebtn">제품관리</button></a>
+				</div>
 				<button class="uploadbtn">피드 업로드</button>
+				<!--피드 종류 선택창 -->
+				<div id="modal" class="selectContentCategory">
+			      <div class="modal-window">
+			            <div class="modal-title"><br />업로드 할 피드 종류 선택</div>
+			            <div class="modal-close">X</div>
+			            <div class="modal-btn snsContent" th:href="@{/content/uploadSnsContent}">
+			                     일상피드
+			            </div>
+			            <div class="modal-btn saleContent" th:href="@{/content/uploadSaleContent}">
+			                     판매피드
+			            </div>
+			      </div>
+			 
+			    </div>
 			</div>
 	
 		</div>
@@ -77,20 +93,7 @@
 
 	</div>
 	
-	<!--피드 종류 선택창 -->
-	<div id="modal" class="selectContentCategory">
-      <div class="modal-window">
-            <div class="modal-title"><br />업로드 할 피드 종류 선택</div>
-            <div class="modal-close">X</div>
-            <div class="modal-btn snsContent" th:href="@{/content/uploadSnsContent}">
-                     일상피드
-            </div>
-            <div class="modal-btn saleContent" th:href="@{/content/uploadSaleContent}">
-                     판매피드
-            </div>
-      </div>
- 
-    </div> -->
+	
     
     <script type="text/javascript">
         

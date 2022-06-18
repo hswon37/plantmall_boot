@@ -1,7 +1,9 @@
 package com.example.plantmall.controller.Product;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +82,7 @@ public class ManageProductController {
 	@RequestMapping("/product/registrationResult")
 	public String productRegistration(ProductWithImgCommand productWithImgCommand, HttpServletRequest request,
 			HttpServletResponse response, RedirectAttributes rttr) throws Exception {
-
+		
 		// 제품 테이블 저장
 		String productImgIdx = "img_" + productWithImgCommand.getP_name();
 		Product product = new Product();
@@ -183,8 +185,7 @@ public class ManageProductController {
 
 		if (checkProductinLineItem.size() > 0 || checkProductinCartItem.size() > 0 ) { // LineItem, CartItem에 담긴 제품은 삭제 불가
 			System.out.println(product.getP_name() + " 제품을 삭제할 수 없음");
-			resultmsg = "<script>alert('해당 제품을 삭제할 수 없음');location.href='/product/manage?userId=" + product.getUserId()
-					+ "'</script>";
+			resultmsg = "해당 제품을 삭제할 수 없음";
 		} else {
 			// 제품 이미지 테이블 삭제
 			String productImgIdx = "img_" + product.getP_name();
@@ -197,48 +198,55 @@ public class ManageProductController {
 			System.out.println(product);
 			rttr.addFlashAttribute(product.getP_name() + " 제품이 삭제되었습니다.");
 
-			resultmsg = "<script>alert('해당 제품이 삭제되었습니다');location.href='/product/manage?userId=" + product.getUserId()
-					+ "'</script>";
+			resultmsg = "해당 제품이 삭제되었습니다";
 		}
 
-		return resultmsg;
+		return "<script>alert('"+resultmsg+"');location.href='/product/manage?userId=" + product.getUserId()+ "'</script>";
 	}
 	
 	// 제품 이미지 가져오기
 	@RequestMapping(value="/getByteImage")
-	public ResponseEntity<byte[]> getByteImage(@RequestParam(value = "p_name") String p_name) {
+	public ResponseEntity<byte[]> getByteImage(@RequestParam(value = "p_name", required = false) String p_name) {
 		Map<String, Object> productImgMap; 
-		String fileId = "img_"+p_name; 
+		byte[] imageContent = null;
+		final HttpHeaders headers;
+		
+		if (p_name != null) {
+			String fileId = "img_"+p_name; 
+				
+			System.out.println("==start to find image==");
 			
-		System.out.println("==start to find image==");
-		
-		productImgMap = productService.selectProductImage(fileId); 
-		byte[] imageContent = blobToBytes((Blob) productImgMap.get("PRODUCTIMGVALUE"));
-		final HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_PNG);
-		
+			productImgMap = productService.selectProductImage(fileId); 
+			try {
+				imageContent = blobToBytes((Blob) productImgMap.get("PRODUCTIMGVALUE"));
+			 } catch (Exception e) {
+		            System.out.println("이미지를 찾을 수 없음");
+		        }
+			headers = new HttpHeaders();
+			headers.setContentType(MediaType.IMAGE_PNG);
+		} else {
+			imageContent = null;
+			headers = new HttpHeaders();
+		}
 		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 		
 	// blob 데이터 -> 바이트 변환
-    private static byte[] blobToBytes(Blob blob) {
+    private static byte[] blobToBytes(Blob blob) throws SQLException, IOException {
         BufferedInputStream is = null;
         byte[] bytes = null;
-        try {
-            is = new BufferedInputStream(blob.getBinaryStream());
-            bytes = new byte[(int) blob.length()];
-            int len = bytes.length;
-            int offset = 0;
-            int read = 0;
+        
+        is = new BufferedInputStream(blob.getBinaryStream());
+        bytes = new byte[(int) blob.length()];
+        int len = bytes.length;
+        int offset = 0;
+        int read = 0;
 
-            while (offset < len
-                    && (read = is.read(bytes, offset, len - offset)) >= 0) {
-                offset += read;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        while (offset < len
+                && (read = is.read(bytes, offset, len - offset)) >= 0) {
+            offset += read;
         }
+
         return bytes;
     }
 }
