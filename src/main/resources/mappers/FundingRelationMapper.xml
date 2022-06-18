@@ -98,7 +98,7 @@
 		</selectKey>
 		
 		UPDATE FUNDING
-		SET ORDERNUM = ORDERNUM+1
+		SET ORDERNUM = ORDERNUM+#{quantity}
 		WHERE FUNDINGID = #{fundingId};
 		END;
 	</insert>
