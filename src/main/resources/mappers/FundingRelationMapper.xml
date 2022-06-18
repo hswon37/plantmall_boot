@@ -55,6 +55,7 @@
 	<select resultType="FundingOrder" id="getAllMyFundingOrderList">
 		SELECT FUNDINGRELATIONID,
 			BUYERID AS userId,
+			USERNAME,
 			FUNDINGID,
 			STATUS,
 			QUANTITY,
