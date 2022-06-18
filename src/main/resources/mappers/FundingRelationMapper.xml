@@ -107,7 +107,7 @@
 	<update id="deleteFundingOrder">
 		UPDATE FUNDINGRELATION
 		SET STATUS=0 
-		WHERE FUNDINGRELATION.FUNDINGRELATIONID = #{param1};
+		WHERE FUNDINGRELATIONID = #{param1}
 	</update>
 	
 
