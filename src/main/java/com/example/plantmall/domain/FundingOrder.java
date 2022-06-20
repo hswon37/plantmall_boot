@@ -38,6 +38,8 @@ public class FundingOrder implements Serializable{
 	private String phoneNumber;
 	private String shipAddress;
 	
+	private Funding funding;
+	
 	public void initOrder(User user, String fundingId, int quantity, int price,String creditCard, String expiryDate) {
 		userId = user.getUserId();
 		this.fundingId = fundingId;

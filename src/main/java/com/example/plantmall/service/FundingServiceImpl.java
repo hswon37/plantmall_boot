@@ -1,18 +1,26 @@
 package com.example.plantmall.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.plantmall.dao.FundingDao;
 import com.example.plantmall.domain.Funding;
 import com.example.plantmall.domain.Product;
+
 @Service
+@Transactional
 public class FundingServiceImpl implements FundingService{
 
 	@Autowired
 	private FundingDao fundingDao;
+	
+	@Autowired
+	private TaskScheduler scheduler;
 	
 	@Override
 	public List<Funding> getAllFundingList() {
@@ -26,7 +34,16 @@ public class FundingServiceImpl implements FundingService{
 
 	@Override
 	public void insertFunding(Funding funding) {
+		
+		Runnable updateTableRunner = new Runnable() {
+			@Override
+			public void run() {
+				Date curTime = new Date();
+				fundingDao.closeFunding(curTime);
+			}
+		};
 		fundingDao.insertFunding(funding);
+		scheduler.schedule(updateTableRunner, funding.getCloseDate());
 	}
 
 	@Override

@@ -93,16 +93,9 @@ public class AccountController{
 			return mav;
 	}
 
-
-	@RequestMapping(path = "/authFuncList", method=RequestMethod.GET)
-	public String authFuncList(Model model, HttpServletRequest request, HttpSession session) {
-		session.invalidate();
-		return "auth/authFuncList";
-	}
 	
 	@RequestMapping(path = "/auth/created", method=RequestMethod.GET)
 	public String created(Model model, HttpServletRequest request, HttpSession session) {
-		System.out.println("!!!"+session.getAttribute("userSession"));
 		return "auth/created";
 	}	
 	

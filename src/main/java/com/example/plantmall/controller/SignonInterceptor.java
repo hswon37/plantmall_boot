@@ -22,7 +22,7 @@ public class SignonInterceptor implements HandlerInterceptor {
 		if (userSession == null) {
 			String url = request.getRequestURL().toString(); 
 			String query = request.getQueryString();
-			ModelAndView modelAndView = new ModelAndView("SignonForm");
+			ModelAndView modelAndView = new ModelAndView("auth/loginForm");
 			if (query != null) {
 				modelAndView.addObject("signonForwardAction", url+"?"+query);
 				System.out.println("url:"+url);
