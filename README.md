@@ -27,20 +27,21 @@
 - Mybatis
 - Thymeleaf
 - SQL Developer
-- Erwin
 
 # 5. 트러블슈팅
+- 개발 중 발생 문제, 해결 방법
 - 제품 수정
   - 제품 수정할 때, 제품 이미지를 업로드하지 않고 수정을 할 경우, 기존에 등록된 제품 이미지가 삭제되는 문제
   -  -> 이미지를 추가 등록하지 않은 경우, 이미지 테이블을 업데이트 하지 않도록 조건을 추가하여 해결
 - 제품 이미지 불러오기
   - 제품 상세, 수정, 삭제, 목록 등에서 제품 이미지를 불러올 때, 제품에 대응되는 이미지를 불러오기 어려운 문제
-  -  -> DB에 저장할 이미지 파일명을 "img_제품명"으로 저장하여, controller에서 DB에서 제품을 가져오면서, 제품명(p_name)을 parameter로 view에 전달 -> //```<img th:src="@{/getByteImage?p_name=}+${product.p_name}">``` -> controller에서 //```@RequestMapping("/getByteImage") ```로 받아 DB에서 "img_제품명"으로 검색하여 다시 view에 전달
+  -  -> DB에 저장할 이미지 파일명을 "img_제품명"으로 저장하여, controller에서 DB에서 제품을 가져오면서, 제품명(p_name)을 parameter로 view에 전달 -> ```<img th:src="@{/getByteImage?p_name=}+${product.p_name}">``` -> controller에서 ```@RequestMapping("/getByteImage") ```로 받아 DB에서 "img_제품명"으로 검색하여 다시 view에 전달
 - 홈화면 이미지 슬라이딩
   - Controller에서 받은 이미지 옆으로 넘기는 것이 일정 시간마다 반복 실행 안되는 문제
   -  -> Swiper 이용
 
 # 6. 개선사항
+- 추후 수정이 필요한 부분
 - 제품 등록
   - 이름이 같은 제품과 이미지를 함께 넣으면, 이미지테이블의 pk(img_제품명으로 저장되게함)중복으로 무결성제약조건위배문제
   - 입력항목이 입력되지 않을 경우, 검증처리 없음(validation 구현필요)
