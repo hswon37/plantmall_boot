@@ -1,6 +1,7 @@
 # 1. 주제
 - 식몰(plantmall_boot)
 - 식물 판매 웹사이트
+<img width="700" height="370" src="https://user-images.githubusercontent.com/49058833/176370598-a9e88993-54b7-4caf-9816-cd3604d58e1b.png"/>
 
 # 2. 핵심 요약
   (1) 문제 배경<br>
