@@ -1,8 +1,14 @@
+## 목차
+1. [주제](-1.-주제)
+2. [핵심요약](-2.-핵심-요약)
+3. [기여한점](-3.-기여한-점)
+4. [사용기술](-4.-사용-기술)
+5. [트러블슈팅](-5.-트러블슈팅)
+6. [개선사항](-6.-개선사항)
+7. [결과화면](-7.-결과화면)
 # 1. 주제
 - 식몰(plantmall_boot)
 - 식물 판매 웹사이트
-<img width="700" height="370" src="https://user-images.githubusercontent.com/49058833/176370598-a9e88993-54b7-4caf-9816-cd3604d58e1b.png"/>
-
 # 2. 핵심 요약
   (1) 문제 배경<br>
   \- 코로나-19로 집에서 보내는 시간이 늘면서 식물 키우기 취미 열풍, 식물 관련 매출 증가<br>
@@ -46,3 +52,12 @@
 - 제품 등록
   - 이름이 같은 제품과 이미지를 함께 넣으면, 이미지테이블의 pk(img_제품명으로 저장되게함)중복으로 무결성제약조건위배문제
   - 입력항목이 입력되지 않을 경우, 검증처리 없음(validation 구현필요)
+
+# 7. 결과화면
+![main](https://user-images.githubusercontent.com/49058833/176376308-b240b794-d5f7-4a94-9c31-49850c9f7007.png)
+![001](https://user-images.githubusercontent.com/49058833/176376386-7ab47054-1288-42bb-8c5c-76edc684ff86.png)
+![002](https://user-images.githubusercontent.com/49058833/176376401-47cb07c5-b4af-4e27-8c77-f11a403c740f.png)
+![003](https://user-images.githubusercontent.com/49058833/176376402-c20032b2-3385-457b-a641-d9e71f8baf66.png)
+![004](https://user-images.githubusercontent.com/49058833/176376406-17aa3912-07f2-4217-abf8-4bd8438a8895.png)
+![005](https://user-images.githubusercontent.com/49058833/176376409-68a06360-6e30-4672-b8de-86b6b0bb393b.png)
+![006](https://user-images.githubusercontent.com/49058833/176376411-db2f164f-2cb8-4a6d-8fa5-eaeff1f30080.png)
