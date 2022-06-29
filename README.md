@@ -29,16 +29,22 @@
 
 
 # 4. 사용 기술
-  - Java 11
-  - Spring Boot
-  - lombok
-  - Oracle
-  - Erwin
-  - Mybatis
-  - Thymeleaf
-  - SQL Developer
-<img src="https://user-images.githubusercontent.com/49058833/176380667-e5af59e1-691d-43ff-b831-15614f47814b.png" width="300"/>
 
+<table>
+  <tr>
+    <td width="300px">
+    - Java 11<br>
+    - Spring Boot<br>
+    - lombok<br>
+    - Oracle<br>
+    - Erwin<br>
+    - Mybatis<br>
+    - Thymeleaf<br>
+    - SQL Developer
+  </td>
+    <td><img src="https://user-images.githubusercontent.com/49058833/176380667-e5af59e1-691d-43ff-b831-15614f47814b.png" width="450"/></td>
+  </tr>
+</table>
 # 5. 트러블슈팅
 - 개발 중 발생 문제, 해결 방법
 - 제품 수정
