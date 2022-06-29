@@ -20,20 +20,24 @@
 # 3. 기여한 점
 - 동덕여자대학교 컴퓨터학과 4-1학기 과목 소프트웨어시스템개발 팀프로젝트
 ## 업무
-  - 서가람: 제품 판매, 구매, 서비스 개발 역할(장바구니, 주문, 문의, 리뷰)
-  - 이세은: 회원 홈페이지 서비스 개발(프로필, 회원 관리 기능)
-  - 임소현: 공동구매, 회원 관리 서비스 개발(공동구매(펀딩), 회원 관리 기능)
-  - 황세원: 제품 판매, 구매, 서비스 개발 역할(판매 제품 관리, 제품 조회, 검색) 및 메인 화면, DB Schema 작성
+이름|업무|
+---|---|
+[서가람](https://github.com/mohyerolo)|제품 판매, 구매, 서비스 개발 역할(장바구니, 주문, 문의, 리뷰)|
+[이세은](https://github.com/seny9)|회원 홈페이지 서비스 개발(프로필, 회원 관리 기능)|
+[임소현](https://github.com/seo-Ireu)|공동구매, 회원 관리 서비스 개발(공동구매(펀딩), 회원 관리 기능)|
+[황세원](https://github.com/hswon37)|제품 판매, 구매, 서비스 개발 역할(판매 제품 관리, 제품 조회, 검색) 및 메인 화면, DB Schema 작성|
+
 
 # 4. 사용 기술
-- Java 11
-- Spring Boot
-- lombok
-- Oracle
-- Erwin
-- Mybatis
-- Thymeleaf
-- SQL Developer
+  - Java 11
+  - Spring Boot
+  - lombok
+  - Oracle
+  - Erwin
+  - Mybatis
+  - Thymeleaf
+  - SQL Developer
+<img src="https://user-images.githubusercontent.com/49058833/176380667-e5af59e1-691d-43ff-b831-15614f47814b.png" width="300"/>
 
 # 5. 트러블슈팅
 - 개발 중 발생 문제, 해결 방법
